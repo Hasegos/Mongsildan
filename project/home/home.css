@@ -1,0 +1,124 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 전체 높이 100% 설정 */
+html,
+body {
+  height: 100%;
+}
+
+/* 웹페이지 전체 길이, 높이 100% 설정 */
+.wrapper {
+  height: 100%;
+}
+
+body {
+  color: white;
+  font-family: "Roboto", sans-serif;
+  background-color: #000000;
+}
+/* 헤더,  네비 */
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 56px;
+  background-color: #212121;
+  /* border: 1px solid white; */
+}
+
+/* 헤드 태그 제외 나머지 */
+.container {
+  display: flex;
+  height: 100%;
+}
+
+/* 왼쪽 태그 */
+aside {
+  width: 240px;
+  flex-shrink: 0; /* 화면 비율 상관없이 고정 */
+  background-color: #212121;
+  padding: 10px;
+  text-align: center;
+  /* border: 1px solid white; */
+  transition: width 0.2s ease;
+}
+.right-content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* 메인 태그 */
+main {
+  padding: 15px;
+  background-color: #000000;
+  height: 100%;
+}
+
+/* 전체 카드 영역 */
+.card-container {
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+  overflow-y: auto;
+}
+/* 카드 영역 */
+.card {
+  flex: 1 1 calc(25% - 20px);
+  max-width: calc(25% - 20px);
+  aspect-ratio: 4 / 3;
+  text-align: center;
+  border: 1px solid white;
+  display: flex;
+  flex-direction: column;
+}
+/* 카드 이미지 */
+.card img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+/* 내용 칸 */
+.card-content {
+  display: flex;
+  flex: 1;
+  gap: 10px;
+  object-fit: cover;
+}
+/* 카드 구독자 모습 */
+.card-title {
+  writing-mode: vertical-rl;
+  padding: 12px 26px 12px 0;
+  width: auto;
+  white-space: nowrap;
+}
+
+/* 카드 내용 */
+.card-description {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+}
+/* 카드 내용 중 첫 텍스트 */
+.card-text1 {
+  padding-top: 12px;
+}
+
+/* 1315px 이하 */
+@media (max-width: 1315px) {
+  aside {
+    width: 72px;
+    flex-shrink: 0; /* 화면 비율 상관없이 고정 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+}
