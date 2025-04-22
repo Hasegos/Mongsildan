@@ -47,7 +47,8 @@ aside {
   transition: width 0.2s ease;
 }
 .right-content {
-  width: 100%;
+  flex: 1;
+  min-width: 0;
 }
 
 /* 메인 태그 */
