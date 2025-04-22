@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../유튜브 클론 아이콘"
+		}
+	],
+	"settings": {
+		"workbench.colorCustomizations": {
+			"activityBar.background": "#461167",
+			"titleBar.activeBackground": "#621890",
+			"titleBar.activeForeground": "#FCF9FE"
+		}
+	}
+}
