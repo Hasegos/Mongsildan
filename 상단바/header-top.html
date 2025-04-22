@@ -1,51 +1,62 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=1440" />
-  <title>유튜브 클론 - 상단바1</title>
-  <link rel="stylesheet" href="styles/header-top.css" />
-</head>
-<body>
-  <!-- 상단바 1 -->
-  <header class="header-top">
-    <div class="left">
-      <img src="assets/burger.png" alt="메뉴" class="icon" />
-      <a href="#" class="logo-button">
-        <img src="assets/youtube logo.png" alt="로고아이콘" class="logo-icon" />
-        <img src="assets/youtube.png" alt="YouTube텍스트" class="logo-text" />
-      </a>
-    </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1440" />
+    <title>유튜브 클론 - 상단바1</title>
+    <link rel="stylesheet" href="styles/header-top.css" />
+  </head>
+  <body>
+    <!-- 상단바 1 -->
+    <header class="header-top">
+      <div class="left">
+        <img src="./img/burger.png" alt="메뉴" class="icon" />
+        <a href="#" class="logo-button">
+          <img
+            src="./img/youtube logo.png"
+            alt="로고아이콘"
+            class="logo-icon"
+          />
+          <img src="./img/youtube.png" alt="YouTube텍스트" class="logo-text" />
+        </a>
+      </div>
 
-    <div class="center">
-      <form class="search-form" onsubmit="return false;">
-        <input type="text" class="search-input" placeholder="Search" id="searchInput" />
-        <button class="search-button" id="searchButton">
-          <img src="assets/search.png" alt="검색" class="icon" />
+      <div class="center">
+        <form class="search-form" onsubmit="return false;">
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Search"
+            id="searchInput"
+          />
+          <button class="search-button" id="searchButton">
+            <img src="./img/search.png" alt="검색" class="icon" />
+          </button>
+        </form>
+        <button class="mic-button">
+          <img src="./img/voice.png" alt="음성검색" class="icon" />
         </button>
-      </form>
-      <button class="mic-button">
-        <img src="assets/voice.png" alt="음성검색" class="icon" />
-      </button>
-    </div>
+      </div>
 
-    <div class="right">
-      <img src="assets/create.png" alt="업로드" class="icon" />
-      <img src="assets/apps.png" alt="앱" class="icon" />
-      <img src="assets/notice.png" alt="알림" class="icon" />
-      <img src="assets/profile.png" alt="프로필" class="icon" />
-    </div>
-  </header>
+      <div class="right">
+        <img src="./img/create.png" alt="업로드" class="icon" />
+        <img src="./img/apps.png" alt="앱" class="icon" />
+        <img src="./img/notice.png" alt="알림" class="icon" />
+        <img src="./img/profile.png" alt="프로필" class="icon" />
+      </div>
+    </header>
 
-  <script>
-    document.getElementById("searchButton").addEventListener("click", function () {
-      const keyword = document.getElementById("searchInput").value.trim();
-      if (keyword) {
-        alert("검색어: " + keyword);
-      } else {
-        alert("검색어를 입력하세요!");
-      }
-    });
-  </script>
-</body>
+    <script>
+      document
+        .getElementById("searchButton")
+        .addEventListener("click", function () {
+          const keyword = document.getElementById("searchInput").value.trim();
+          if (keyword) {
+            alert("검색어: " + keyword);
+          } else {
+            alert("검색어를 입력하세요!");
+          }
+        });
+    </script>
+  </body>
 </html>
