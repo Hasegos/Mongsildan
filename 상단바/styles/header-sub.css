@@ -17,6 +17,7 @@
   
   /* 탭을 담는 스크롤 영역 */
   .scroll-container {
+    /* 부모요소랑 중복으로 flex 이면 창 크기 조정이 잘 되지 않을 수 있음. */
     display: flex;
     gap: 12px;
     overflow-x: auto;
