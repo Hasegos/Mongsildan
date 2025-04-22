@@ -7,11 +7,8 @@ body {
 }
 
 .sidebar {
-  top: 0;
-  left: 0;
-  width: 240px;
+  position: fixed;
   height: 100%;
-  background-color: #212121;
   font-size: 14px;
   font-family: "Noto Sans KR", "Roboto", sans-serif;
   font-style: normal;
@@ -40,10 +37,13 @@ body {
 
 .sidebar a svg,
 .sidebar details summary {
-  width: 24px;
+  /* width: 24px; */
   height: 24px;
   flex-shrink: 0;
   padding: 0 0 0 1em;
+}
+.sidebar details summary {
+  width: 36px;
 }
 
 .sidebar a img {
