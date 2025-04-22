@@ -7,10 +7,7 @@ body {
 }
 
 .sidebar {
-<<<<<<< HEAD
   position: fixed;
-=======
->>>>>>> 5f4115ca1d06aece741b3c8345e2bd28886c45cc
   height: 100%;
   font-size: 14px;
   font-family: "Noto Sans KR", "Roboto", sans-serif;
