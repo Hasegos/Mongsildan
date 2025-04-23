@@ -13,7 +13,7 @@
 .playlist-header {
   display: flex;
   align-items: center;
-  justify-content: space-between; 
+  justify-content: flex-start; 
   width: 100%;
   max-width: 1070px;
   height: 44px;
@@ -29,7 +29,7 @@
   padding: 9px 0;
   font-size: 16px;
   font-weight: 600;
-  margin: 0;
+  margin: 10px;
 }
 
 .play-all-btn {
@@ -55,7 +55,6 @@
   flex-wrap: wrap;
   width: 100%;
   max-width: 1070px;
-  padding: 24px 65px;
   margin-top: 0;
   background-color: transparent;
   justify-content: flex-start;
