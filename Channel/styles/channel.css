@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000000;
+}
+.sidebar {
+    margin-top: 56px;
+    background-color: #212121;
+}
+/* 메인 태그 */
+main {
+    padding: 15px;    
+    height: 100%;
+}
+/* 헤드 태그 제외 나머지 */
+.container {
+    display: flex;
+    height: 100%;
+  }
+main {
+    padding: 0;
+    width: 100%;
+    margin-top: 56px;
+}

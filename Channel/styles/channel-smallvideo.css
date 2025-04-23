@@ -19,8 +19,9 @@ body {
   position: relative;
 }
 
-.video-preview {
+.video-main-preview {
   position: relative;
+  height: auto;
   width: 100%;
   max-width: 640px;
   aspect-ratio: 16 / 9;
@@ -52,7 +53,6 @@ body {
 .custom-play-button:hover {
   transform: translate(-50%, -50%) scale(1.1);
 }
-
 
 .video-description {
   width: 400px;

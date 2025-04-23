@@ -43,6 +43,7 @@ body {
   font-weight: bold;
 }
 
+
 .subscribers {
   font-size: 14px;
   color: gray;
@@ -71,6 +72,8 @@ body {
 
 .channel-nav ul {
   display: flex;
+  flex-direction: row;
+  width: 100%;
   align-items: center;
   padding: 0 65px;
   list-style: none;
