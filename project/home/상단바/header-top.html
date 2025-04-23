@@ -1,25 +1,18 @@
 <!-- 상단바 1 -->
 <header class="header-top">
   <div class="left">
-    <img src="./img/burger.png" alt="메뉴" class="icon" />
+    <!-- 햄버그 버튼 추가 -->
+    <button class="menu-button" id="menuButton">
+      <img src="./img/burger.png" alt="메뉴" class="icon" />
+    </button>
     <a href="#" class="logo-button">
-      <img
-        src="./img/youtube logo.png"
-        alt="로고아이콘"
-        class="logo-icon"
-      />
+      <img  src="./img/youtube logo.png" alt="로고아이콘" class="logo-icon" />
       <img src="./img/youtube.png" alt="YouTube텍스트" class="logo-text" />
     </a>
   </div>
-
   <div class="center">
     <form class="search-form" onsubmit="return false;">
-      <input
-        type="text"
-        class="search-input"
-        placeholder="Search"
-        id="searchInput"
-      />
+      <input type="text" class="search-input" placeholder="Search" id="searchInput"/>
       <button class="search-button" id="searchButton">
         <img src="./img/search.png" alt="검색" class="icon" />
       </button>
@@ -28,7 +21,6 @@
       <img src="./img/voice.png" alt="음성검색" class="icon" />
     </button>
   </div>
-
   <div class="right">
     <img src="./img/create.png" alt="업로드" class="icon" />
     <img src="./img/apps.png" alt="앱" class="icon" />

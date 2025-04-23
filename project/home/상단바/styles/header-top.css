@@ -16,7 +16,7 @@ body {
 /* 로고 버튼 스타일 */
 .logo {
   height: 20px;
-  object-fit: contain;
+  object-fit: contain;  
 }
 
 .logo-button {
@@ -25,6 +25,7 @@ body {
   padding: 18px 14px 18px 16px;
   height: 56px;
   text-decoration: none;
+  flex-direction: row;
   cursor: pointer;
 }
 
@@ -47,6 +48,7 @@ body {
 .header-top .left {
   display: flex;
   align-items: center;
+  
   gap: 10px;
   margin-left: 40px;
 }
@@ -61,6 +63,14 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
+}
+/* 햄버그 */
+.menu-button {
+  background-color: #212121;
+  border: none;
+}
+.menu-button :hover{
+  background-color: #333;  
 }
 
 /* 검색창 */
