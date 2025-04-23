@@ -2,42 +2,214 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=1440" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>유튜브 클론 - 상단바2</title>
     <link rel="stylesheet" href="styles/header-sub.css" />
+    <style>
+      .scroll-arrow.left,
+      .scroll-arrow.right {
+        display: none;
+      }
+
+      .filter-modal-popup {
+        width: auto;
+        max-width: 95vw;
+        max-height: 80vh;
+        margin: 0 auto;
+        overflow-x: auto;
+      }
+
+      .filter-columns {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 20px;
+        justify-content: space-between;
+        min-width: 600px;
+      }
+
+      .filter-column {
+        flex: 1 1 0;
+        min-width: 120px;
+        text-align: left;
+      }
+
+      @media (max-width: 768px) {
+        .filter-modal-popup {
+          padding: 16px;
+        }
+        .filter-column h4 {
+          font-size: 13px;
+        }
+        .filter-column button {
+          font-size: 12px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .filter-modal-popup {
+          padding: 16px;
+          border-radius: 8px;
+        }
+        .filter-column h4 {
+          font-size: 12px;
+        }
+        .filter-column button {
+          font-size: 11px;
+        }
+        .filter-close {
+          font-size: 18px;
+        }
+      }
+    </style>
   </head>
   <body>
-    <!-- 상단바 2 -->
     <nav class="header-sub">
+      <button class="scroll-arrow left" id="scrollLeftBtn">
+        <img src="./img/더보기.png" alt="왼쪽" class="more-icon" />
+      </button>
+
       <div class="scroll-container" id="scrollContainer">
-        <div class="tab-item active">All</div>
-        <div class="tab-item">Music</div>
-        <div class="tab-item">Gaming</div>
-        <div class="tab-item">News</div>
-        <div class="tab-item">Mixes</div>
-        <div class="tab-item">Live</div>
-        <div class="tab-item">Podcasts</div>
-        <div class="tab-item">Fashion</div>
-        <div class="tab-item">Style</div>
-        <div class="tab-item">Learning</div>
-        <div class="tab-item">Movies</div>
-        <div class="tab-item">Trending</div>
+        <div class="tab-item active" data-category="all">All</div>
+        <div class="tab-item" data-category="music">Music</div>
+        <div class="tab-item" data-category="gaming">Gaming</div>
+        <div class="tab-item" data-category="news">News</div>
+        <div class="tab-item" data-category="mixes">Mixes</div>
+        <div class="tab-item" data-category="live">Live</div>
+        <div class="tab-item" data-category="podcasts">Podcasts</div>
+        <div class="tab-item" data-category="fashion">Fashion</div>
+        <div class="tab-item" data-category="style">Style</div>
+        <div class="tab-item" data-category="learning">Learning</div>
+        <div class="tab-item" data-category="movies">Movies</div>
+        <div class="tab-item" data-category="trending">Trending</div>
       </div>
 
-      <button class="scroll-arrow" id="scrollRightBtn">
+      <button class="scroll-arrow right" id="scrollRightBtn">
         <img src="./img/더보기.png" alt="더보기" class="more-icon" />
       </button>
+
+      <button class="filter-button" id="filterButton">
+        <img src="./img/mokoko.jpg" alt="필터" />
+      </button>
     </nav>
+
+    <div class="filter-modal-popup" id="filterModal">
+      <div class="filter-content">
+        <div class="filter-header">
+          <strong>검색 필터</strong>
+          <button id="closeFilter" class="filter-close">×</button>
+        </div>
+        <div class="filter-columns">
+          <div class="filter-column">
+            <h4>업로드 날짜</h4>
+            <ul>
+              <li><button class="filter-option" data-filter="today">오늘</button></li>
+              <li><button class="filter-option" data-filter="this-week">이번 주</button></li>
+              <li><button class="filter-option" data-filter="this-month">이번 달</button></li>
+              <li><button class="filter-option" data-filter="this-year">올해</button></li>
+            </ul>
+          </div>
+          <div class="filter-column">
+            <h4>정렬 기준</h4>
+            <ul>
+              <li><button class="filter-option" data-filter="relevance">관련도</button></li>
+              <li><button class="filter-option" data-filter="popular">조회수</button></li>
+              <li><button class="filter-option" data-filter="newest">최신순</button></li>
+            </ul>
+          </div>
+          <div class="filter-column">
+            <h4>구분</h4>
+            <ul>
+              <li><button class="filter-option" data-filter="video">동영상</button></li>
+              <li><button class="filter-option" data-filter="channel">채널</button></li>
+              <li><button class="filter-option" data-filter="playlist">재생목록</button></li>
+              <li><button class="filter-option" data-filter="movie">영화</button></li>
+            </ul>
+          </div>
+          <div class="filter-column">
+            <h4>길이</h4>
+            <ul>
+              <li><button class="filter-option" data-filter="short">4분 미만</button></li>
+              <li><button class="filter-option" data-filter="mid">4~20분</button></li>
+              <li><button class="filter-option" data-filter="long">20분 초과</button></li>
+            </ul>
+          </div>
+          <div class="filter-column">
+            <h4>기능별</h4>
+            <ul>
+              <li><button class="filter-option" data-filter="live">라이브</button></li>
+              <li><button class="filter-option" data-filter="4k">4K</button></li>
+              <li><button class="filter-option" data-filter="hd">HD</button></li>
+              <li><button class="filter-option" data-filter="caption">자막</button></li>
+              <li><button class="filter-option" data-filter="360">360°</button></li>
+              <li><button class="filter-option" data-filter="vr180">VR180</button></li>
+              <li><button class="filter-option" data-filter="3d">3D</button></li>
+              <li><button class="filter-option" data-filter="hdr">HDR</button></li>
+              <li><button class="filter-option" data-filter="location">위치</button></li>
+              <li><button class="filter-option" data-filter="cc">크리에이티브 커먼즈</button></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const scrollContainer = document.getElementById("scrollContainer");
-        const scrollBtn = document.getElementById("scrollRightBtn");
+        const scrollRightBtn = document.getElementById("scrollRightBtn");
+        const scrollLeftBtn = document.getElementById("scrollLeftBtn");
+        const filterBtn = document.getElementById("filterButton");
+        const filterModal = document.getElementById("filterModal");
+        const closeBtn = document.getElementById("closeFilter");
+        const tabs = document.querySelectorAll(".tab-item");
 
-        scrollBtn.addEventListener("click", () => {
-          scrollContainer.scrollBy({
-            left: 200,
-            behavior: "smooth",
+        function toggleScrollButtons() {
+          const scrollLeft = scrollContainer.scrollLeft;
+          const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+
+          scrollLeftBtn.style.display = scrollLeft > 0 ? "flex" : "none";
+          scrollRightBtn.style.display = scrollLeft < maxScroll - 1 ? "flex" : "none";
+        }
+
+        scrollContainer.addEventListener("scroll", toggleScrollButtons);
+        window.addEventListener("resize", toggleScrollButtons);
+        toggleScrollButtons();
+
+        scrollRightBtn.addEventListener("click", () => {
+          scrollContainer.scrollBy({ left: 200, behavior: "smooth" });
+        });
+
+        scrollLeftBtn.addEventListener("click", () => {
+          scrollContainer.scrollBy({ left: -200, behavior: "smooth" });
+        });
+
+        tabs.forEach((tab) => {
+          tab.addEventListener("click", () => {
+            const category = tab.getAttribute("data-category");
+            tabs.forEach((t) => t.classList.remove("active"));
+            tab.classList.add("active");
+            window.location.href = `/filtered.html?tag=${category}`;
+          });
+        });
+
+        filterBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          filterModal.classList.toggle("show");
+        });
+
+        closeBtn.addEventListener("click", () => {
+          filterModal.classList.remove("show");
+        });
+
+        document.addEventListener("click", (e) => {
+          if (!filterModal.contains(e.target) && !filterBtn.contains(e.target)) {
+            filterModal.classList.remove("show");
+          }
+        });
+
+        document.querySelectorAll(".filter-option").forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            const filterValue = e.target.dataset.filter;
+            window.location.href = `/filtered.html?filter=${filterValue}`;
           });
         });
       });
