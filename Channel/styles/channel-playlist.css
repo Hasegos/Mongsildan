@@ -13,11 +13,12 @@
 .playlist-header {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   width: 1070px;
   height: 44px;
   padding-top: 8px;
   color: white;
-  gap: 20px;
+  gap: 24px;
 }
 
 .playlist-header h3 {
@@ -25,7 +26,7 @@
   align-items: center;
   width: auto;
   height: 36px;
-  padding: 9px 8px 8px 0;
+  padding: 9px 0;
   font-size: 16px;
   font-weight: 600;
   margin: 0;
@@ -34,7 +35,7 @@
 .play-all-btn {
   width: 135px;
   height: 36px;
-  padding: 6px 16px;
+  padding: 6px 24px;
   background-color: transparent;
   border: 1px solid #fff;
   color: white;
@@ -46,7 +47,7 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  margin-left: auto;
+  margin-left: 0;
 }
 
 .playlist-grid {
