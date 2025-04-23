@@ -1,0 +1,62 @@
+/* channel-smallvideo.css */
+
+body {
+  background-color: #000;
+  margin: 0;
+  font-family: 'Roboto','Arial', sans-serif;
+}
+
+.featured-video {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 24px 287px 24px 65px;
+  gap: 32px;
+  color: #ffffff;
+  background-color: transparent;
+  position: relative;
+}
+
+.video-preview {
+  flex-shrink: 0;
+  width: 640px;
+  height: auto;
+}
+
+.video-thumb {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  display: block;
+}
+
+.video-description {
+  width: 400px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.video-description h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #ffffff;
+}
+
+.video-description p {
+  font-size: 16px;
+  margin: 6px 0;
+  color: #aaa;
+}
+
+.description-text {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #ccc;
+}
