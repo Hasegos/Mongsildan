@@ -43,8 +43,7 @@ aside {
   background-color: #212121;
   padding: 10px;
   text-align: center;
-  /* border: 1px solid white; */
-  transition: width 0.2s ease;
+  /* border: 1px solid white; */  
 }
 .right-content {
   flex: 1;
@@ -61,16 +60,20 @@ main {
 /* 전체 카드 영역 */
 .card-container {
   margin-top: 50px;
-  display: flex;
-  flex-wrap: wrap;
+  /* display: flex;
+  flex-wrap: wrap; */
+  display: grid;
+  grid-template-columns: repeat(4,minmax(240px,1fr));
+  overflow: hidden;
   gap: 20px;
   justify-content: flex-start;
-  overflow-y: auto;
+  /* overflow-y: auto; */
 }
 /* 카드 영역 */
 .card {
-  flex: 1 1 calc(25% - 20px);
-  max-width: calc(25% - 20px);
+  /* flex: 1 1 calc(25% - 20px); */
+  /* max-width: calc(25% - 20px); */
+  max-width: 100%;
   aspect-ratio: 4 / 3;
   text-align: center;
   border: 1px solid white;
@@ -111,14 +114,23 @@ main {
   padding-top: 12px;
 }
 
-/* 1315px 이하 */
 @media (max-width: 1315px) {
-  aside {
-    width: 72px;
-    flex-shrink: 0; /* 화면 비율 상관없이 고정 */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
+  .card-container{
+    grid-template-columns: repeat(3,minmax(240px,1fr));
   }
+}
+
+@media (max-width: 700px) {
+  .card-container{
+    grid-template-columns: repeat(2,minmax(240px,1fr));
+  }
+}
+
+@media (max-width: 500px) {
+  .card-container{
+    grid-template-columns: repeat(1,minmax(240px,1fr));
+  }
+  .sidebar {
+    display: none;       
+  } 
 }
