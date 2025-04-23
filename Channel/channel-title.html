@@ -3,20 +3,16 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>채널 소개 - Mongsildan</title>
-    <link rel="stylesheet" href="./styles/channel.css" />
-    <link rel="stylesheet" href="./styles/channel-title.css" />
+    <title>채널 소개 - Mongsildan</title>    
 </head>
-
 <body>
-
   <header class="channel-header">
     <div class="banner">
-      <img src="img/title.jpg" alt="채널 배너" class="banner-img" />
+      <img src="../img/title.jpg" alt="채널 배너" class="banner-img" />
     </div>
     <div class="channel-info">
       <a href="https://example.com" target="_blank">
-        <img src="img/mokoko.jpg" alt="프로필 이미지" class="profile-img" />
+        <img src="../img/mokoko.jpg" alt="프로필 이미지" class="profile-img" />
       </a>
       <div class="text-info">
         <h1 class="channel-name">Mongsildan</h1>
@@ -34,24 +30,11 @@
         <li><button class="nav-btn">ABOUT</button></li>
         <li class="search-item">
           <button class="search-btn">
-            <img src="img/search.png" alt="검색" class="search-icon" />
+            <img src="../img/search.png" alt="검색" class="search-icon" />
           </button>
         </li>
       </ul>
     </nav>
-  </header>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const subscribeBtn = document.getElementById('subscribe-btn');
-      let subscribed = false;
-  
-      subscribeBtn.addEventListener('click', () => {
-        subscribed = !subscribed;
-        subscribeBtn.textContent = subscribed ? 'SUBSCRIBED' : 'SUBSCRIBES';
-        subscribeBtn.style.backgroundColor = subscribed ? 'gray' : 'red';
-      });
-    });
-  </script>
-  
+  </header>  
 </body>
 </html>

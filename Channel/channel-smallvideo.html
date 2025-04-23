@@ -7,11 +7,10 @@
   <link rel="stylesheet" href="./styles/channel-smallvideo.css" />
 </head>
 <body>
-
   <section class="featured-video">
-    <div class="video-preview">
+    <div class="video-main-preview" >
       <video id="main-video" class="video-thumb" muted>
-        <source src="wave.mp4" type="video/mp4" />
+        <source src="wave.mp4" type="video/mp4"  />
         브라우저가 video 태그를 지원하지 않습니다.
       </video>
       <div class="custom-play-button" id="play-button">▶</div>
@@ -24,19 +23,6 @@
         His story is a testament to passion, perseverance, and the power of learning through community.
       </p>
     </div>
-  </section>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const video = document.getElementById("main-video");
-      const playBtn = document.getElementById("play-button");
-  
-      playBtn.addEventListener("click", () => {
-        video.play();
-        playBtn.style.display = "none";
-        video.setAttribute("controls", true); // 재생 후 controls 표시
-      });
-    });
-  </script>
-  
+  </section>  
 </body>
 </html>
