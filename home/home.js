@@ -16,6 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 헤더 서브바 불러오기
   loadHtml(".nav", "./상단바/header-sub.html", () => {
+
+    // 상단바 스크롤 이동기능
+    /*     
     const scrollContainer = document.getElementById("scrollContainer");
     const scrollBtn = document.getElementById("scrollRightBtn");
 
@@ -23,8 +26,9 @@ document.addEventListener("DOMContentLoaded", () => {
       scrollContainer.scrollBy({
         left: 200,
         behavior: "smooth",
-      });      
+      });            
     });
+    */
   });
 
   // 사이드바 불러오기
