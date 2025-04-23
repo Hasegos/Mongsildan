@@ -34,18 +34,17 @@
         <li><button class="nav-btn">ABOUT</button></li>
         <li class="search-item">
           <button class="search-btn">
-            <img src="/img/search.png" alt="검색" class="search-icon" />
+            <img src="img/search.png" alt="검색" class="search-icon" />
           </button>
         </li>
       </ul>
     </nav>
   </header>
-
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const subscribeBtn = document.getElementById('subscribe-btn');
       let subscribed = false;
-
+  
       subscribeBtn.addEventListener('click', () => {
         subscribed = !subscribed;
         subscribeBtn.textContent = subscribed ? 'SUBSCRIBED' : 'SUBSCRIBES';
@@ -53,6 +52,6 @@
       });
     });
   </script>
-
+  
 </body>
 </html>
