@@ -68,7 +68,7 @@
 
 .channel-nav ul {
   display: flex;
-  /* flex-direction: row; */
+  flex-direction: row; 
   width: 100%;
   align-items: center;
   padding: 0 65px;
@@ -115,4 +115,18 @@
   background: none;
   display: block;
   margin: 0;
+}
+/* 875px 이하일때 */
+@media (max-width: 875px) {
+  .channel-nav ul{    
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    padding: 0 65px;
+    list-style: none;
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    margin: 0;
+  }
+  
 }
