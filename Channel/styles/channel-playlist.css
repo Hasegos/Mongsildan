@@ -1,4 +1,12 @@
-/* channel-playlists.css */
+body {
+  background-color: #000;
+  margin: 0;
+  font-family: 'Roboto', 'Arial', sans-serif;
+}
+
+.main-content {
+  border-top: 5px solid #212121;
+}
 
 .playlist-section {
   background-color: #000;
@@ -13,9 +21,9 @@
 .playlist-header {
   display: flex;
   align-items: center;
-  justify-content: flex-start; 
+  justify-content: flex-start;
   width: 100%;
-  max-width: 1070px;
+  max-width: 1280px;
   height: 44px;
   padding: 8px 65px;
   color: white;
@@ -46,30 +54,35 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  margin-left: 0; 
+  margin-left: 0;
 }
 
+/* ✅ 카드 배치: 카드 크기는 고정, 개수는 자동 반응형 */
 .playlist-grid {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 214px); /* 고정 크기 카드 반복 */
   gap: 15px;
-  flex-wrap: wrap;
+  justify-content: center;
   width: 100%;
-  max-width: 1070px;
+  max-width: 1280px;
+  padding: 0 16px;
   margin-top: 0;
+  box-sizing: border-box;
   background-color: transparent;
-  justify-content: flex-start;
 }
 
+/* ✅ 카드 크기 고정 */
 .playlist-card {
-  width: 276px;
-  height: 247px;
+  width: 214px;
+  height: 194px;
+  background-color: #111;
+  border-radius: 8px;
+  overflow: hidden;
   position: relative;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   text-decoration: none;
-  background-color: #111;
-  border-radius: 8px;
-  overflow: hidden;
+  flex-shrink: 0;
 }
 
 .playlist-card:hover {
@@ -77,9 +90,10 @@
   box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
 }
 
+/* ✅ 썸네일 이미지 */
 .video-preview {
-  width: 276px;
-  height: 155px;
+  width: 100%;
+  height: 120px;
   position: relative;
   overflow: hidden;
 }
@@ -91,6 +105,7 @@
   display: block;
 }
 
+/* ▶ 오버레이 */
 .play-icon-overlay {
   position: absolute;
   top: 50%;
@@ -109,10 +124,10 @@
   100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
 }
 
+/* ✅ 텍스트 영역 스타일 유지 */
 .playlist-text {
-  width: 252px;
-  height: auto;
-  margin: 10px auto 0 auto;
+  width: 100%;
+  padding: 10px;
   color: #ccc;
   font-size: 13px;
   font-family: 'Roboto', 'Noto Sans KR', sans-serif;
@@ -120,33 +135,6 @@
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 3;
-  line-clamp: 3; 
+  line-clamp: 3;
   -webkit-box-orient: vertical;
-}
-
-/* 반응형 레이아웃 */
-@media (max-width: 1024px) {
-  .playlist-grid {
-    justify-content: center;
-    width: 100%;
-    height: auto;
-    margin-top: 24px;
-  }
-  .playlist-card {
-    width: 45%;
-    height: auto;
-  }
-  .video-preview {
-    width: 100%;
-    height: auto;
-  }
-}
-
-@media (max-width: 600px) {
-  .playlist-card {
-    width: 100%;
-  }
-  .playlist-text {
-    width: 100%;
-  }
 }
