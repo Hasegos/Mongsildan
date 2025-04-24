@@ -30,7 +30,12 @@ document.addEventListener("DOMContentLoaded", () => {
       document.head.appendChild(sidebarStyle); 
       aside.style.width = "190px";
 
-      menuButton.addEventListener("click", () => {     
+      menuButton.addEventListener("click", () => {  
+        document.querySelectorAll("link[rel='stylesheet']").forEach(link => {
+          if(link.href.includes("aside")) {
+              link.remove();
+          }
+        })   
         if(cuurrentPage == 1){        
           loadHtml("aside","../home/sidebar/aside2.html", () => {            
               sidebarStyle.href = "../home/sidebar/style/aside2.css";
@@ -55,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });      
   });
   /* channel-title */
-  loadHtml(".header", "./channel-title.html", () => {
+  loadHtml(".header", "./html/channel-title.html", () => {
 
     let channelTitle = document.createElement("link");
     channelTitle.rel = "stylesheet";
@@ -75,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
   })
 
   /* channel-smallvideo */
-  loadHtml(".main", "./channel-smallvideo.html", () => {
+  loadHtml(".main", "./html/channel-smallvideo.html", () => {
     let smallvideo = document.createElement("link");
     smallvideo.rel = "stylesheet";
     smallvideo.href = "./styles/channel-smallvideo.css";
@@ -92,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
   })
 
   /* channel-playlist */
-  loadHtml(".footer", "./channel-playlist.html", () => {
+  loadHtml(".footer", "./html/channel-playlist.html", () => {
     let playlist = document.createElement("link");
     playlist.rel = "stylesheet";
     playlist.href = "./styles/channel-playlist.css";
@@ -107,4 +112,20 @@ document.addEventListener("DOMContentLoaded", () => {
       subscribeBtn.style.backgroundColor = subscribed ? 'gray' : 'red';
     });
   });
+
+  let cuurrentSidebarPage = null;
+  function handleResponsiveSidebar() {
+    const meideaQuery = window.matchMedia("(max-width: 1315px)");
+    if(meideaQuery.matches && cuurrentSidebarPage !==2){      
+      switchSidebar(2);
+      cuurrentSidebarPage = 2;
+    }
+    else if(!meideaQuery.matches && cuurrentSidebarPage !==1){
+      switchSidebar(1);
+      cuurrentSidebarPage = 1;
+    }
+  }
+    
+  handleResponsiveSidebar();
+  window.addEventListener("resize", handleResponsiveSidebar);
 });
