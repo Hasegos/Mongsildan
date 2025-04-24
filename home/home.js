@@ -133,33 +133,61 @@ document.addEventListener("DOMContentLoaded", () => {
         });        
       }      
     });
-  });   
+  });
+  
+async function URL() {
+  
+  const videos = await getVideoList();  
+  const Div = document.querySelector("section");
 
-  // 카드 생성
-  function creatDiv() {
-    const div = document.createElement("div");
-    div.classList.add("card");
-    div.innerHTML = `
-      <a href="../videos/videos.html" class="card-link">
-        <img src="../img/다운로드.png" />
-        <div class="card-content">
-        <a href="../Channel/channel.html">
-          <p class="card-title">올린 사람</p>
+  const chunkSize = 4;
+  let currentIndex = 0;
+
+  async function renderChunk() {
+    const fragment = document.createDocumentFragment();
+    const chunk = videos.slice(currentIndex, currentIndex + chunkSize);
+
+    const channelInfos = await Promise.all(
+      chunk.map((video) => getChannelInfo(video.channel_id))
+    );
+
+    chunk.forEach((video, index) => {
+      const { channel_name, channel_profile } = channelInfos[index];
+
+      const channelDiv = document.createElement("div");
+      channelDiv.classList.add("card");
+      channelDiv.innerHTML = `
+        <a href="../videos/videos.html" class="card-link">
+          <img src="${video.thumbnail}" loading="lazy" />
         </a>
-        <div class="card-description">
-          <p class="card-text1">이미지 내용?</p>
-          <p class="card-text2">이미지 내용?</p>
+        <div class="card-content">
+          <a href="#">
+            <p class="card-title">
+              <img src="${channel_profile}" style="width:90px; height:90px; object-fit:cover;">
+            </p>
+          </a>
+          <div class="card-description">
+            <p class="card-text1">${video.title}</p>
+            <p class="card-text2">${channel_name}</p>
+          </div>
         </div>
-        </div>
-      </a>
       `;
-    return div;
+      fragment.appendChild(channelDiv);
+    });
+
+    Div.appendChild(fragment);
+
+    currentIndex += chunkSize;
+    if (currentIndex < videos.length) {
+      setTimeout(renderChunk, 1);
+    }
   }
-  // 내용 추가
-  for (let i = 0; i < 10; i++) {
-    const Div = document.querySelector("section");
-    Div.appendChild(creatDiv());
-  } 
+  renderChunk();
+}
+
+URL()
+
+  // 카드 생성  
   let cuurrentSidebarPage = null;
   function handleResponsiveSidebar() {
     const meideaQuery = window.matchMedia("(max-width: 1315px)");

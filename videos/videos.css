@@ -251,3 +251,10 @@ body {
   }
   
 }
+
+@media (min-width: 1316px) {
+  .related-videos1{
+    display: none;
+  }
+
+}
