@@ -239,6 +239,15 @@ body {
   .comment-section {
     order: 3;
   }
-
+  .related-videos2{
+    display: none;
+  }
   
+}
+
+@media (min-width: 1316px) {
+  .related-videos1{
+    display: none;
+  }
+
 }
