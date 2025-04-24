@@ -31,9 +31,16 @@ main {
     margin-top: 56px;
 }
 
+@media (max-width: 1285px) {
+ .sidebar{
+    position: static !important;
+ }
+
+}
+
 @media (max-width: 625px) {
     aside {
-        background-color: #212121;
+        display: none;
     }
     .sidebar {
         display: none;
