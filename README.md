@@ -29,7 +29,6 @@
 - 최수호 [Hasegos](https://github.com/Hasegos)
 - 이소연 [BlueGraffie-hub](https://github.com/BlueGraffie-hub)
 - 김재경 [Jaekyung89](https://github.com/Jaekyung89)
-- 김혜림 []()
 
 ## 팀원 소개
 
@@ -49,12 +48,7 @@
             <a href="https://github.com/Jaekyung89" target="_blank">
             <img src="https://avatars.githubusercontent.com/u/127376926?v=4"  alt="김재경 프로필">
             </a>
-        </td>    
-        <td align="center" width="150px">
-            <a href="https://github.com/Hasegos" target="_blank">
-            <img src="https://avatars.githubusercontent.com/u/93961708?s=400&v=4" alt="최수호 프로필">
-            </a>
-        </td>    
+        </td>             
     </tr>
      <tr>
         <td align="center">
@@ -65,10 +59,7 @@
         </td>    
         <td align="center">
             <a href="https://github.com/Jaekyung89" target="_blank">김재경</a>
-        </td>    
-        <td align="center">
-            <a href="https://github.com/Hasegos" target="_blank">최수호</a>
-        </td>    
+        </td>                
     </tr>
 </table>
 
