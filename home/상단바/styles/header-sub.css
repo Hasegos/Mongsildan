@@ -53,7 +53,7 @@
   position: absolute;
   top: 0;
   height: 100%;
-  width: 40px;
+  width: 50px;
   background: linear-gradient(to right, transparent, #212121);
   border: none;
   cursor: pointer;
@@ -84,9 +84,10 @@
   z-index: 100;
   margin-left: auto;
 }
-.scroll-arrow img.more-icon, .filter-button img {
-  width: 20px;
-  height: 20px;
+.scroll-arrow img.more-icon,
+.filter-button img {
+  width: 40px;
+  height: 40px;
   object-fit: contain;
 }
 
@@ -118,7 +119,6 @@
   opacity: 1;
   visibility: visible;
 }
-
 .filter-close {
   background: none;
   border: none;
@@ -127,7 +127,9 @@
   cursor: pointer;
   float: right;
 }
-.filter-close:hover { color: white; }
+.filter-close:hover {
+  color: white;
+}
 
 /* ===== 필터 항목 ===== */
 .filter-columns {
@@ -185,7 +187,6 @@
 @media (max-width: 768px) {
   .filter-modal-popup {
     padding: 16px;
-    margin: 5vh 5vw;
   }
   .filter-column h4 { font-size: 13px; }
   .filter-column button { font-size: 12px; }
