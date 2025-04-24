@@ -38,12 +38,12 @@ document.addEventListener("DOMContentLoaded", () => {
         })   
         if(cuurrentPage == 1){        
           loadHtml("aside","../home/sidebar/aside2.html", () => {            
-              sidebarStyle.href = "../home/sidebar/style/aside2.css";
-            document.head.appendChild(sidebarStyle);         
-                
+            sidebarStyle.href = "../home/sidebar/style/aside2.css";
+            document.head.appendChild(sidebarStyle);                        
             aside.style.width = "70px";        
             aside.style.display = "flex";
-            aside.style.justifyContent = "center";              
+            aside.style.justifyContent = "center"; 
+
           });
           cuurrentPage = 2;
         }      
