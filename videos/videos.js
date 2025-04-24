@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  fetch("../상단바/header-top.html")
+  fetch("../home/상단바/header-top.html")
   .then((res) => {
     if (!res.ok) {
       throw new Error("파일을 불러오지 못했습니다.");
@@ -26,6 +26,8 @@ document.addEventListener("DOMContentLoaded", function () {
   .catch((err) => {
     console.error("fetch 실패:", err);
   });
+
+  
   const commentList = document.getElementById("comment-list");
   const commentInput = document.getElementById("comment-input");
   const submitBtn = document.getElementById("submit-comment");
