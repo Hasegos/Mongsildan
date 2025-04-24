@@ -73,16 +73,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const div = document.createElement("div");
     div.classList.add("card");
     div.innerHTML = `
-<<<<<<< HEAD
-      <img src="./img/다운로드.png" />
-      <div class="card-content">
-        <p class="card-title">올린 사람</p>
-        <div class="card-description">
-          <p class="card-text1">이미지 내용?</p>
-          <p class="card-text2">이미지 내용?</p>
-        </div>
-      </div>
-=======
       <a href="../videos/videos.html" class="card-link">
         <img src="../img/다운로드.png" />
         <div class="card-content">
@@ -93,7 +83,6 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         </div>
       </a>
->>>>>>> suho
       `;
     return div;
   }
@@ -101,10 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
   for (let i = 0; i < 10; i++) {
     const Div = document.querySelector("section");
     Div.appendChild(creatDiv());
-<<<<<<< HEAD
-  }
-});
-=======
   } 
   let cuurrentSidebarPage = null;
   function handleResponsiveSidebar() {
@@ -122,4 +107,3 @@ document.addEventListener("DOMContentLoaded", () => {
   handleResponsiveSidebar();
   window.addEventListener("resize", handleResponsiveSidebar);
 });
->>>>>>> suho
