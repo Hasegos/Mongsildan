@@ -29,9 +29,9 @@ body {
 
 .video-player iframe {
   width: 100%;
-  height: 800px;
   border: none;
   border-radius: 10px;
+  aspect-ratio: 16 / 9;
 }
 
 .video-title {
@@ -220,4 +220,25 @@ body {
 .comment-list li {
   padding: 6px 0;
   border-bottom: 1px solid #333;
+}
+
+@media (max-width: 1315px) {
+  .main-layout {
+    flex-direction: column;
+  }
+
+  .video-section {
+    order: 1;
+  }
+
+  .related-videos {
+    order: 2;
+    margin: 20px 0;
+  }
+
+  .comment-section {
+    order: 3;
+  }
+
+  
 }
