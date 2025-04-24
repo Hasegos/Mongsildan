@@ -1,80 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-<<<<<<< HEAD
-  fetch("../상단바/header-sub.html")
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error("파일을 불러오지 못했습니다.");
-      }
-      return res.text();
-    })
-    .then((html) => {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, "text/html");
-
-      const bodyContent = doc.body.innerHTML;
-      document.querySelector(".nav").innerHTML = bodyContent;
-
-      const scrollContainer = document.getElementById("scrollContainer");
-      const scrollBtn = document.getElementById("scrollRightBtn");
-
-      scrollBtn.addEventListener("click", () => {
-        scrollContainer.scrollBy({
-          left: 200,
-          behavior: "smooth",
-        });
-      });
-    })
-    .catch((err) => {
-      console.error("fetch 실패:", err);
-    });
-
-  fetch("../aside/aside.html")
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error("파일을 불러오지 못했습니다.");
-      }
-      return res.text();
-    })
-    .then((html) => {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, "text/html");
-
-      const bodyContent = doc.body.innerHTML;
-      document.querySelector("aside").innerHTML = bodyContent;
-    })
-    .catch((err) => {
-      console.error("fetch 실패:", err);
-    });
-
-  fetch("../상단바/header-top.html")
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error("파일을 불러오지 못했습니다.");
-      }
-      return res.text();
-    })
-    .then((html) => {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, "text/html");
-
-      const bodyContent = doc.body.innerHTML;
-      document.querySelector("header").innerHTML = bodyContent;
-
-      document
-        .getElementById("searchButton")
-        .addEventListener("click", function () {
-          const keyword = document.getElementById("searchInput").value.trim();
-          if (keyword) {
-            alert("검색어: " + keyword);
-          } else {
-            alert("검색어를 입력하세요!");
-          }
-        });
-    })
-    .catch((err) => {
-      console.error("fetch 실패:", err);
-    });
-=======
 
    // 최상단바 불러오기
   loadHtml("header", "./상단바/header-top.html", () => {
@@ -143,7 +67,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }      
     });
   });   
->>>>>>> suho
 
   // 카드 생성
   function creatDiv() {
