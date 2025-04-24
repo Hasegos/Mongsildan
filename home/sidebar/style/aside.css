@@ -3,6 +3,10 @@
 }
 
 .sidebar {
+  background-color: #212121;
+  left: 0;
+  top: 56px;
+  width: 240px;
   position: fixed;
   height: 100%;
   font-size: 14px;
