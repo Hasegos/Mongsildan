@@ -12,8 +12,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const menuButton = document.getElementById("menuButton");    
     const aside = document.querySelector("aside");   
     
-    
-    
     let sidebar = document.createElement("link");
     sidebar.rel = "stylesheet";
     sidebar.href = "../home/상단바/styles/header-top.css";
@@ -33,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
           sidebarSytle.style.backgroundColor = "#212121";    
           sidebarSytle.style.left = "0";    
           sidebarSytle.style.width = "190px";
+          sidebarSytle.style.marginTop = "56px";
           
         });
         cuurrentPage = 2;
