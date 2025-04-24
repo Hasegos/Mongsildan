@@ -29,15 +29,9 @@ body {
 
 .video-player iframe {
   width: 100%;
-<<<<<<< HEAD
   border: none;
   border-radius: 10px;
   aspect-ratio: 16 / 9;
-=======
-  height: 800px;
-  border: none;
-  border-radius: 10px;
->>>>>>> Blue
 }
 
 .video-title {
