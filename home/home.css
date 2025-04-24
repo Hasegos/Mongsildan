@@ -43,12 +43,7 @@ aside {
   background-color: #212121;
   padding: 10px;
   text-align: center;
-<<<<<<< HEAD
-  /* border: 1px solid white; */
-  transition: width 0.2s ease;
-=======
   /* border: 1px solid white; */  
->>>>>>> suho
 }
 .right-content {
   flex: 1;
@@ -65,18 +60,6 @@ main {
 /* 전체 카드 영역 */
 .card-container {
   margin-top: 50px;
-<<<<<<< HEAD
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: flex-start;
-  overflow-y: auto;
-}
-/* 카드 영역 */
-.card {
-  flex: 1 1 calc(25% - 20px);
-  max-width: calc(25% - 20px);
-=======
   /* display: flex;
   flex-wrap: wrap; */
   display: grid;
@@ -91,7 +74,6 @@ main {
   /* flex: 1 1 calc(25% - 20px); */
   /* max-width: calc(25% - 20px); */
   max-width: 100%;
->>>>>>> suho
   aspect-ratio: 4 / 3;
   text-align: center;
   border: 1px solid white;
@@ -132,19 +114,6 @@ main {
   padding-top: 12px;
 }
 
-<<<<<<< HEAD
-/* 1315px 이하 */
-@media (max-width: 1315px) {
-  aside {
-    width: 72px;
-    flex-shrink: 0; /* 화면 비율 상관없이 고정 */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
-  }
-}
-=======
 @media (max-width: 1315px) {
   .card-container{
     grid-template-columns: repeat(3,minmax(240px,1fr));
@@ -162,4 +131,3 @@ main {
     grid-template-columns: repeat(1,minmax(240px,1fr));
   }  
 }
->>>>>>> suho
