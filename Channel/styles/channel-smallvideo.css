@@ -1,0 +1,84 @@
+/* channel-smallvideo.css */
+
+body {
+  background-color: #000;
+  margin: 0;
+  font-family: 'Roboto','Arial', sans-serif;
+}
+
+.featured-video {
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  max-width: 1000px;
+  margin: 40px auto;
+  /* padding: 24px 287px 24px 65px; */
+  gap: 32px;
+  color: #ffffff;
+  background-color: transparent;
+  position: relative;
+}
+
+.video-main-preview {
+  position: relative;
+  min-width: 300px;
+  height: auto;
+  width: 100%;
+  max-width: 640px;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.video-thumb {
+  width: 90%;
+  height: 90%;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+
+/* ▶ 아이콘 버튼 */
+.custom-play-button {
+  position: absolute;
+  top: 45%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+  font-size: 64px;
+  color: white;
+  opacity: 0.85;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: transform 0.2s ease;
+}
+
+.custom-play-button:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.video-description {
+  /* width: 400px; */
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+.video-description h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #ffffff;
+}
+
+.video-description p {
+  font-size: 16px;
+  margin: 6px 0;
+  color: #aaa;
+}
+
+.description-text {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #ccc;
+}
