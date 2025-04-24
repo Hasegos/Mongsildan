@@ -143,11 +143,13 @@ document.addEventListener("DOMContentLoaded", () => {
       <a href="../videos/videos.html" class="card-link">
         <img src="../img/다운로드.png" />
         <div class="card-content">
+        <a href="../Channel/channel.html">
           <p class="card-title">올린 사람</p>
-          <div class="card-description">
-            <p class="card-text1">이미지 내용?</p>
-            <p class="card-text2">이미지 내용?</p>
-          </div>
+        </a>
+        <div class="card-description">
+          <p class="card-text1">이미지 내용?</p>
+          <p class="card-text2">이미지 내용?</p>
+        </div>
         </div>
       </a>
       `;
