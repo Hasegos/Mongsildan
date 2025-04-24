@@ -5,67 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>유튜브 클론 - 상단바2</title>
     <link rel="stylesheet" href="styles/header-sub.css" />
-    <style>
-      .scroll-arrow.left,
-      .scroll-arrow.right {
-        display: none;
-      }
-
-      .filter-modal-popup {
-        width: auto;
-        max-width: 95vw;
-        max-height: 80vh;
-        margin: 0 auto;
-        overflow-x: auto;
-      }
-
-      .filter-columns {
-        display: flex;
-        flex-wrap: nowrap;
-        gap: 20px;
-        justify-content: space-between;
-        min-width: 600px;
-      }
-
-      .filter-column {
-        flex: 1 1 0;
-        min-width: 120px;
-        text-align: left;
-      }
-
-      @media (max-width: 768px) {
-        .filter-modal-popup {
-          padding: 16px;
-        }
-        .filter-column h4 {
-          font-size: 13px;
-        }
-        .filter-column button {
-          font-size: 12px;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .filter-modal-popup {
-          padding: 16px;
-          border-radius: 8px;
-        }
-        .filter-column h4 {
-          font-size: 12px;
-        }
-        .filter-column button {
-          font-size: 11px;
-        }
-        .filter-close {
-          font-size: 18px;
-        }
-      }
-    </style>
   </head>
   <body>
     <nav class="header-sub">
       <button class="scroll-arrow left" id="scrollLeftBtn">
-        <img src="./img/더보기.png" alt="왼쪽" class="more-icon" />
+        <img src="./img/더보기(왼).png" alt="왼쪽" class="more-icon" />
       </button>
 
       <div class="scroll-container" id="scrollContainer">
@@ -145,7 +89,7 @@
               <li><button class="filter-option" data-filter="3d">3D</button></li>
               <li><button class="filter-option" data-filter="hdr">HDR</button></li>
               <li><button class="filter-option" data-filter="location">위치</button></li>
-              <li><button class="filter-option" data-filter="cc">크리에이티브 커먼즈</button></li>
+              <li><button class="filter-option" data-filter="cc">크리에이티브</button></li>
             </ul>
           </div>
         </div>
