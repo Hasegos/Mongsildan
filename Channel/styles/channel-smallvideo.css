@@ -1,4 +1,9 @@
-/* channel-smallvideo.css - 공통 스타일 제거 후 */
+/* channel-smallvideo.css */
+body {
+  background-color: #000;
+  margin: 0;
+  font-family: 'Roboto','Arial', sans-serif;
+}
 
 .featured-video {
   display: flex;
@@ -9,11 +14,13 @@
   margin: 40px auto;
   padding: 24px;
   gap: 32px;
+  color: #ffffff;
   background-color: transparent;
   position: relative;
   flex-wrap: nowrap;
 }
 
+/* 뷰포트 작아지면 세로로 정렬 */
 @media (max-width: 768px) {
   .featured-video {
     flex-direction: column;
@@ -41,9 +48,9 @@
   object-fit: cover;
   border-radius: 12px;
   display: block;
-  /* .img-cover + .rounded-md 가능 */
 }
 
+/* ▶ 아이콘 버튼 */
 .custom-play-button {
   position: absolute;
   top: 45%;
@@ -64,6 +71,7 @@
 .video-description {
   width: 400px;
   min-width: 280px;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -74,16 +82,17 @@
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 12px;
+  color: #ffffff;
 }
 
 .video-description p {
   font-size: 16px;
   margin: 6px 0;
+  color: #aaa;
 }
 
 .description-text {
   font-size: 15px;
   line-height: 1.7;
   color: #ccc;
-  /* .text-light-gray 가능 */
 }

@@ -1,0 +1,89 @@
+<body>
+  <nav class="header-sub">
+    <button class="scroll-arrow left" id="scrollLeftBtn">
+      <img src="../../img/더보기(왼).png" alt="왼쪽" class="more-icon" />
+    </button>
+
+    <div class="scroll-container" id="scrollContainer">
+      <div class="tab-item active" data-category="all">All</div>
+      <div class="tab-item" data-category="music">Music</div>
+      <div class="tab-item" data-category="gaming">Gaming</div>
+      <div class="tab-item" data-category="news">News</div>
+      <div class="tab-item" data-category="mixes">Mixes</div>
+      <div class="tab-item" data-category="live">Live</div>
+      <div class="tab-item" data-category="podcasts">Podcasts</div>
+      <div class="tab-item" data-category="fashion">Fashion</div>
+      <div class="tab-item" data-category="style">Style</div>
+      <div class="tab-item" data-category="learning">Learning</div>
+      <div class="tab-item" data-category="movies">Movies</div>
+      <div class="tab-item" data-category="trending">Trending</div>
+
+      <button class="scroll-arrow right" id="scrollRightBtn">
+        <img src="../../img/더보기.png" alt="더보기" class="more-icon" />
+      </button>  
+      <button class="filter-button" id="filterButton">
+        <img src="../../img/mokoko.jpg" alt="필터" />
+      </button>
+    </div> 
+        
+  </nav>
+  <div class="filter-modal-popup" id="filterModal">
+    <div class="filter-content">
+      <div class="filter-header">
+        <strong>검색 필터</strong>
+        <button id="closeFilter" class="filter-close">×</button>
+      </div>
+      <div class="filter-columns">
+        <div class="filter-column">
+          <h4>업로드 날짜</h4>
+          <ul>
+            <li><button class="filter-option" data-filter="today">오늘</button></li>
+            <li><button class="filter-option" data-filter="this-week">이번 주</button></li>
+            <li><button class="filter-option" data-filter="this-month">이번 달</button></li>
+            <li><button class="filter-option" data-filter="this-year">올해</button></li>
+          </ul>
+        </div>
+        <div class="filter-column">
+          <h4>정렬 기준</h4>
+          <ul>
+            <li><button class="filter-option" data-filter="relevance">관련도</button></li>
+            <li><button class="filter-option" data-filter="popular">조회수</button></li>
+            <li><button class="filter-option" data-filter="newest">최신순</button></li>
+          </ul>
+        </div>
+        <div class="filter-column">
+          <h4>구분</h4>
+          <ul>
+            <li><button class="filter-option" data-filter="video">동영상</button></li>
+            <li><button class="filter-option" data-filter="channel">채널</button></li>
+            <li><button class="filter-option" data-filter="playlist">재생목록</button></li>
+            <li><button class="filter-option" data-filter="movie">영화</button></li>
+          </ul>
+        </div>
+        <div class="filter-column">
+          <h4>길이</h4>
+          <ul>
+            <li><button class="filter-option" data-filter="short">4분 미만</button></li>
+            <li><button class="filter-option" data-filter="mid">4~20분</button></li>
+            <li><button class="filter-option" data-filter="long">20분 초과</button></li>
+          </ul>
+        </div>
+        <div class="filter-column">
+          <h4>기능별</h4>
+          <ul>
+            <li><button class="filter-option" data-filter="live">라이브</button></li>
+            <li><button class="filter-option" data-filter="4k">4K</button></li>
+            <li><button class="filter-option" data-filter="hd">HD</button></li>
+            <li><button class="filter-option" data-filter="caption">자막</button></li>
+            <li><button class="filter-option" data-filter="360">360°</button></li>
+            <li><button class="filter-option" data-filter="vr180">VR180</button></li>
+            <li><button class="filter-option" data-filter="3d">3D</button></li>
+            <li><button class="filter-option" data-filter="hdr">HDR</button></li>
+            <li><button class="filter-option" data-filter="location">위치</button></li>
+            <li><button class="filter-option" data-filter="cc">크리에이티브</button></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>   
+</body>

@@ -1,4 +1,12 @@
-/* channel-playlist.css - 공통 스타일 제외한 구성 */
+body {
+  background-color: #000;
+  margin: 0;
+  font-family: 'Roboto', 'Arial', sans-serif;
+}
+
+.main-content {
+  border-top: 5px solid #212121;
+}
 
 .main-content {
   border-top: 5px solid #212121;
@@ -22,12 +30,13 @@
   max-width: 1280px;
   height: 44px;
   padding: 8px 65px;
-  /* 텍스트 색상은 .text-white 사용 */
+  color: white;
 }
 
 .playlist-header h3 {
   display: flex;
   align-items: center;
+  width: auto;
   height: 36px;
   padding: 9px 0;
   font-size: 16px;
@@ -35,19 +44,29 @@
   margin: 10px;
 }
 
-/* 버튼: 공통 유틸로 스타일링 */
 .play-all-btn {
   height: 36px;
   padding: 6px 24px;
+  background-color: transparent;
+  border: 1px solid #fff;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
   font-size: 14px;
-  margin-left: 0;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 10px;
-  /* .btn .btn-outline-white 조합 사용 */
+  margin-left: 0;
 }
 
-/* 카드 레이아웃 */
+/* ✅ 카드 배치: 카드 크기는 고정, 개수는 자동 반응형 */
 .playlist-grid {
-  /* 공통 클래스: .grid-auto-card 사용 */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 214px); /* 고정 크기 카드 반복 */
+  gap: 15px;
+  justify-content: center;
   width: 100%;
   max-width: 1280px;
   padding: 0 16px;
@@ -56,7 +75,7 @@
   background-color: transparent;
 }
 
-/* 카드 개별 스타일만 유지 */
+/* ✅ 카드 크기 고정 */
 .playlist-card {
   width: 214px;
   height: 194px;
@@ -75,7 +94,7 @@
   box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
 }
 
-/* 썸네일 이미지 */
+/* ✅ 썸네일 이미지 */
 .video-preview {
   width: 100%;
   height: 120px;
@@ -83,30 +102,43 @@
   overflow: hidden;
 }
 
-/* .thumb-img는 공통 클래스로 대체 가능 (.img-cover) */
+.thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 
-/* ▶ 오버레이: pulse는 common.css에서 제공됨 */
+/* ▶ 오버레이 */
 .play-icon-overlay {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 36px;
+  color: white;
+  opacity: 0.8;
   pointer-events: none;
   animation: pulse 1.5s infinite;
-  /* color: white / opacity: 0.8는 .text-white로 처리 가능 */
 }
 
-/* 텍스트 스타일 */
+@keyframes pulse {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+  50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+}
+
+/* ✅ 텍스트 영역 스타일 유지 */
 .playlist-text {
   width: 100%;
   padding: 10px;
+  color: #ccc;
   font-size: 13px;
+  font-family: 'Roboto', 'Noto Sans KR', sans-serif;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   line-clamp: 3;
   -webkit-box-orient: vertical;
-  /* color, font는 .text-light-gray, .default-font 사용 */
 }
