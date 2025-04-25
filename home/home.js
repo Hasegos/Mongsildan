@@ -159,7 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const channelDiv = document.createElement("div");
         channelDiv.classList.add("card");
         channelDiv.innerHTML = `
-          <a href="../videos/videos.html" class="card-link">
+          <a href="../videos/videos.html?channel_id=${video.channel_id}&video_id=${video.id}" class="card-link">
             <img src="${video.thumbnail}" loading="lazy" />
           </a>
           <div class="card-content">

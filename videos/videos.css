@@ -27,7 +27,7 @@ body {
   margin-left: 50px;
 }
 
-.video-player iframe {
+.video-player video {
   width: 100%;
   border: none;
   border-radius: 10px;
@@ -80,7 +80,7 @@ body {
 
 .video-actions button {
   display: flex;
-  align-items: center;
+  align-items: center; 
   background-color: #181818;
   border: none;
   color: white;
@@ -92,6 +92,10 @@ body {
 
 .video-actions button:hover {
   background-color: #333;
+}
+
+.video-actions button svg {
+  margin-right: 4px;
 }
 
 .channel-info {

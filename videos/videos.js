@@ -59,6 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const commentInput = document.getElementById("comment-input");
   const submitBtn = document.getElementById("submit-comment");
   const commentCount = document.getElementById("comment-count");
+  
 
   let comments = [];
 
@@ -82,23 +83,65 @@ document.addEventListener("DOMContentLoaded", function () {
       alert("댓글을 입력해주세요.");
     }
   });  
+
+
+  // 채널 이름과 구독자 수 삽입
   
+  // async function getChannelInfo(channelID) {
+  //   try{
+  //     const channelInfo = await channel.json();
+
+  //     // 채널 이름과 구독자 수를 HTML에 삽입
+  //     const channelName = document.querySelector(".channel-details h3");
+  //     const subscribers = document.querySelector(".channel-details .subscribers");
+  
+  //     // 채널 이름과 구독자 수 업데이트
+  //     channelName.innerHTML = `${channelInfo.channel_name} <br><span class="subscribers">${formatSubscribers(channelInfo.subscribers)}</span>`;
+    
+  
+  //   // 구독자 수 포맷 함수 (예: 1.2M, 105K 형태로 변환)
+  //   function formatSubscribers(subscribers) {
+  //     if (subscribers >= 1000000) {
+  //       return (subscribers / 1000000).toFixed(1) + "M";
+  //     } else if (subscribers >= 1000) {
+  //       return (subscribers / 1000).toFixed(1) + "K";
+  //     } else {
+  //       return subscribers;
+  //     }
+  //   }
+  //   }catch(error){
+  //     console.error("채널 정보를 불러오는 중 오류 발생:", error);
+  //   }
+    
+  // }
+
+  // getChannelInfo(channelId);
+
+
+  const params = new URLSearchParams(window.location.search);
+  const videoId = parseInt(params.get("video_id")); 
+  const channelId = parseInt(params.get("channel_id"));
+
   async function loadVideo(videoId) {
     try {
       const videoInfo = await window.getVideoInfo(videoId);
 
-      // iframe에 src 설정
-      const iframe = document.getElementById("player");
-      iframe.src = `https://storage.googleapis.com/youtube-clone-video/${id}.mp4`;
+      // video에 src 설정
+      const video = document.getElementById("player");
+      video.src = `https://storage.googleapis.com/youtube-clone-video/${videoId}.mp4`;
+      
 
       // 제목 및 설명 등 정보 삽입
       document.querySelector(".video-title").textContent = videoInfo.title || "제목 없음";
+      document.querySelector(".views").textContent = `조회수 ${videoInfo.views}회` || "조회수 없음";
       document.querySelector(".video-description").textContent = videoInfo.description || "설명 없음";
+      document.querySelector(".like_count").textContent = videoInfo.likes || 0;
+      document.querySelector(".dislike_count").textContent = videoInfo.dislikes || 0;
     } catch (error) {
       console.error("영상 정보를 불러오는 중 오류 발생:", error);
     }
   }
-  const VideoId = "1"; // 원하는 videoId로 바꿔주세요
-  loadVideo(VideoId)
 
+  // 페이지가 로드되면 videoId로 영상 불러오기
+  loadVideo(videoId);
 });
