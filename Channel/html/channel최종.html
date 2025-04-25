@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>채널 페이지 - Mongsildan</title>
+
+  <!-- CSS: 공통 + 개별 -->
+  <link rel="stylesheet" href="/Channel/styles/channel-common.css" />
+  <link rel="stylesheet" href="/Channel/styles/channel-title.css" />
+  <link rel="stylesheet" href="/Channel/styles/channel-smallvideo.css" />
+  <link rel="stylesheet" href="/Channel/styles/channel-playlist.css" />
+  <link rel="stylesheet" href="/Channel/styles/channel.css" />
+</head>
+<body>
+  <div class="wrapper">
+    <!-- 최상단바 (JS로 불러옴) -->
+    <header id="header"></header>
+
+    <div class="container">
+      <!-- 사이드바 (JS로 불러옴) -->
+      <aside></aside>
+
+      <!-- 메인 콘텐츠 -->
+      <main>
+        <section class="card-container">
+          <!-- 채널 타이틀 -->
+          <div class="header">
+            <div class="channel-header">
+              <div class="banner">
+                <img alt="채널 배너" class="banner-img img-cover" id="banner-img" />
+              </div>
+              <div class="channel-info">
+                <a href="https://example.com" target="_blank">
+                  <img alt="프로필 이미지" class="profile-img rounded-full" id="profile-img" />
+                </a>
+                <div class="text-info">
+                  <h1 class="channel-name text-white default-font" id="channel-name">Mongsildan</h1>
+                  <p class="subscribers text-light-gray default-font">4.2M subscribers</p>
+                </div>
+                <button id="subscribe-btn" class="btn btn-red btn-active subscribe-btn">SUBSCRIBE</button>
+              </div>
+              <nav class="channel-nav">
+                <ul>
+                  <li><button class="nav-btn">HOME</button></li>
+                  <li><button class="nav-btn">VIDEOS</button></li>
+                  <li><button class="nav-btn">PLAYLISTS</button></li>
+                  <li><button class="nav-btn">COMMUNITY</button></li>
+                  <li><button class="nav-btn">CHANNELS</button></li>
+                  <li><button class="nav-btn">ABOUT</button></li>
+                  <li class="search-item">
+                    <button class="search-btn" aria-label="검색">
+                      <img src="/img/search.png" alt="검색" class="search-icon" />
+                    </button>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+
+          <!-- 대표 영상 -->
+          <div class="main">
+            <section class="featured-video">
+              <div class="video-main-preview">
+                <img id="main-img" class="video-thumb img-cover rounded-md" alt="대표 영상 썸네일" />
+                <div class="custom-play-button text-white" id="play-button">▶</div>
+              </div>
+              <div class="video-description">
+                <h2 class="text-white default-font" id="video-description">대표 영상 제목</h2>
+                <p class="text-light-gray default-font">
+                  <span id="viewText">0</span> views • <span id="date">방금 전</span>
+                </p>
+              </div>
+            </section>
+          </div>
+
+          <!-- 플레이리스트 -->
+          <div class="footer">
+            <div class="layout">
+              <div class="main-content">
+                <section class="playlist-section">
+                  <div class="playlist-header text-white">
+                    <h3 class="default-font">Search On '21</h3>
+                    <button class="btn btn-outline-white play-all-btn">▶ PLAY ALL</button>
+                  </div>
+                  <div class="playlist-grid grid-auto-card">
+                    <!-- JS가 여기 채워 넣음 -->
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="/js/loadHTML.js"></script>     
+  <script src="/js/page1315px.js"></script>
+  <script src="/sidebar/sidebar.js"></script>
+  <script src="/api/getChannelVideoList.js"></script>  
+  <script src="/api/getChannelInfo.js"></script>
+  <script src="/js/getTimeAgo.js"></script>
+  <script src="/Channel/channel.js"></script>  
+</body>
+</html>

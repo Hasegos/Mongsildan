@@ -5,7 +5,7 @@
 .sidebar {
   background-color: #212121;
   left: 0;  
-  width: 190px;
+  width: 240px;
   position: fixed;
   height: 100%;
   font-size: 14px;
@@ -15,6 +15,7 @@
   overflow-y: auto;
   scrollbar-width: none;
 }
+
 
 .sidebar ul {
   list-style-type: none;
