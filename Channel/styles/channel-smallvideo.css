@@ -1,5 +1,4 @@
 /* channel-smallvideo.css */
-
 body {
   background-color: #000;
   margin: 0;
@@ -8,24 +7,38 @@ body {
 
 .featured-video {
   display: flex;
-  align-items: center;
-  /* justify-content: center; */
-  max-width: 1000px;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  max-width: 1200px;
   margin: 40px auto;
-  /* padding: 24px 287px 24px 65px; */
+  padding: 24px;
   gap: 32px;
   color: #ffffff;
   background-color: transparent;
   position: relative;
+  flex-wrap: nowrap;
+}
+
+/* 뷰포트 작아지면 세로로 정렬 */
+@media (max-width: 768px) {
+  .featured-video {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .video-description {
+    text-align: center;
+    align-items: center;
+  }
 }
 
 .video-main-preview {
   position: relative;
-  min-width: 300px;
-  height: auto;
-  width: 100%;
-  max-width: 640px;
-  aspect-ratio: 16 / 9;
+  height: 238px;
+  width: 424px;
+  min-width: 424px;
+  flex-shrink: 0;
   overflow: hidden;
 }
 
@@ -56,12 +69,13 @@ body {
 }
 
 .video-description {
-  /* width: 400px; */
+  width: 400px;
+  min-width: 280px;
   height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-right: 10px;
+  flex-shrink: 0;
 }
 
 .video-description h2 {

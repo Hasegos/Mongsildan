@@ -135,57 +135,59 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
   
-async function URL() {
-  
-  const videos = await getVideoList();  
-  const Div = document.querySelector("section");
 
-  const chunkSize = 4;
-  let currentIndex = 0;
+  // 총 영상 정보 찍어주기
+  async function URL() {
+    
+    const videos = await getVideoList();  
+    const Div = document.querySelector("section");
 
-  async function renderChunk() {
-    const fragment = document.createDocumentFragment();
-    const chunk = videos.slice(currentIndex, currentIndex + chunkSize);
+    const chunkSize = 4;
+    let currentIndex = 0;
 
-    const channelInfos = await Promise.all(
-      chunk.map((video) => getChannelInfo(video.channel_id))
-    );
+    async function renderChunk() {
+      const fragment = document.createDocumentFragment();
+      const chunk = videos.slice(currentIndex, currentIndex + chunkSize);
 
-    chunk.forEach((video, index) => {
-      const { channel_name, channel_profile } = channelInfos[index];
+      const channelInfos = await Promise.all(
+        chunk.map((video) => getChannelInfo(video.channel_id))
+      );
 
-      const channelDiv = document.createElement("div");
-      channelDiv.classList.add("card");
-      channelDiv.innerHTML = `
-        <a href="../videos/videos.html" class="card-link">
-          <img src="${video.thumbnail}" loading="lazy" />
-        </a>
-        <div class="card-content">
-          <a href="#">
-            <p class="card-title">
-              <img src="${channel_profile}" style="width:90px; height:90px; object-fit:cover;">
-            </p>
+      chunk.forEach((video, index) => {
+        const { channel_name, channel_profile } = channelInfos[index];
+
+        const channelDiv = document.createElement("div");
+        channelDiv.classList.add("card");
+        channelDiv.innerHTML = `
+          <a href="../videos/videos.html" class="card-link">
+            <img src="${video.thumbnail}" loading="lazy" />
           </a>
-          <div class="card-description">
-            <p class="card-text1">${video.title}</p>
-            <p class="card-text2">${channel_name}</p>
+          <div class="card-content">
+            <a href="../Channel/channel.html?id=${video.channel_id}">
+              <p class="card-title">
+                <img src="${channel_profile}" style="width:90px; height:90px; object-fit:cover;">
+              </p>
+            </a>
+            <div class="card-description">
+              <p class="card-text1">${video.title}</p>
+              <p class="card-text2">${channel_name}</p>
+            </div>
           </div>
-        </div>
-      `;
-      fragment.appendChild(channelDiv);
-    });
+        `;
+        fragment.appendChild(channelDiv);
+      });
 
-    Div.appendChild(fragment);
+      Div.appendChild(fragment);
 
-    currentIndex += chunkSize;
-    if (currentIndex < videos.length) {
-      setTimeout(renderChunk, 1);
+      currentIndex += chunkSize;
+      if (currentIndex < videos.length) {
+        setTimeout(renderChunk, 1);
+      }
     }
+    renderChunk();
   }
-  renderChunk();
-}
 
-URL()
+  URL()
 
   // 카드 생성  
   let cuurrentSidebarPage = null;
