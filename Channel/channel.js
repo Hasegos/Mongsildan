@@ -7,10 +7,10 @@ document.addEventListener("DOMContentLoaded", () => {
   let like = 0 , videoMainDescription, view,date; 
 
    // 최상단바 불러오기
-  loadHtml("header", "/top/html/header-top.html", () => {  
+  loadHtml("header", "../top/html/header-top.html", () => {  
       let headerstyle = document.createElement("link");
       headerstyle.rel = "stylesheet";
-      headerstyle.href = "/top/style/header-top.css";
+      headerstyle.href = "../top/style/header-top.css";
       document.head.appendChild(headerstyle); 
       document
       .getElementById("searchButton")
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });     
   // 사이드바 불러오기
   let cuurrentPage = 1 , check = 1;
-  loadHtml("aside", "/sidebar/html/aside.html",() => {    
+  loadHtml("aside", "../sidebar/html/aside.html",() => {      
     menuButton(cuurrentPage,check);
   });
   
@@ -83,20 +83,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-
  /* title */
   async function title() { 
     
-  const videos = await getChannelInfo(channelId);        
+    const videos = await getChannelInfo(channelId);        
 
-  const bannerImg = document.getElementById("banner-img");
-  bannerImg.src = videos.channel_banner;
+    const bannerImg = document.getElementById("banner-img");
+    bannerImg.src = videos.channel_banner;
 
-  const profileImg = document.getElementById("profile-img");
-  profileImg.src = videos.channel_profile;
+    const profileImg = document.getElementById("profile-img");
+    profileImg.src = videos.channel_profile;
 
-  const channelName = document.getElementById("channel-name");
-  channelName.textContent = videos.channel_name;   
+    const channelName = document.getElementById("channel-name");
+    channelName.textContent = videos.channel_name;   
+
+    const subscribers = document.getElementById("subscribers");
+    subscribers.textContent = getSubscriber(videos.subscribers);
   }  
   /* smallVideo */
   async function smallvideo(like,videoMainDescription,views,date){
