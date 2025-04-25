@@ -44,6 +44,7 @@ aside {
   /* padding: 10px; */
   text-align: center;
   /* border: 1px solid white; */  
+  position: fixed;
 }
 .right-content {
   flex: 1;
