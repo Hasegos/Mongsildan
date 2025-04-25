@@ -112,6 +112,11 @@ main {
 /* 카드 내용 중 첫 텍스트 */
 .card-text1 {
   padding-top: 12px;
+  font-weight: bold;
+}
+
+.card-text2 {
+  color: #aaaaaa;
 }
 
 @media (max-width: 1315px) {

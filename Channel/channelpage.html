@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>채널 페이지 - Mongsildan</title>
+
+  <!-- 공통 및 개별 CSS -->
+  <link rel="stylesheet" href="/Channel/styles/channel-common.css" />
+  <link rel="stylesheet" href="/Channel/styles/channel-title.css" />
+  <link rel="stylesheet" href="/Channel/styles/channel-smallvideo.css" />
+  <link rel="stylesheet" href="/Channel/styles/channel-playlist.css" />
+</head>
+<body>
+
+  <!-- ✅ 채널 헤더 -->
+  <header class="channel-header">
+    <div class="banner">
+      <img alt="채널 배너" class="banner-img img-cover" id="banner-img" />
+    </div>
+    <div class="channel-info">
+      <a href="https://example.com" target="_blank">
+        <img alt="프로필 이미지" class="profile-img rounded-full" id="profile-img" />
+      </a>
+      <div class="text-info">
+        <h1 class="channel-name text-white default-font" id="channel-name">Mongsildan</h1>
+        <p class="subscribers text-light-gray default-font">4.2M subscribers</p>
+      </div>
+      <button id="subscribe-btn" class="btn btn-red btn-active subscribe-btn">SUBSCRIBE</button>
+    </div>
+    <nav class="channel-nav">
+      <ul>
+        <li><button class="nav-btn">HOME</button></li>
+        <li><button class="nav-btn">VIDEOS</button></li>
+        <li><button class="nav-btn">PLAYLISTS</button></li>
+        <li><button class="nav-btn">COMMUNITY</button></li>
+        <li><button class="nav-btn">CHANNELS</button></li>
+        <li><button class="nav-btn">ABOUT</button></li>
+        <li class="search-item">
+          <button class="search-btn" aria-label="검색">
+            <img src="/img/search.png" alt="검색" class="search-icon" />
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ✅ 대표 영상 섹션 -->
+  <section class="featured-video">
+    <div class="video-main-preview">
+      <img id="main-img" class="video-thumb img-cover rounded-md" src="/img/sample-main.jpg" alt="대표 영상 썸네일" />
+      <div class="custom-play-button text-white" id="play-button">▶</div>
+    </div>
+    <div class="video-description">
+      <h2 class="text-white default-font" id="video-description">Welcome to Mongsildan</h2>
+      <p class="text-light-gray default-font">
+        <span id="viewText">1.2M</span> views • <span id="date">2 days ago</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ✅ 플레이리스트 섹션 -->
+  <div class="layout">
+    <div class="main-content">
+      <section class="playlist-section">
+        <div class="playlist-header text-white">
+          <h3 class="default-font">Search On '21</h3>
+          <button class="btn btn-outline-white play-all-btn">▶ PLAY ALL</button>
+        </div>
+        <div class="playlist-grid grid-auto-card">
+          <!-- 예시 카드 -->
+          <a class="playlist-card" href="#">
+            <div class="video-preview">
+              <img src="/img/mokoko.jpg" alt="영상 썸네일" class="thumb-img img-cover" />
+              <div class="play-icon-overlay text-white">▶</div>
+            </div>
+            <div class="playlist-text text-light-gray default-font">
+              혁신과 창조를 이끄는 기술 이야기
+            </div>
+          </a>
+          <!-- JS로 동적 삽입 가능 -->
+        </div>
+      </section>
+    </div>
+  </div>
+
+</body>
+</html>

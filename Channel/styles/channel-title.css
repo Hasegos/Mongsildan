@@ -1,21 +1,16 @@
-/* channel-title.css */
-
-body {
-  font-family: 'Roboto', 'Noto Sans KR', sans-serif;
-}
+/* channel-title.css - 공통 스타일 제거 후 */
 
 .channel-header {
   background-color: #181818;
-  color: white;
   padding-bottom: 10px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .banner-img {
   width: 100%;
-  height: 180px;
-  object-fit: cover;
-  display: block;
+  height: 100%;
+  /* .img-cover 사용 가능 */
 }
 
 .channel-info {
@@ -30,6 +25,7 @@ body {
   height: 100px;
   border-radius: 50%;
   margin-right: 20px;
+  /* .rounded-full 가능 */
 }
 
 .text-info {
@@ -43,36 +39,21 @@ body {
   font-weight: bold;
 }
 
-
 .subscribers {
   font-size: 14px;
   color: gray;
 }
 
 .subscribe-btn {
-  background-color: red;
-  color: white;
-  border: none;
   padding: 10px 16px;
-  font-weight: bold;
-  border-radius: 2px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
   margin-left: 0;
   align-self: center;
-}
-
-.subscribe-btn:hover {
-  background-color: darkred;
-}
-
-.subscribe-btn:active {
-  transform: scale(0.96);
+  /* .btn .btn-red .btn-active 조합 가능 */
 }
 
 .channel-nav ul {
   display: flex;
-  flex-direction: row;
+  flex-direction: row; 
   width: 100%;
   align-items: center;
   padding: 0 65px;
@@ -85,10 +66,10 @@ body {
 .nav-btn {
   background: none;
   border: none;
-  color: white;
   padding: 16px;
   cursor: pointer;
   font-weight: bold;
+  color: white;
 }
 
 .nav-btn:hover {
@@ -119,4 +100,11 @@ body {
   background: none;
   display: block;
   margin: 0;
+}
+
+@media (max-width: 875px) {
+  .channel-nav ul {    
+    flex-direction: column;
+    padding: 0 65px;
+  }
 }
