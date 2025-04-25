@@ -1,8 +1,8 @@
-document.addEventListener("DOMContentLoaded", () => {
-    
+document.addEventListener("DOMContentLoaded", () => {    
 
   const params = new URLSearchParams(window.location.search);
   const channelId = parseInt(params.get("id")); 
+  
   // 좋아요, 타이틀 , 조회수, 날짜
   let like = 0 , videoMainDescription, view,date; 
 
@@ -188,17 +188,15 @@ document.addEventListener("DOMContentLoaded", () => {
           </a>
         `;
         fragment.appendChild(channelDiv);
-      });
-      
-      smallvideo(like,videoMainDescription,view,getTimeAgo(date));  
+      });      
 
-      
       Div.appendChild(fragment);
-
       currentIndex += chunkSize;
       if (currentIndex < videos.length) {
-        setTimeout(renderChunk, 1);
+        setTimeout(renderChunk, 1);        
       }
+      // smallvideo
+      smallvideo(like,videoMainDescription,view,getTimeAgo(date));
     }
     renderChunk();
   }
@@ -224,9 +222,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return `${years}년 전`;
   }
 
-
-
-
   /* 1315px 미만일때 작동 */
   let cuurrentSidebarPage = null;
   function handleResponsiveSidebar() {
@@ -239,9 +234,7 @@ document.addEventListener("DOMContentLoaded", () => {
       switchSidebar(1);
       cuurrentSidebarPage = 1;
     }
-  }
-    
+  }    
   handleResponsiveSidebar();
   window.addEventListener("resize", handleResponsiveSidebar);
-
 });
