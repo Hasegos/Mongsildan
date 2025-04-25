@@ -1,13 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
    // 최상단바 불러오기
-  loadHtml("header", "../top/html/header-top.html", () => {
-
-    let styleLink = document.createElement("link");
-    styleLink.rel = "stylesheet";
-    styleLink.href = "../top/style/header-top.css";
-    document.head.appendChild(styleLink);
-
+  loadHtml("header", "./상단바/header-top.html", () => {
     document
       .getElementById("searchButton")
       .addEventListener("click", function () {
@@ -21,13 +15,20 @@ document.addEventListener("DOMContentLoaded", () => {
   });    
 
   // 헤더 서브바 불러오기
-  loadHtml(".nav", "../top/html/header-sub.html", () => { 
+  loadHtml(".nav", "./상단바/header-sub.html", () => {
 
-    // 헤더 서브 css 불러오기
-    let styleLink = document.createElement("link");
-    styleLink.rel = "stylesheet";
-    styleLink.href = "../top/style/header-sub.css";
-    document.head.appendChild(styleLink);
+    // 상단바 스크롤 이동기능
+    /*         
+    const scrollContainer = document.getElementById("scrollContainer");
+    const scrollBtn = document.getElementById("scrollRightBtn");
+
+    scrollBtn.addEventListener("click", () => {      
+      scrollContainer.scrollBy({
+        left: 200,
+        behavior: "smooth",
+      });            
+    });
+    */
 
     const scrollContainer = document.getElementById("scrollContainer");
     const scrollRightBtn = document.getElementById("scrollRightBtn");
@@ -44,7 +45,9 @@ document.addEventListener("DOMContentLoaded", () => {
       let isScrolled = scrollLeft > 0
       scrollLeftBtn.style.display = isScrolled ? "flex" : "none";      
 
-      scrollRightBtn.style.display = scrollLeft < maxScroll - 1 ? "flex" : "none";      
+      scrollRightBtn.style.display = scrollLeft < maxScroll - 1 ? "flex" : "none";
+      
+      
     }
 
     scrollContainer.addEventListener("scroll", toggleScrollButtons);
@@ -92,15 +95,50 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // 사이드바 불러오기
-  let cuurrentPage = 1 , check = 1;
-  loadHtml("aside", "../sidebar/html/aside.html",() => {
-    menuButton(cuurrentPage, check);
+  loadHtml("aside", "./sidebar/aside.html", () => {
+    const menuButton = document.getElementById("menuButton");
+    // width 넓이 수정을위해서
+    const aside = document.querySelector("aside");
+    let cuurrentPage = 1;
+    let styleLink = document.createElement("link");
+    styleLink.rel = "stylesheet";
+
+    menuButton.addEventListener("click", () => {
+        document.querySelectorAll("link[rel='stylesheet']").forEach(link => {
+          if(link.href.includes("aside")) {
+              link.remove();
+          }
+        })
+
+      if(cuurrentPage == 1){        
+        loadHtml("aside","./sidebar/aside2.html", () => {            
+          styleLink.href = "./sidebar/style/aside2.css";
+          document.head.appendChild(styleLink);         
+              
+          aside.style.width = "70px";        
+          aside.style.display = "flex";
+          aside.style.justifyContent = "center";          
+          
+        });
+        cuurrentPage = 2;
+      }      
+      else if (cuurrentPage == 2){
+        loadHtml("aside","./sidebar/aside.html",() =>{          
+          styleLink.href = "./sidebar/style/aside.css";
+          document.head.appendChild(styleLink); 
+          cuurrentPage = 1;     
+          aside.style.width = "240px";
+          aside.style.display = "";
+          aside.style.justifyContent = "";          
+        });        
+      }      
+    });
   });
-  
   
 
   // 총 영상 정보 찍어주기
-  async function URL() {    
+  async function URL() {
+    
     const videos = await getVideoList();  
     const Div = document.querySelector("section");
 
@@ -140,6 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       Div.appendChild(fragment);
+
       currentIndex += chunkSize;
       if (currentIndex < videos.length) {
         setTimeout(renderChunk, 1);
@@ -147,9 +186,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     renderChunk();
   }
+
   URL()
 
-  /* 1315px 미만일때 */
+  // 카드 생성  
   let cuurrentSidebarPage = null;
   function handleResponsiveSidebar() {
     const meideaQuery = window.matchMedia("(max-width: 1315px)");
