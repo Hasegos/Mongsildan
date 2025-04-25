@@ -6,11 +6,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // 좋아요, 타이틀 , 조회수, 날짜
   let like = 0 , videoMainDescription, view,date; 
 
-    // 최상단바 추가
-  loadHtml("header", "../home/상단바/header-top.html", () => {  
+   // 최상단바 불러오기
+  loadHtml("header", "/top/html/header-top.html", () => {  
       let headerstyle = document.createElement("link");
       headerstyle.rel = "stylesheet";
-      headerstyle.href = "../home/상단바/styles/header-top.css";
+      headerstyle.href = "/top/style/header-top.css";
       document.head.appendChild(headerstyle); 
       document
       .getElementById("searchButton")
@@ -23,49 +23,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });     
   });     
-
-    // 사이드바 불러오기
-  loadHtml("aside", "../home/sidebar/aside.html", () => {
-      const menuButton = document.getElementById("menuButton");
-      // width 넓이 수정을위해서
-      const aside = document.querySelector("aside");      
-      
-      let cuurrentPage = 1;
-      let sidebarStyle = document.createElement("link");
-      sidebarStyle.rel = "stylesheet";
-      sidebarStyle.href = "../home/sidebar/style/aside.css";      
-      document.head.appendChild(sidebarStyle); 
-      aside.style.width = "190px";
-
-      menuButton.addEventListener("click", () => {  
-        document.querySelectorAll("link[rel='stylesheet']").forEach(link => {
-          if(link.href.includes("aside")) {
-              link.remove();
-          }
-        })   
-        if(cuurrentPage == 1){        
-          loadHtml("aside","../home/sidebar/aside2.html", () => {            
-            sidebarStyle.href = "../home/sidebar/style/aside2.css";
-            document.head.appendChild(sidebarStyle);                        
-            aside.style.width = "70px";        
-            aside.style.display = "flex";
-            aside.style.justifyContent = "center"; 
-
-          });
-          cuurrentPage = 2;
-        }      
-        else if (cuurrentPage == 2){
-          loadHtml("aside","../home/sidebar/aside.html",() =>{          
-              sidebarStyle.href = "../home/sidebar/style/aside.css";
-            document.head.appendChild(sidebarStyle); 
-            cuurrentPage = 1;     
-            aside.style.width = "190px";
-            aside.style.display = "";
-            aside.style.justifyContent = "";          
-          });        
-        }      
-      });      
+  // 사이드바 불러오기
+  let cuurrentPage = 1 , check = 1;
+  loadHtml("aside", "/sidebar/html/aside.html",() => {    
+    menuButton(cuurrentPage,check);
   });
+  
   /* channel-title */
   loadHtml(".header", "./html/channel-title.html", () => {
 
@@ -202,26 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   playlist();
   title();
-
-  // 날짜 차이 계산 함수
-  function getTimeAgo(dateString) {
-    const createdDate = new Date(dateString);
-    const now = new Date();
-
-    const diffTime = now - createdDate;
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-
-    if (diffDays === 0) return "오늘";
-    if (diffDays === 1) return "어제";
-    if (diffDays < 30) return `${diffDays}일 전`;
-
-    const months = Math.floor(diffDays / 30);
-    if (months < 12) return `${months}개월 전`;
-
-    const years = Math.floor(months / 12);
-    return `${years}년 전`;
-  }
-
+  
   /* 1315px 미만일때 작동 */
   let cuurrentSidebarPage = null;
   function handleResponsiveSidebar() {
