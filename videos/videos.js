@@ -1,58 +1,32 @@
 document.addEventListener("DOMContentLoaded", function () {
 
   // 상단 바 불러오기
-  loadHtml("header", "../home/상단바/header-top.html", () => {    
-
+  loadHtml("header", "../top/html/header-top.html", () => { 
     let styleLink = document.createElement("link");
     styleLink.rel = "stylesheet";
-    styleLink.href = "../home/상단바/styles/header-top.css";
+    styleLink.href = "../top/style/header-top.css";
     document.head.appendChild(styleLink);   
-
-    // 사이드바 불러오기  
-    const menuButton = document.getElementById("menuButton");    
-    const aside = document.querySelector("aside");   
+      // 검색기능
+      document.getElementById("searchButton")
+      .addEventListener("click", function () {
+        const keyword = document.getElementById("searchInput").value.trim();
+        if (keyword) {
+          alert("검색어: " + keyword);
+        } else {
+          alert("검색어를 입력하세요!");
+        }
+      });
+  });
+  // 사이드바 불러오기
+  let cuurrentPage = 3 , check = 2;
+  loadHtml("aside", "/sidebar/html/aside.html",() => {
+    let headerStyle  = document.createElement("link");
+    headerStyle.rel = "stylesheet";
+    headerStyle.href = "/sidebar/style/aside.css";
+    document.head.appendChild(headerStyle);        
     
-    let sidebar = document.createElement("link");
-    sidebar.rel = "stylesheet";
-    sidebar.href = "../home/상단바/styles/header-top.css";
-    document.head.appendChild(sidebar); 
-    let cuurrentPage = 1;
-
-    menuButton.addEventListener("click", () => {
-      if(cuurrentPage == 1){        
-        loadHtml("aside","../home/sidebar/aside.html", () => { 
-          const sidebarSytle = document.querySelector(".sidebar");           
-          sidebar.href = "../home/sidebar/style/aside.css";
-          document.head.appendChild(sidebar);         
-              
-          aside.style.width = "70px";        
-          aside.style.display = "flex";
-          aside.style.justifyContent = "center";  
-          sidebarSytle.style.backgroundColor = "#212121";    
-          sidebarSytle.style.left = "0";    
-          sidebarSytle.style.width = "190px";
-          sidebarSytle.style.marginTop = "56px";
-          
-        });
-        cuurrentPage = 2;
-      }      
-      else if (cuurrentPage == 2){
-        aside.style.display = "none";
-        cuurrentPage = 1;
-      }    
-    });
-  
-    // 검색기능
-    document.getElementById("searchButton")
-    .addEventListener("click", function () {
-      const keyword = document.getElementById("searchInput").value.trim();
-      if (keyword) {
-        alert("검색어: " + keyword);
-      } else {
-        alert("검색어를 입력하세요!");
-      }
-    });
-  });    
+    menuButton(cuurrentPage, check);
+  });
   
   
   const commentList = document.getElementById("comment-list");
