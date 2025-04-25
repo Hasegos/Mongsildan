@@ -95,9 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let cuurrentPage = 1 , check = 1;
   loadHtml("aside", "../sidebar/html/aside.html",() => {
     menuButton(cuurrentPage, check);
-  });
-  
-  
+  });   
 
   // 총 영상 정보 찍어주기
   async function URL() {    
@@ -121,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const channelDiv = document.createElement("div");
         channelDiv.classList.add("card");
         channelDiv.innerHTML = `
-          <a href="../videos/videos.html" class="card-link">
+          <a href="../videos/videos.html?channel_id=${video.channel_id}&video_id=${video.id}" class="card-link">
             <img src="${video.thumbnail}" loading="lazy" />
           </a>
           <div class="card-content">
