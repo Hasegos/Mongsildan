@@ -1,0 +1,98 @@
+/* channel-smallvideo.css */
+body {
+  background-color: #000;
+  margin: 0;
+  font-family: 'Roboto','Arial', sans-serif;
+}
+
+.featured-video {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 24px;
+  gap: 32px;
+  color: #ffffff;
+  background-color: transparent;
+  position: relative;
+  flex-wrap: nowrap;
+}
+
+/* 뷰포트 작아지면 세로로 정렬 */
+@media (max-width: 768px) {
+  .featured-video {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .video-description {
+    text-align: center;
+    align-items: center;
+  }
+}
+
+.video-main-preview {
+  position: relative;
+  height: 238px;
+  width: 424px;
+  min-width: 424px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.video-thumb {
+  width: 90%;
+  height: 90%;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+
+/* ▶ 아이콘 버튼 */
+.custom-play-button {
+  position: absolute;
+  top: 45%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+  font-size: 64px;
+  color: white;
+  opacity: 0.85;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: transform 0.2s ease;
+}
+
+.custom-play-button:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.video-description {
+  width: 400px;
+  min-width: 280px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.video-description h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #ffffff;
+}
+
+.video-description p {
+  font-size: 16px;
+  margin: 6px 0;
+  color: #aaa;
+}
+
+.description-text {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #ccc;
+}
