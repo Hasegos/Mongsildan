@@ -64,6 +64,10 @@ body {
 .video-description {
   margin: 0;
   white-space: pre-line;
+  color: #ccc;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 30px;
 }
 
 .video-actions {
@@ -138,12 +142,6 @@ body {
   background-color: #e60000;
 }
 
-.video-description {
-  color: #ccc;
-  font-size: 14px;
-  line-height: 1.5;
-  margin-bottom: 30px;
-}
 
 .video-buttons button {
   margin-right: 10px;

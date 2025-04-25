@@ -83,4 +83,22 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });  
   
+  async function loadVideo(videoId) {
+    try {
+      const videoInfo = await window.getVideoInfo(videoId);
+
+      // iframe에 src 설정
+      const iframe = document.getElementById("player");
+      iframe.src = `https://storage.googleapis.com/youtube-clone-video/${id}.mp4`;
+
+      // 제목 및 설명 등 정보 삽입
+      document.querySelector(".video-title").textContent = videoInfo.title || "제목 없음";
+      document.querySelector(".video-description").textContent = videoInfo.description || "설명 없음";
+    } catch (error) {
+      console.error("영상 정보를 불러오는 중 오류 발생:", error);
+    }
+  }
+  const VideoId = "1"; // 원하는 videoId로 바꿔주세요
+  loadVideo(VideoId)
+
 });
