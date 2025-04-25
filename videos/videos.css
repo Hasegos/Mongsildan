@@ -26,12 +26,16 @@ body {
   margin-right: 20px;
   margin-left: 50px;
 }
+.video-player {
+  text-align: center;
+}
 
-.video-player iframe {
+.video-player img {
   width: 100%;
   border: none;
   border-radius: 10px;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16 / 9;  
+  max-width: 1300px;
 }
 
 .video-title {
