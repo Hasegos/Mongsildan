@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="styles/channel.css" rel="stylesheet" />    
+    <link href="styles/channel.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/common.css"/>    
+    <link rel="stylesheet" href="./styles/channel.css"/>
+    <link rel="stylesheet" href="./styles/channel-title.css"/>
 </head>
 <body>
     <div class="wrapper">
@@ -16,12 +19,70 @@
             <aside></aside>       
             <!--메인-->
             <main>
-                <section class="card-container">
-                    <div class="header">
 
+                <section class="card-container">
+                    <!-- Channel Title -->                    
+                    <div class="channel-header">
+                        <div class="banner">
+                            <img alt="채널 배너" class="banner-img" id="banner-img"/>
+                        </div>
+                        <div class="channel-info">
+                            <a href="https://example.com" target="_blank">
+                            <img alt="프로필 이미지" class="profile-img" id="profile-img" />
+                            </a>
+                            <div class="text-info">
+                            <h1 class="channel-name" id="channel-name"></h1>
+                            <p class="subscribers" id="subscribers"> subscribers</p>
+                            </div>
+                            <button id="subscribe-btn" class="subscribe-btn">구독</button>
+                        </div>
+                        <nav class="channel-nav">
+                            <ul>
+                            <li><button class="nav-btn">HOME</button></li>
+                            <li><button class="nav-btn">VIDEOS</button></li>
+                            <li><button class="nav-btn">PLAYLISTS</button></li>
+                            <li><button class="nav-btn">COMMUNITY</button></li>
+                            <li><button class="nav-btn">CHANNELS</button></li>
+                            <li><button class="nav-btn">ABOUT</button></li>
+                            <li class="search-item">
+                                <button class="search-btn">
+                                <img src="../img/search.png" alt="검색" class="search-icon" />
+                                </button>
+                            </li>
+                            </ul>
+                        </nav>                                         
                     </div>
-                    <div class="main"></div>
-                    <div class="footer"></div>
+
+                    <!-- SmallVideo -->
+                    <div class="main">                        
+                        <section class="featured-video">
+                            <div class="video-main-preview" >
+                                <img id="main-img" class="video-thumb" >      
+                                <div class="custom-play-button" id="play-button">▶</div>
+                            </div>
+                            <div class="video-description" >
+                                <h2 id="video-description"></h2>
+                                <p><span id="viewText"></span> views  <span id="date"></span></p>      
+                            </div>
+                        </section>  
+                    </div>
+
+                    <!--- playVideoList -->
+                    <div class="footer">
+                        <div class="layout">
+                            <div class="main-content">
+                                <section class="playlist-section">
+                                <div class="playlist-header">
+                                    <h3>Search On '21</h3>
+                                    <button class="play-all-btn">▶ PLAY ALL</button>
+                                </div>
+                                <div class="playlist-grid">
+                                    
+                                </div>
+                                </section>
+                            </div>
+                        </div>  
+                    </div>
                 </section>
             </main>
             </div>
@@ -32,7 +93,7 @@
     <script src="../sidebar/sidebar.js"></script>
     <script src="../api/getChannelVideoList.js"></script>  
     <script src="../api/getChannelInfo.js"></script>
-    <script src="/js/getTimeAgo.js"></script>
+    <script src="../js/getTimeAgo.js"></script>
     <script src="../js/getChannelEverything.js"></script>
     <script src="./channel.js"></script>       
 </body>

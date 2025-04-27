@@ -1,120 +1,98 @@
-/* channel-title.css */
+/* 채널 Title layout */
 .channel-header {
-  background-color: #181818;
-  color: white;
-  padding-bottom: 10px;
-  margin: 0 auto;
-  width: 100%;
+  background-color: #181818;  
+  padding-bottom: 10px;  
 }
 
+/* 채널 Title 이미지*/
 .banner-img {
-  width: 100%;
-  height: 100%;
+  width: 100%;  
   object-fit: cover;
   display: block;
 }
-
+/* 채널 주인 정보 */
 .channel-info {
-  display: flex;
-  align-items: center;
+  display: flex;  
   padding: 20px 65px;
   gap: 20px;
 }
-
+/* 채널 주인 프로필 */
 .profile-img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin-right: 20px;
+  width: 100px;  
+  border-radius: 50%;  
 }
 
+/* 채널 주인 정보 layout*/
 .text-info {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
+/* 채널 이름 */
 .channel-name {
   font-size: 24px;
   font-weight: bold;
 }
 
-
-.subscribers {
-  font-size: 14px;
+/* 구독자 수*/
+.subscribers {  
   color: gray;
 }
 
+/* 구독자 버튼 */
 .subscribe-btn {
-  background-color: red;
-  color: white;
+  color: black;
   border: none;
   padding: 10px 16px;
   font-weight: bold;
-  border-radius: 2px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
-  margin-left: 0;
+  transition: background-color 0.2s ease;  
   align-self: center;
 }
 
 .subscribe-btn:hover {
-  background-color: darkred;
+  background-color: #d9d9d9;
 }
 
 .subscribe-btn:active {
   transform: scale(0.96);
 }
 
+/* 채널 정보 목차 */
 .channel-nav ul {
   display: flex;
   flex-direction: row; 
   width: 100%;
   align-items: center;
-  padding: 0 65px;
-  list-style: none;
+  padding: 0 65px;  
   border-top: 1px solid #333;
-  border-bottom: 1px solid #333;
-  margin: 0;
+  border-bottom: 1px solid #333;  
 }
 
+/* 채널 정보 목차 버튼 */
 .nav-btn {
   background: none;
-  border: none;
-  color: white;
+  border: none;  
   padding: 16px;
-  cursor: pointer;
-  font-weight: bold;
+  cursor: pointer;  
 }
 
 .nav-btn:hover {
   color: #aaa;
 }
 
-.search-item {
-  margin-left: 8px;
-  display: flex;
-  align-items: center;
-  height: 100%;
-}
-
-.search-btn {
-  background: none;
-  border: none;
-  padding: 0;
+/* 돋보기 버튼 */
+.search-btn {  
+  border: none;  
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
+  display: flex;  
 }
-
+/* 돋보기 이미지 */
 .search-icon {
   width: 46px;
-  height: 40px;
-  background: none;
-  display: block;
-  margin: 0;
+  height: 40px; 
 }
 /* 875px 이하일때 */
 @media (max-width: 875px) {
@@ -127,6 +105,5 @@
     border-top: 1px solid #333;
     border-bottom: 1px solid #333;
     margin: 0;
-  }
-  
+  }  
 }

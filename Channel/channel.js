@@ -29,25 +29,15 @@ document.addEventListener("DOMContentLoaded", () => {
     menuButton(cuurrentPage,check);
   });
   
-  /* channel-title */
-  loadHtml(".header", "./html/channel-title.html", () => {
+  /* channel-title */ 
+  const subscribeBtn = document.getElementById('subscribe-btn');
+  let subscribed = false;
 
-    let channelTitle = document.createElement("link");
-    channelTitle.rel = "stylesheet";
-    channelTitle.href = "./styles/channel-title.css";
-    document.head.appendChild(channelTitle); 
-
-    document.addEventListener('DOMContentLoaded', () => {
-      const subscribeBtn = document.getElementById('subscribe-btn');
-      let subscribed = false;
-  
-      subscribeBtn.addEventListener('click', () => {
-        subscribed = !subscribed;
-        subscribeBtn.textContent = subscribed ? 'SUBSCRIBED' : 'SUBSCRIBES';
-        subscribeBtn.style.backgroundColor = subscribed ? 'gray' : 'red';
-      });
-    });
-  })
+  subscribeBtn.addEventListener('click', () => {
+    subscribed = !subscribed;
+    subscribeBtn.textContent = subscribed ? 'SUBSCRIBED' : 'SUBSCRIBES';
+    subscribeBtn.style.backgroundColor = subscribed ? 'gray' : 'red';
+  });
 
   /* channel-smallvideo */
   loadHtml(".main", "./html/channel-smallvideo.html", () => {
@@ -78,8 +68,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     subscribeBtn.addEventListener('click', () => {
       subscribed = !subscribed;
-      subscribeBtn.textContent = subscribed ? 'SUBSCRIBED' : 'SUBSCRIBES';
-      subscribeBtn.style.backgroundColor = subscribed ? 'gray' : 'red';
+      subscribeBtn.textContent = subscribed ? '구독' : '구독중';
+      subscribeBtn.style.backgroundColor = subscribed ? 'white' : '#3f3e3e';
     });
   });
 
@@ -169,16 +159,16 @@ document.addEventListener("DOMContentLoaded", () => {
   title();
   
   /* 1315px 미만일때 작동 */
-  let cuurrentSidebarPage = null;
+  let currentSidebarPage = null;
   function handleResponsiveSidebar() {
-    const meideaQuery = window.matchMedia("(max-width: 1315px)");
-    if(meideaQuery.matches && cuurrentSidebarPage !==2){      
+    const mediaQuery = window.matchMedia("(max-width: 1315px)");
+    if(mediaQuery.matches && currentSidebarPage !==2){      
       switchSidebar(2);
-      cuurrentSidebarPage = 2;
+      currentSidebarPage = 2;
     }
-    else if(!meideaQuery.matches && cuurrentSidebarPage !==1){
+    else if(!mediaQuery.matches && currentSidebarPage !==1){
       switchSidebar(1);
-      cuurrentSidebarPage = 1;
+      currentSidebarPage = 1;
     }
   }    
   handleResponsiveSidebar();

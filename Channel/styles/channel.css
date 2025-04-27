@@ -1,43 +1,20 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body,html {
-    width: 100%;
-}
-
-body {
-    background-color: #000000;
-}
+/* 채널페이지 올시 aside 넓이 조절*/
 .sidebar {
-    margin-top: 56px;
-    background-color: #212121;
+    width: auto !important;
 }
-/* 메인 태그 */
-main {
-    padding: 15px;    
-    height: 100%;
-}
-/* 헤드 태그 제외 나머지 */
-.container {
-    display: flex;
-    height: 100%;
-  }
-main {
-    padding: 0;
-    width: 100%;
-    margin-top: 56px;
-}
+
+
+
+
+
+
 
 @media (max-width: 1285px) {
- .sidebar{
-    position: static !important;
- }
-
+    /* fixed 된 포지션 원래대로 돌리기위함 */
+    .sidebar{
+        position: static !important;
+    }
 }
-
 @media (max-width: 625px) {
     aside {
         display: none;
