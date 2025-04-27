@@ -14,7 +14,7 @@
   font-weight: 200;
   overflow-y: auto;
   scrollbar-width: none;
-  /* top: 56px; */
+  top: 56px;
 }
 
 /* 확장했을시 */

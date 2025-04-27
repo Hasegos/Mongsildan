@@ -1,48 +1,288 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body,html {
-    width: 100%;
-}
-
+/* channel css 통합본 */
 body {
-    background-color: #000000;
+  background-color: #000;
+  margin: 0;
+  font-family: 'Roboto', 'Arial', sans-serif;
+  color: #fff;
 }
+
+.ul-reset {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Utilities */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.btn-basic,
+.nav-btn,
+.search-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.img-cover,
+.thumb-img,
+.banner-img,
+.video-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.transition-scale {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+/* Keyframes */
+@keyframes pulse {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+  50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+}
+
+/* Layout Wrappers */
+.main-wrapper {
+  display: flex;
+}
+
 .sidebar {
-    margin-top: 56px;
-    background-color: #212121;
+  /* Sidebar styles imported from aside.css */
 }
-/* 메인 태그 */
-main {
-    padding: 15px;    
-    height: 100%;
+
+.channel-page {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: self-start;
+
+
 }
-/* 헤드 태그 제외 나머지 */
-.container {
-    display: flex;
-    height: 100%;
+
+/* Channel Header */
+.channel-header {
+  background-color: #181818;
+  width: 100%;
+  margin: 0 auto;
+  padding-bottom: 10px;
+}
+
+.channel-header .banner-img {
+  width: 100%;
+  height: 200px;
+}
+
+.channel-info {
+  display: flex;
+  align-items: center;
+  padding: 20px 65px;
+  gap: 20px;
+}
+
+.profile-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-left: 150px;
+}
+
+.text-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.channel-name { font-size: 24px; font-weight: bold; }
+.subscribers { font-size: 14px; color: gray; }
+
+.subscribe-btn {
+  background-color: #cc0000;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  font-weight: bold;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  align-self: center;
+}
+
+.subscribe-btn:hover { background-color: darkred; }
+.subscribe-btn:active { transform: scale(0.96); }
+
+.channel-nav ul {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  padding: 0 65px;
+  padding-left: 300px; /* Adjusted to ensure better alignment */
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #333;
+  align-items: center;
+  width: 100%;
+}
+
+.nav-btn {
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: white; /* Button text color */
+  padding: 16px;
+  font-weight: bold;
+}
+
+.nav-btn:hover {
+  color: #aaa; /* Color change on hover */
+}
+
+.search-item {
+  margin-left: 8px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.search-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+}
+
+.search-icon {
+  width: 46px;
+  height: 40px;
+  display: block;
+  margin: 0;
+}
+
+/* Featured Video Section 스몰비디오 옆 스크립트 */
+.featured-video {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 24px;
+  gap: 32px;
+}
+
+.video-main-preview {
+  position: relative;
+  width: 424px;
+  max-width: 100%;
+  height: 238px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.video-main-preview .video-thumb { border-radius: 12px; }
+
+.custom-play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 64px;
+  color: white;
+  opacity: 0.85;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.custom-play-button:hover { transform: translate(-50%, -50%) scale(1.1); }
+
+.video-description {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 400px;
+  min-width: 280px;
+}
+
+.video-description h1 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #ffffff;
+}
+
+.video-description p { font-size: 16px; margin: 6px 0; color: #aaa; }
+
+/* Playlists Section */
+.playlist-section {
+  background-color: #000;
+  padding: 0;
+}
+
+.playlist-header {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  width: 100%;
+  max-width: 1280px;
+  padding: 8px 100px;
+}
+
+.playlist-header h3 { font-size: 16px; font-weight: 600; }
+.play-all-btn { display: flex; align-items: center; justify-content: center; }
+
+.playlist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 214px);
+  gap: 15px;
+  justify-content: center;
+  padding: 0 16px;
+}
+
+.playlist-card { position: relative; }
+
+.playlist-card:hover { /* hover styles */ }
+
+/* Media Queries */
+@media (max-width: 875px) {
+  .responsive-column,
+  .channel-nav ul {
+    flex-direction: column;
+    align-items: center;
+    padding: 0 65px;
   }
-main {
-    padding: 0;
-    width: 100%;
-    margin-top: 56px;
 }
 
-@media (max-width: 1285px) {
- .sidebar{
-    position: static !important;
- }
-
-}
-
-@media (max-width: 625px) {
-    aside {
-        display: none;
-    }
-    .sidebar {
-        display: none;
-    }
+@media (max-width: 768px) {
+  .featured-video {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .video-description {
+    text-align: center;
+    align-items: center;
+  }
 }
