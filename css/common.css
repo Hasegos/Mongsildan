@@ -1,0 +1,65 @@
+/* variables */
+:root {
+    --color-body: #000000;
+    --color-aside: #212121;
+    --color-font:#fff;
+    --font-main: "Roboto" ,'Noto Sans KR', sans-serif;    
+}
+
+/* reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 모든 길이 100%, 모든 높이 100% */
+html, body {
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-body);
+    font-family: var(--font-main);
+    color: var(--color-font);  
+    font-size: 13px;
+}
+
+/* header 높이 설정 */
+header {
+    height: 56px;
+    z-index: 1000;
+}
+/* main 기본 layout */
+main {
+    padding: 15px;    
+    width: 100%;
+}
+
+/* 사이드바 기본 색상 */
+aside {
+    background-color: var(--color-aside);    
+    width: 190px;       
+}
+/* 헤더 밑에 내용 */
+.container {
+    display: flex;
+    height: 100%;    
+}
+
+/* 사이드바 */
+.sidebar {               
+    position: fixed;
+    height: 100%;    
+    overflow-y: auto;
+    scrollbar-width: none;
+    background-color: var(--color-aside);
+}
+
+/* 목록 */
+ul {
+    list-style: none;
+}
+
+/* 버튼*/
+button {
+    color: var(--color-font);
+}

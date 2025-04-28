@@ -1,36 +1,16 @@
-.sidebar li {
-  gap: 12px;
-}
-
-.sidebar {
-  background-color: #212121;  
-  left: 0;  
+.sidebar{
   width: 190px;
-  position: fixed;
-  height: 100%;
-  font-size: 14px;
-  font-family: "Noto Sans KR", "Roboto", sans-serif;
-  font-style: normal;
-  font-weight: 200;
-  overflow-y: auto;
-  scrollbar-width: none;
-  top: 56px;
 }
 
-/* 확장했을시 */
-.sidebarExpanded{
-  width: 190px;
-  height: 100%;
+/*목차 별 제목 */
+.title {  
+  font-weight: bold;
+  color: #aaa;  
+  padding: 12px 0 0 1em;
 }
 
-.sidebar ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-.sidebar a:link,
-.sidebar a:visited {
+/* 사이드바 내용 */
+.sidebar a{
   display: flex;
   align-items: center;
   gap: 12px;
@@ -40,18 +20,14 @@
   color: #ffffff;
   text-decoration: none;
 }
-
+/* 사이드바 구독자 아래 화살표, 아이콘 */
 .sidebar a svg,
-.sidebar details summary {
-  /* width: 24px; */
-  height: 24px;
-  flex-shrink: 0;
-  padding: 0 0 0 1em;
-}
-.sidebar details summary {
+.sidebar details summary {  
   width: 36px;
+  height: 24px;  
+  padding: 0 0 0 1em;  
 }
-
+/* 사이드바 구독자 */
 .sidebar a img {
   width: 24px;
   height: 24px;
@@ -61,6 +37,7 @@
   object-fit: cover;
 }
 
+/* 각 목차별 밑줄 */
 .sidebar li:last-child {
   border-bottom: 1px solid #303030;
 }
@@ -73,14 +50,7 @@
   background-color: #3c3c3c;
 }
 
+/* 사이드바 구독자 아래 화살표 */
 details summary {
   list-style: none; /* 기본 디폴트 아이콘 제거 */
-}
-
-.title {
-  text-align: left;
-  font-weight: bold;
-  color: #aaa;
-  text-decoration: none;
-  padding: 12px 0 0 1em;
 }

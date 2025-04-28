@@ -107,6 +107,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // 총 영상 정보 찍어주기
   async function URL() {    
     const videos = await getVideoList();  
+
+    console.log(videos);
     const Div = document.querySelector("section");
 
     const chunkSize = 4;
@@ -124,6 +126,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       chunk.forEach((video, index) => {
         const { channel_name, channel_profile } = channelInfos[index];
+        // console.log(channelInfos[index]);
+        console.log(video);
 
         const channelDiv = document.createElement("div");
         channelDiv.classList.add("card");
@@ -161,15 +165,14 @@ document.addEventListener("DOMContentLoaded", () => {
   function handleResponsiveSidebar() {
     const meideaQuery = window.matchMedia("(max-width: 1315px)");
     if(meideaQuery.matches && cuurrentSidebarPage !==2){      
-      switchSidebar(2);
+      switchSidebar(2);      
       cuurrentSidebarPage = 2;
     }
     else if(!meideaQuery.matches && cuurrentSidebarPage !==1){
-      switchSidebar(1);
+      switchSidebar(1);      
       cuurrentSidebarPage = 1;
     }
-  }
-    
+  }    
   handleResponsiveSidebar();
   window.addEventListener("resize", handleResponsiveSidebar);
 });

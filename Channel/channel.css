@@ -1,291 +1,300 @@
-/* channel css 통합본 */
-body {
-  background-color: #000;
-  margin: 0;
-  font-family: 'Roboto', 'Arial', sans-serif;
-  color: #fff;
-}
-
-.ul-reset {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-/* Utilities */
-.flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.flex-column {
-  display: flex;
-  flex-direction: column;
-}
-
-.flex-row {
-  display: flex;
-  flex-direction: row;
-}
-
-.btn-basic,
-.nav-btn,
-.search-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border: none;
-  background: none;
-}
-
-.img-cover,
-.thumb-img,
-.banner-img,
-.video-thumb {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.transition-scale {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.hover-scale:hover {
-  transform: scale(1.02);
-}
-
-/* Keyframes */
-@keyframes pulse {
-  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
-  50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
-  100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
-}
-
-/* Layout Wrappers */
-.main-wrapper {
-  display: flex;
-}
-
+/* 채널페이지 올시 aside 넓이 조절*/
 .sidebar {
-  /* Sidebar styles imported from aside.css */
+    width: auto !important;
 }
 
-.channel-page {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: self-start;
+/* ============= 채널 Title layout ============= */
 
-
-}
-
-/* Channel Header */
+/* 채널 Title layout */
 .channel-header {
-  background-color: #181818;
-  width: 100%;
-  margin: 0 auto;
-  padding-bottom: 10px;
+    background-color: #181818;  
+    padding-bottom: 10px;  
 }
 
-.channel-header .banner-img {
-  width: 100%;
-  height: 200px;
+/* 채널 Title 이미지*/
+.banner-img {
+    width: 100%;  
+    object-fit: cover;
+    display: block;
 }
-
+  /* 채널 주인 정보 */
 .channel-info {
-  display: flex;
-  align-items: center;
-  padding: 20px 65px;
-  padding-left: 40vh;
-  gap: 20px;
+    display: flex;  
+    padding: 20px 65px;
+    gap: 20px;
 }
-
+  /* 채널 주인 프로필 */
 .profile-img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin-left: 10px;
+    width: 100px;  
+    border-radius: 50%;  
 }
 
+/* 채널 주인 정보 layout*/
 .text-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.channel-name { font-size: 24px; font-weight: bold; }
-.subscribers { font-size: 14px; color: gray; }
+  /* 채널 이름 */
+.channel-name {
+    font-size: 24px;
+    font-weight: bold;
+}
 
+/* 구독자 수*/
+.subscribers {  
+    color: gray;
+}
+
+  /* 구독자 버튼 */
 .subscribe-btn {
-  background-color: #cc0000;
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  font-weight: bold;
-  border-radius: 2px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  align-self: center;
+    color: black;
+    border: none;
+    padding: 10px 16px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;  
+    align-self: center;
 }
 
-.subscribe-btn:hover { background-color: darkred; }
-.subscribe-btn:active { transform: scale(0.96); }
+.subscribe-btn:hover {
+    background-color: #d9d9d9;
+}
 
+.subscribe-btn:active {
+    transform: scale(0.96);
+}
+
+/* 채널 정보 목차 */
 .channel-nav ul {
-  display: flex;
-  flex-direction: row;
-  list-style: none;
-  padding: 0 65px;
-  padding-left: 300px; /* Adjusted to ensure better alignment */
-  border-top: 1px solid #333;
-  border-bottom: 1px solid #333;
-  align-items: center;
-  width: 100%;
+    display: flex;
+    flex-direction: row; 
+    width: 100%;
+    align-items: center;
+    padding: 0 65px;  
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;  
 }
 
+/* 채널 정보 목차 버튼 */
 .nav-btn {
-  cursor: pointer;
-  border: none;
-  background: none;
-  color: white; /* Button text color */
-  padding: 16px;
-  font-weight: bold;
+    background: none;
+    border: none;  
+    padding: 16px;
+    cursor: pointer;  
 }
 
 .nav-btn:hover {
-  color: #aaa; /* Color change on hover */
+    color: #aaa;
 }
 
-.search-item {
-  margin-left: 8px;
-  display: flex;
-  align-items: center;
-  height: 100%;
+  /* 돋보기 버튼 */
+.search-btn {  
+    border: none;  
+    cursor: pointer;
+    display: flex;  
 }
 
-.search-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  border: none;
-}
-
+/* 돋보기 이미지 */
 .search-icon {
-  width: 46px;
-  height: 40px;
-  display: block;
-  margin: 0;
-}
-/* Featured Video Section 스몰비디오 옆 스크립트 */
-.featured-video {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 24px;
-  gap: 32px;
-  position: sticky;  /* Fix the position */
-  top: 20px; /* Make the element stick 20px from the top */
-  z-index: 10; /* Ensure it stays on top of other content */
+    width: 46px;
+    height: 40px; 
 }
 
+/* ============= 채널 SmallVideo layout ============= */
+
+/* 채널 Main layout */
+.smallVideo-section {
+    display: flex;  
+    align-items: flex-start;
+    justify-content: center;  
+    margin: 40px auto;
+    padding: 24px;  
+}
+
+/* 채널 Main Preview 이미지*/
 .video-main-preview {
-  position: relative;
-  width: 424px;
-  max-width: 100%;
-  height: 238px;
-  flex-shrink: 0;
-  overflow: hidden;
+    position: relative;
+    height: 238px;
+    width: 424px;
+    min-width: 424px;     
 }
 
-.video-main-preview .video-thumb { border-radius: 12px; }
+/* 채널 Main Preview 화살표 layout */
+.video-thumb {
+    width: 90%;
+    height: 90%;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+}
 
+/* ▶ 아이콘 버튼 */
 .custom-play-button {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 64px;
-  color: white;
-  opacity: 0.85;
-  cursor: pointer;
-  transition: transform 0.2s ease;
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    font-size: 64px;  
+    opacity: 0.85;
+    cursor: pointer;  
+    transition: transform 0.2s ease;
 }
 
-.custom-play-button:hover { transform: translate(-50%, -50%) scale(1.1); }
+.custom-play-button:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+}
 
+/* 채널 Main Description layout */
 .video-description {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 400px;
-  min-width: 280px;
+    width: 400px; 
+    display: flex;
+    flex-direction: column;  
 }
 
-.video-description h1 {
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 12px;
-  color: #ffffff;
+/* 채널 Main 제목 */
+.video-description h2 {
+    font-size: 20px;  
+    margin-bottom: 12px; 
 }
 
-.video-description p { font-size: 16px; margin: 6px 0; color: #aaa; }
-
-/* Playlists Section */
-.playlist-section {
-  background-color: #000;
-  padding: 0;
+/* 채널 View 정보*/
+.video-description p {
+    font-size: 16px;  
+    color: #aaa;
 }
 
+/* ============= 채널 PlayList layout ============= */
+
+/* 채널 플레이리스트 layout */
+.playlist-section {  
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+    border-top: 5px solid #212121;
+}  
+
+/* 채널 플레이 리스트 header layout */
 .playlist-header {
-  display: flex;
-  align-items: center;
-  justify-content: right;
-  width: 100%;
-  max-width: 1280px;
-  padding: 8px 100px;
+    display: flex;
+    align-items: center;  
+    width: 100%;
+    max-width: 1280px;  
+    padding: 8px 65px;  
 }
 
-.playlist-header h3 { font-size: 16px; font-weight: 600; }
-.play-all-btn { display: flex; align-items: center; justify-content: center; }
+/* 채널 플레이 리스트 header title */
+.playlist-header h3 {
+    display: flex;
+    align-items: center;  
+    height: 36px;  
+    font-size: 16px;  
+    margin: 10px;
+}
 
+/* 채널 플레이 리스트 header button */
+.play-all-btn {  
+    padding: 6px 24px;
+    background-color: transparent;
+    border: 1px solid #fff;  
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 4px;  
+}
+
+/* 카드 배치: 카드 크기는 고정, 개수는 자동 반응형 layout */
 .playlist-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 214px);
-  gap: 15px;
-  justify-content: center;
-  padding: 0 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 214px); /* 고정 크기 카드 반복 */
+    gap: 15px;
+    justify-content: center;
+    width: 100%;
+    max-width: 1280px;
+    padding: 0 16px; 
 }
 
-.playlist-card { position: relative; }
+/* 카드 크기 고정 */
+.playlist-card {  
+    cursor: pointer;  
+    text-decoration: none;  
+}
 
-.playlist-card:hover { /* hover styles */ }
+.playlist-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+}
 
-/* Media Queries */
+/* 썸네일 이미지 layout */
+.video-preview {  
+    height: 120px;
+    position: relative;  
+}
+
+/* 썸네일 이미지 */
+.thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  
+}
+
+/* ▶ 오버레이 */
+.play-icon-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;  
+    font-size: 36px;
+    color: white;  
+    animation: pulse 1.5s infinite;
+}
+/* ▶ 오버레이 애니 */
+@keyframes pulse {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+    50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+}
+
+/* 썸네일 텍스트 */
+.playlist-text {  
+    padding: 10px;
+    color: #ccc; 
+}
+
+/* ============= 반응형 ============= */
+
+@media (max-width: 1285px) {
+    /* fixed 된 포지션 원래대로 돌리기위함 */
+    .sidebar{
+        position: static !important;
+    }
+}
+  /* 875px 이하일때 */
 @media (max-width: 875px) {
-  .responsive-column,
-  .channel-nav ul {
-    flex-direction: column;
-    align-items: center;
-    padding: 0 65px;
-  }
+    .channel-nav ul{    
+        flex-direction: column;    
+    }  
 }
 
+/* 뷰포트 작아지면 세로로 정렬 */
 @media (max-width: 768px) {
-  .featured-video {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .video-description {
-    text-align: center;
-    align-items: center;
-  }
+    .smallVideo-section {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .video-description {
+        text-align: center;
+        align-items: center;
+    }
+}
+
+@media (max-width: 625px) {
+    aside {
+        display: none;
+    }
+    .sidebar {
+        display: none;
+    }
 }

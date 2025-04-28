@@ -1,28 +1,12 @@
-.sidebar {    
-    position: fixed;
-    height: 100vh;
-    overflow-y: auto;
-    scrollbar-width: none;
-    background-color: #212121;
-    top: 56px;
-}
-
-ul {
-    
+aside{
     width: 70px;
-    color: white;
+    display: flex;
+    justify-content: center;    
+}
+ul {       
     display: flex;
     gap: 10px;
-    flex-direction: column;
-    list-style-type: none;
-    align-items: center;  
-}
-
-/* 사이드바 접었을시 */
-.sidebarClosed {
-    width: 70px;  
-    padding: 35px;  
-    margin-top: 56px; /* 상단 여백 추가 */
+    flex-direction: column;        
 }
 
 a {
@@ -31,8 +15,7 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px;
-    font-size: 12px;    
+    gap: 5px;      
 }
 
 a:hover {

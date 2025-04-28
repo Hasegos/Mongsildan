@@ -1,14 +1,9 @@
-/* ===== 상단바 2 전체 영역 ===== */
+/*  상단바 2 전체 영역  */
 .header-sub {
   position: fixed;
-  width: 100%;
-  height: 58px;
+  width: 100%;  
   background-color: #212121;
-  display: flex;
-  align-items: center;
-  box-sizing: border-box;
-  z-index: 99;
-  overflow: hidden;
+  display: flex;        
   padding-left: 12px;
   padding-right: 96px;
 }
@@ -17,12 +12,9 @@
 .scroll-container,
 .filter-columns {
   display: flex;
-  overflow-x: auto;
-  overflow-y: hidden;
-  gap: 12px;
-  scrollbar-width: none;
-  align-items: center;
-  -ms-overflow-style: none;
+  overflow-x: auto;  
+  gap: 12px;  
+  align-items: center;  
 }
 .scroll-container::-webkit-scrollbar,
 .filter-columns::-webkit-scrollbar {
@@ -31,17 +23,18 @@
 
 /* 탭 버튼 */
 .tab-item {
-  background-color: #383838;
-  color: white;
+  background-color: #383838;  
   padding: 8px 16px;
   font-size: 14px;
-  border-radius: 8px;
-  white-space: nowrap;
-  cursor: pointer;
-  flex-shrink: 0;
-  transition: background 0.2s ease;
+  border-radius: 8px;  
+  cursor: pointer;  
 }
-.tab-item:hover { background-color: #555; }
+
+/* 탭 버튼 효과 */
+.tab-item:hover {
+    background-color: #555; 
+}
+/* All */
 .tab-item.active {
   background-color: white;
   color: black;
@@ -50,75 +43,57 @@
 
 /* 버튼 (화살표, 필터) */
 .scroll-arrow {
-  position: absolute;
-  top: 0;
-  height: 100%;
-  width: 50px;
+  position: absolute;  
   background: linear-gradient(to right, transparent, #212121);
   border: none;
   cursor: pointer;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  z-index: 100;      
 }
+
+/* 왼쪽 화살표 */
 .scroll-arrow.left {
-  left: 0;
-  background: linear-gradient(to left, transparent, #212121);
+  left: 0;  
 }
+/* 오른쪽 화살표 */
 .scroll-arrow.right {
   right: 88px;
 }
-.filter-button {
-  position: static;
-  /* right: 48px; */
-  top: 0;
-  width: 40px;
-  height: 100%;
-  background: none;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 100;
-  margin-left: auto;
-}
+
+/* 오른쪽 화살표 이미지 ,검색 이미지 */
 .scroll-arrow img.more-icon,
-.filter-button img {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
+.filter-button img {  
+  height: 40px;  
 }
 
-/* ===== 필터 모달 ===== */
-.filter-modal-popup {
-  display: none;
+/* 검색 버튼 */
+.filter-button {    
+  border: none;
+  display: flex;  
+  cursor: pointer;  
+}
+
+/*  =======필터 모달=======  */
+.filter-modal-popup {  
   opacity: 0;
   position: fixed;
   top: 10vh;
   left: 50%;
-  transform: translateX(-50%);
-  width: auto;
-  max-width: 90vw;
-  max-height: 80vh;
+  transform: translateX(-50%);    
   overflow-y: auto;
-  background: #181818e6;
-  color: white;
+  background: #181818e6;  
   border-radius: 12px;
   padding: 24px 32px;
-  margin: 5vh 5vw;
-  z-index: 150;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  transition: opacity 0.3s ease; 
-  /* margin: 0 auto; */
-  overflow-x: auto;
+  margin: 5vh 5vw;  
+  transition: opacity 0.3s ease;     
 }
-.filter-modal-popup.show {
-  display: block;
+
+/* 필터 보일때 */
+.filter-modal-popup.show {  
   opacity: 1;
   visibility: visible;
 }
+
+/* X */
 .filter-close {
   background: none;
   border: none;
@@ -133,54 +108,41 @@
 
 /* ===== 필터 항목 ===== */
 .filter-columns {
-  flex-wrap: nowrap;
-  gap: 20px;
+  flex-wrap: nowrap;  
   margin-top: 8px;
-  justify-content: space-between;
-  display: flex;  
-  min-width: 600px;
+  justify-content: space-between;    
 }
-.filter-column {
-  /* flex: 1; */
-  /* min-width: 0; */
-  text-align: left;
-  flex: 1 1 0;
-  min-width: 120px;
-  
+
+/* 필터 text */
+.filter-column {    
+  min-width: 120px;  
 }
+
+/* 필터 목차 */
 .filter-column h4 {
-  font-size: 14px;
-  margin: 0 0 8px;
+  font-size: 14px;  
   padding-bottom: 8px;
-  border-bottom: 1px solid #333;
-  font-weight: 500;
+  border-bottom: 1px solid #333;  
   color: #ccc;
 }
 .filter-column ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  list-style: none;  
 }
 .filter-column li {
   padding: 6px 0;
 }
+/* 목차 내용 버튼 */
 .filter-column button {
   background: none;
   border: none;
   color: #eee;
   font-size: 13px;
-  text-align: left;
-  width: 100%;
+  text-align: left;  
   cursor: pointer;
 }
 .filter-column button:hover {
   text-decoration: underline;
   color: white;
-}
-
-.scroll-arrow.left,
-.scroll-arrow.right {
-  display: none;
 }
 
 /* ===== 반응형 ===== */
