@@ -1,15 +1,17 @@
-/* ===== 기본 설정 ===== */
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  color: white;
+/* 최상단바 */
+.header-top {
+  width: 100%;  
+  background-color: #212121;
+  display: flex;  
+  justify-content: space-between;
+  padding: 0 16px;  
+  position: fixed;  
+  z-index: 1000;
 }
 
 /* 공통 아이콘 스타일 */
 .icon {
-  width: 40px;
-  height: 40px;
+  width: 40px;  
   object-fit: contain;
 }
 
@@ -19,6 +21,7 @@ body {
   object-fit: contain;  
 }
 
+/* Youtube */
 .logo-button {
   display: flex;
   align-items: center;
@@ -29,46 +32,32 @@ body {
   cursor: pointer;
 }
 
-/* ===== 상단바 1 ===== */
-.header-top {
-  width: 100%;
-  height: 56px;
-  background-color: #212121;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 16px;
-  box-sizing: border-box;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 100;
-}
-
+/* 왼쪽 */
 .header-top .left {
-  display: flex;
-  align-items: center;
-  
+  display: flex;  
   gap: 10px;
   margin-left: 40px;
 }
 
+/* 오른쪽 */
 .header-top .right {
-  display: flex;
-  align-items: center;
+  display: flex;  
   gap: 16px;
 }
 
+/* 가운데 */
 .header-top .center {
   display: flex;
   align-items: center;
   gap: 12px;
 }
+
 /* 햄버그 */
 .menu-button {
   background-color: #212121;
   border: none;
 }
+
 .menu-button :hover{
   background-color: #333;  
 }
@@ -79,8 +68,7 @@ body {
   width: 426px;
   height: 40px;
   border: 1px solid #333;
-  border-radius: 2px;
-  overflow: hidden;
+  border-radius: 2px;  
 }
 
 .search-input {
@@ -99,20 +87,12 @@ body {
 .search-button {
   width: 64px;
   background-color: #333;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border: none;  
   cursor: pointer;
 }
 
-.mic-button {
-  width: 40px;
-  height: 40px;
+.mic-button {  
   background-color: #212121;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border: none;  
   cursor: pointer;
 }

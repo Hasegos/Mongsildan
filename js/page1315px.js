@@ -12,19 +12,13 @@
     if (page === 1) {
         loadHtml("aside", "../sidebar/html/aside.html", () => {
         styleLink.href = "../sidebar/style/aside.css";
-        document.head.appendChild(styleLink);  
-        aside.style.width = "240px";
-        aside.style.display = "";
-        aside.style.justifyContent = "";
+        document.head.appendChild(styleLink);      
     });
     }
     else if (page === 2) {
         loadHtml("aside", "../sidebar/html/aside2.html", () => {
         styleLink.href = "../sidebar/style/aside2.css";
-        document.head.appendChild(styleLink);
-        aside.style.width = "70px";
-        aside.style.display = "flex";
-        aside.style.justifyContent = "center";
+        document.head.appendChild(styleLink);        
         });
     }
 }

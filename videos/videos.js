@@ -69,13 +69,55 @@ document.addEventListener("DOMContentLoaded", function () {
     // 조회수
     views.textContent = getViews(videos.views);    
     // 업로드 날짜
-    date.textContent = getTimeAgo(videos.created_dt);    
-    
-    
-
+    date.textContent = getTimeAgo(videos.created_dt);
   }
   video();
 
+  async function relatedVidos(){
+    const getVideos = await getVideoList();
+    
+    const Div = document.querySelector(".related-videos1");
+
+    const chunkSize = 4;
+    let currentIndex = 0;
+
+    async function renderChunk() {
+      const fragment = document.createDocumentFragment();
+      const chunk = getVideos.slice(currentIndex, currentIndex + chunkSize);
+
+      const channelInfos = await Promise.all(
+        chunk.map((video) => getChannelInfo(video.channel_id))        
+      );
+      
+
+      chunk.forEach((video, index) => {
+        const { channel_name, channel_profile } = channelInfos[index];   
+        console.log(channelInfos[index]);
+
+        const channelDiv = document.createElement("div");
+        channelDiv.classList.add("related-video");
+        channelDiv.innerHTML = `            
+              <a href="../videos/videos.html?channel_id=${video.channel_id}&video_id=${video.id}" class="card-link">
+                <img src="${video.thumbnail}" loading="lazy" />
+              </a>
+              <div class="video-text">
+                <h4>제목2</h4>
+                <p>텍스트2</p>
+              </div>
+          `;
+        fragment.appendChild(channelDiv);
+      });
+
+      Div.appendChild(fragment);
+      currentIndex += chunkSize;
+      if (currentIndex < getVideos.length) {
+        setTimeout(renderChunk, 1);
+      }
+    }
+    renderChunk();
+  }
+
+  relatedVidos();
   
   const commentList = document.getElementById("comment-list");
   const commentInput = document.getElementById("comment-input");
@@ -103,6 +145,5 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       alert("댓글을 입력해주세요.");
     }
-  });  
-  
+  });    
 });
