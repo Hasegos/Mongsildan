@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  window.isSeraching = false;
    // 최상단바 불러오기
   loadHtml("header", "../top/html/header-top.html", () => {
 
@@ -12,15 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document
       .getElementById("searchButton")
       .addEventListener("click", function () {
-        const keyword = document.getElementById("searchInput").value;
-        
-        // 공백 자체 지우기
-        const inputValue = keyword.replace(/\s/g, "");
-        console.log(inputValue);
+        const keyword = document.getElementById("searchInput").value.trim();
         if (keyword) {
           alert("검색어: " + keyword);
-          window.isSeraching = true;
-          searchVideos(inputValue);  // 검색 실행
         } else {
           alert("검색어를 입력하세요!");
         }
@@ -115,8 +108,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentIndex = 0;
 
     async function renderChunk() {
-      // 검색 했을시 초기 렌더링 멈추기
-      if(window.isSeraching) return;
       const fragment = document.createDocumentFragment();
       const chunk = videos.slice(currentIndex, currentIndex + chunkSize);
 
@@ -145,7 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
               <p class="card-text1">${video.title}</p>
               <p class="card-text2">${channel_name}</p>
             </div>
-          
+          </div>
         `;
         fragment.appendChild(channelDiv);
       });
