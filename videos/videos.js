@@ -51,6 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const dislike = document.getElementById("dislike");
     const views = document.getElementById("views");
     const date = document.getElementById("date");
+    const description = document.getElementById("description");
 
     // 채널 프로필
     channelProfile.src = channel.channel_profile;
@@ -70,6 +71,8 @@ document.addEventListener("DOMContentLoaded", function () {
     views.textContent = getViews(videos.views);    
     // 업로드 날짜
     date.textContent = getTimeAgo(videos.created_dt);
+    description.textContent = videos.tags.join(", ");
+
   }
   video();
 
