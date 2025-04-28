@@ -1,8 +1,7 @@
-// 검색어에 맞는 비디오 목록 필터링
+// 기존 검색어에 맞는 비디오 목록 필터링
 async function searchVideos(query) {
   const videos = await getVideoList();   
 
-  // 검색어로 필터링 (채널 이름, 비디오 제목, 키워드)
   const filteredVideos = videos.filter(video => {
     return video.title.toLowerCase().includes(query.toLowerCase()) || 
            video.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase()));
@@ -12,17 +11,17 @@ async function searchVideos(query) {
 }
 window.searchVideos = searchVideos;
 
-// 검색된 결과를 화면에 표시
+// 기존 검색된 결과를 화면에 표시
 function displayResults(videos) {
   const resultsContainer = document.getElementById('card-container');        
-  resultsContainer.innerHTML = ''; // 기존 결과 지우기   
-  
+  resultsContainer.innerHTML = '';
+
   if (videos.length === 0) {
     resultsContainer.innerHTML = '<p>검색 결과가 없습니다.</p>';
     return;
   }
 
-  const chunkSize = 4;  // 한 번에 렌더링할 개수
+  const chunkSize = 4;  
   let currentIndex = 0;      
 
   async function renderChunk() {
@@ -69,43 +68,55 @@ function displayResults(videos) {
   renderChunk();
 }
 
-// 추가: 화면 크기에 따라 search-btn + header searchButton 이동
+// 추가: searchInput, searchButton 반응형 이동 + 검색창 다시 보이게
 document.addEventListener("DOMContentLoaded", () => {
-  const navSearchBtn = document.querySelector(".channel-nav .search-btn"); // 네비게이션 검색 버튼
-  const headerSearchBtn = document.getElementById("searchButton");          // 헤더 검색 버튼
+  const navSearchBtn = document.querySelector(".channel-nav .search-btn"); 
+  const headerSearchBtn = document.getElementById("searchButton");
+  const searchInput = document.getElementById("searchInput"); // 검색 input
 
-  function handleSearchButtonPosition() {
-    const isMobile = window.matchMedia("(max-width: 600px)").matches;
-    
+  function adjustSearchUI() {
+    const isMobile = window.innerWidth <= 485;
+
     if (navSearchBtn) {
-      if (isMobile) {
-        navSearchBtn.style.position = "absolute";
-        navSearchBtn.style.left = "10px";
-        navSearchBtn.style.top = "10px";
-        navSearchBtn.style.zIndex = "1000";
-      } else {
-        navSearchBtn.style.position = "static";
-        navSearchBtn.style.left = "";
-        navSearchBtn.style.top = "";
-        navSearchBtn.style.zIndex = "";
-      }
+      navSearchBtn.style.position = isMobile ? "absolute" : "relative";
+      navSearchBtn.style.left = isMobile ? "10px" : "";
+      navSearchBtn.style.top = isMobile ? "10px" : "";
+      navSearchBtn.style.zIndex = isMobile ? "1000" : "";
     }
 
     if (headerSearchBtn) {
+      headerSearchBtn.style.position = isMobile ? "absolute" : "relative";
+      headerSearchBtn.style.right = isMobile ? "10px" : "";
+      headerSearchBtn.style.top = isMobile ? "10px" : "";
+      headerSearchBtn.style.zIndex = isMobile ? "1000" : "";
+    }
+
+    if (searchInput) {
       if (isMobile) {
-        headerSearchBtn.style.position = "absolute";
-        headerSearchBtn.style.right = "10px";
-        headerSearchBtn.style.top = "10px";
-        headerSearchBtn.style.zIndex = "1000";
+        if (!searchInput.classList.contains("force-visible")) {
+          searchInput.style.display = "none"; // 기본 모바일 상태에서는 숨김
+        }
       } else {
-        headerSearchBtn.style.position = "static";
-        headerSearchBtn.style.right = "";
-        headerSearchBtn.style.top = "";
-        headerSearchBtn.style.zIndex = "";
+        searchInput.style.display = "inline-block"; // 데스크탑에서는 항상 표시
+        searchInput.classList.remove("force-visible"); // 강제 표시 클래스 제거
       }
     }
   }
 
-  handleSearchButtonPosition();
-  window.addEventListener("resize", handleSearchButtonPosition);
+  // 초기 실행
+  adjustSearchUI();
+  // 화면 리사이즈마다 실행
+  window.addEventListener("resize", adjustSearchUI);
+
+  // searchButton 클릭 시 숨겨진 searchInput 다시 표시
+  if (headerSearchBtn && searchInput) {
+    headerSearchBtn.addEventListener("click", (e) => {
+      e.preventDefault(); // 버튼 submit 방지
+      const isMobile = window.innerWidth <= 485;
+      if (isMobile) {
+        searchInput.style.display = "inline-block"; // 검색창 다시 보이게
+        searchInput.classList.add("force-visible"); // 강제 보이도록 클래스 추가
+      }
+    });
+  }
 });

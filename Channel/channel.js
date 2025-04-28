@@ -29,8 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     menuButton(cuurrentPage,check);
   });
 
-  /* channel-smallvideo */   
-  const video = document.getElementById("main-video"); // 어디있는거임?  
+  // /* channel-smallvideo */   
   const playBtn = document.getElementById("play-button");
 
   playBtn.addEventListener("click", () => {
