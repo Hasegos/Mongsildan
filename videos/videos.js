@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const params = new URLSearchParams(window.location.search);
   const channelId = parseInt(params.get("channel_id")); 
   const videoId = parseInt(params.get("video_id"));
+  const description = document.getElementById("description");
 
   // 상단 바 불러오기
   loadHtml("header", "../top/html/header-top.html", () => { 
@@ -70,13 +71,16 @@ document.addEventListener("DOMContentLoaded", function () {
     views.textContent = getViews(videos.views);    
     // 업로드 날짜
     date.textContent = getTimeAgo(videos.created_dt);
+
+    description.textContent = videos.tags.join(", ");
   }
   video();
-
-  async function relatedVidos(){
+  
+  async function renderRelatedVideos(selector){
+    
     const getVideos = await getVideoList();
     
-    const Div = document.querySelector(".related-videos1");
+    const Div = document.querySelector(selector);
 
     const chunkSize = 4;
     let currentIndex = 0;
@@ -101,8 +105,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 <img src="${video.thumbnail}" loading="lazy" />
               </a>
               <div class="video-text">
-                <h4>제목2</h4>
-                <p>텍스트2</p>
+                <h4>${video.title}</h4>
+                <p>${channel_name}</p>
               </div>
           `;
         fragment.appendChild(channelDiv);
@@ -117,33 +121,81 @@ document.addEventListener("DOMContentLoaded", function () {
     renderChunk();
   }
 
-  relatedVidos();
+  // 관련 영상 1과 2 호출
+  renderRelatedVideos(".related-videos1");
+  renderRelatedVideos(".related-videos2");
+  
   
   const commentList = document.getElementById("comment-list");
   const commentInput = document.getElementById("comment-input");
   const submitBtn = document.getElementById("submit-comment");
   const commentCount = document.getElementById("comment-count");
 
+   // 고정된 프로필 정보 (동물의 왕국)
+  const profile = {
+    name: "동물의 왕국",
+    profileImage: "https://storage.googleapis.com/youtube-clone-video/channel_profile_1.png"  // 실제 프로필 이미지 URL을 넣으세요
+  };
+
   let comments = [];
 
+   // 댓글 렌더링 함수
   function renderComments() {
-    commentList.innerHTML = "";
-    comments.forEach((text, index) => {
-      const li = document.createElement("li");
-      li.textContent = text;
+    commentList.innerHTML = "";  // 기존 댓글 초기화
+    comments.forEach((comment) => {
+      const li = document.createElement("li");  
+      li.classList.add("comment-item");
+
+      // 댓글 항목에 프로필 이미지와 작성자 이름, 댓글 내용 추가
+      li.innerHTML = `
+        <img src="${comment.profileImage}" alt="${comment.author}" class="profile-image" />
+        <div class="author">${comment.author}</div>
+        <div class="text">${comment.text}</div>
+      `;
+
       commentList.appendChild(li);
     });
+
+    // 댓글 개수 갱신
     commentCount.textContent = comments.length;
   }
 
+
+  // 댓글 작성 버튼 클릭 시 댓글 추가
   submitBtn.addEventListener("click", () => {
     const text = commentInput.value.trim();
+
     if (text) {
-      comments.push(text);
-      commentInput.value = "";
-      renderComments();
+      // 새 댓글 객체 생성 (작성자 이름과 프로필 이미지 추가)
+      const newComment = {
+        author: profile.name,  
+        text: text,  
+        profileImage: profile.profileImage 
+      };
+
+      comments.push(newComment);  // 댓글 배열에 추가
+      commentInput.value = "";  
+      renderComments();        
     } else {
       alert("댓글을 입력해주세요.");
     }
-  });    
+  });
+
+  // 초기 댓글 렌더링
+  renderComments();  // 페이지 로드 시 초기 댓글 렌더링
+  
+  
+    // 구독 버튼
+    const subscribeBtn = document.getElementById('subscribe-btn');
+    const subscribeIcon = document.getElementById('subscribe-icon');
+    const subscribeText = document.getElementById('subscribe-text');
+    let subscribed = false;
+  
+    subscribeBtn.addEventListener('click', () => {
+      subscribed = !subscribed;
+      subscribeBtn.style.backgroundColor = subscribed ? '#3f3e3e' : 'white';
+      subscribeText.textContent = subscribed ? '구독중' : '구독';
+      subscribeText.style.color = subscribed ? 'white' : '#3f3e3e';
+      subscribeIcon.style.display = subscribed ? 'block' : 'none';
+    });
 });
