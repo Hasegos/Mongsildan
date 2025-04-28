@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // 채널 프로필
     channelProfile.src = channel.channel_profile;
     // 비디오 영상
-    video.src = videos.thumbnail;
+    video.src = `https://storage.googleapis.com/youtube-clone-video/${videoId}.mp4`;
     // 영상 제목
     videoTitle.textContent = videos.title;    
     // 채널 주인 이름
@@ -72,8 +72,33 @@ document.addEventListener("DOMContentLoaded", function () {
     views.textContent = getViews(videos.views);    
     // 업로드 날짜
     date.textContent = getTimeAgo(videos.created_dt);
-
+    // 비디오 설명
     description.textContent = videos.tags.join(", ");
+
+    //플레이 버튼
+    const playBtn = document.getElementById("play-button");
+
+    playBtn.addEventListener("click", () => {
+      if (video.readyState >= 2) {
+        video.setAttribute("controls", true);
+        video.play().then(() => {
+          playBtn.style.display = "none";
+        }).catch(error => {
+          console.error('비디오 재생 실패:', error);
+        });
+      }
+    });
+
+    video.addEventListener("pause", () => {
+      if (video.currentTime > 0 && !video.ended) { 
+        playBtn.style.display = "block";
+      }
+    });
+
+    video.addEventListener("play", () => {
+      playBtn.style.display = "none";
+    });
+
   }
   video();
   
@@ -96,6 +121,10 @@ document.addEventListener("DOMContentLoaded", function () {
       chunk.forEach((video, index) => {
         const { channel_name, channel_profile } = channelInfos[index];           
 
+        // 조회수와 날짜 변환 함수 호출
+        const formattedViews = getViews(video.views);  // 조회수 변환
+        const formattedDate = getTimeAgo(video.created_dt);  // 날짜 변환
+
         const channelDiv = document.createElement("div");
         channelDiv.classList.add("related-video");
         channelDiv.innerHTML = `            
@@ -105,6 +134,8 @@ document.addEventListener("DOMContentLoaded", function () {
               <div class="video-text">
                 <h4>${video.title}</h4>
                 <p>${channel_name}</p>
+                <p>${formattedViews}</p>
+                <p>${formattedDate}</p>
               </div>
           `;
         fragment.appendChild(channelDiv);
@@ -181,8 +212,6 @@ document.addEventListener("DOMContentLoaded", function () {
   
   // 초기 댓글 렌더링
   renderComments();  // 페이지 로드 시 초기 댓글 렌더링
-  
-  
   
   /* 구독 버튼 */
   const subscribeBtn = document.getElementById('subscribe-btn');
