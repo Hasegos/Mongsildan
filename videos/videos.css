@@ -3,6 +3,7 @@
   display: flex;
   justify-content: center;
 }
+
 /* 비디오 플레이어 전체 레이아웃 */
 .video-page__player {
   display: flex;
@@ -113,6 +114,12 @@
   border-radius: 10px;
   font-weight: 700;
   cursor: pointer;
+  display: flex;
+  align-items: center;  
+}
+.subscribe-icon{
+  display: none;
+  margin-right: 10px;
 }
 /* 구독 버튼 올릴시 */
 .subscribe-btn:hover {

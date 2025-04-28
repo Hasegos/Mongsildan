@@ -78,8 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
   async function renderRelatedVideos(selector){
     
-    const getVideos = await getVideoList();
-    
+    const getVideos = await getVideoList();    
     const Div = document.querySelector(selector);
 
     const chunkSize = 4;
@@ -91,12 +90,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const channelInfos = await Promise.all(
         chunk.map((video) => getChannelInfo(video.channel_id))        
-      );
-      
+      );      
 
       chunk.forEach((video, index) => {
-        const { channel_name, channel_profile } = channelInfos[index];   
-        console.log(channelInfos[index]);
+        const { channel_name, channel_profile } = channelInfos[index];           
 
         const channelDiv = document.createElement("div");
         channelDiv.classList.add("related-video");
@@ -123,8 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 관련 영상 1과 2 호출
   renderRelatedVideos(".related-videos1");
-  renderRelatedVideos(".related-videos2");
-  
+  renderRelatedVideos(".related-videos2");  
   
   const commentList = document.getElementById("comment-list");
   const commentInput = document.getElementById("comment-input");
@@ -181,21 +177,24 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  
   // 초기 댓글 렌더링
   renderComments();  // 페이지 로드 시 초기 댓글 렌더링
   
   
-    // 구독 버튼
-    const subscribeBtn = document.getElementById('subscribe-btn');
-    const subscribeIcon = document.getElementById('subscribe-icon');
-    const subscribeText = document.getElementById('subscribe-text');
-    let subscribed = false;
   
-    subscribeBtn.addEventListener('click', () => {
-      subscribed = !subscribed;
-      subscribeBtn.style.backgroundColor = subscribed ? '#3f3e3e' : 'white';
-      subscribeText.textContent = subscribed ? '구독중' : '구독';
-      subscribeText.style.color = subscribed ? 'white' : '#3f3e3e';
-      subscribeIcon.style.display = subscribed ? 'block' : 'none';
-    });
+  /* 구독 버튼 */
+  const subscribeBtn = document.getElementById('subscribe-btn');
+  const subscribeIcon = document.getElementById('subscribe-icon');
+  const subscribeText = document.getElementById('subscribe-text');
+  let subscribed = false;
+
+  subscribeBtn.addEventListener('click', () => {
+    subscribed = !subscribed;
+    subscribeBtn.style.backgroundColor = subscribed ? '#3f3e3e' : 'white';
+    subscribeText.textContent = subscribed ? '구독중' : '구독';
+    subscribeText.style.color = subscribed ? 'white' : '#3f3e3e';
+    subscribeIcon.style.display = subscribed ? 'block' : 'none';   
+  });
+
 });
