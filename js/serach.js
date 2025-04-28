@@ -1,13 +1,51 @@
 // 검색어에 맞는 비디오 목록 필터링
 async function searchVideos(query) {
+    // 비디오 목록
     const videos = await getVideoList();   
+    
+    // 채널 캐시 
+    const channelCache = {};
+    const getChannelName = async (channelId) => {
+        if (!channelCache[channelId]) {
+            const channelInfo = await getChannelInfo(channelId);
+            channelCache[channelId] = channelInfo.channel_name;
+        }
+        return channelCache[channelId];
+    }
+    /* 비디오 내용 */
+    const channelNamePromise = videos.map(video => getChannelName(video.channel_id));
+    const channelNames = await Promise.all(channelNamePromise);   
 
+    const mathchedChannelIds = [];
+    channelNames.forEach((channelInfo, index) => {        
+        if (channelInfo.toLowerCase() === query.toLowerCase()) {
+            mathchedChannelIds.push(videos[index].channel_id);
+        }
+    });
+
+    let filteredVideos;
     // 검색어로 필터링 <- 채널 이름, 비디오 제목, 키워드
-    const filteredVideos = videos.filter(video => {
-        return video.title.toLowerCase().includes(query.toLowerCase()) || 
-            video.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase())) ;
-    });   
 
+    // 채널명이 완전일치
+    if(mathchedChannelIds.length > 0){
+        filteredVideos = videos.filter(video => mathchedChannelIds.includes(video.channel_id));
+    }
+    else{ // 다를 경우
+        filteredVideos = videos.filter((video,index) => {                   
+        // 제목
+        const titleWords = video.title.replace(/\s/g,"");
+        // 제목 기준
+        const titleMatches = titleWords.toLowerCase().includes(query.toLowerCase());
+        // 태그 기준
+        const tagMatches = video.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase()));  
+        // 
+        const channelNameMatches = channelNames[index].toLowerCase().includes(query.toLowerCase());
+    
+        // 태그와 제목 기준 포함되어있을때
+        return titleMatches || tagMatches || channelNameMatches;
+        });
+    }
+    
     displayResults(filteredVideos);  // 필터링된 결과 출력
 }
 window.searchVideos = searchVideos;
@@ -32,8 +70,7 @@ async function displayResults(videos) {
         const channelInfos = await Promise.all(
             chunk.map(v => getChannelInfo(v.channel_id))
         );
-
-        // 문서 조각에 카드 생성
+        
         const fragment = document.createDocumentFragment();
 
         chunk.forEach((video, index) => {
@@ -61,13 +98,11 @@ async function displayResults(videos) {
 
         resultsContainer.appendChild(fragment);
         currentIndex += chunkSize;
-
-        // 남은 영상이 있으면 다음 청크 스케줄
+        
         if (currentIndex < videos.length) {
             setTimeout(renderChunk, 1);
         }
     }
-
     // 청크 로딩 시작
     renderChunk();    
 }
