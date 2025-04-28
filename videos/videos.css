@@ -11,21 +11,6 @@
   align-items: flex-start;
 }
 
-
-/* 왼쪽 콘텐츠 */
-.video-main-content {
-  flex: 3;
-}
-
-/* 오른쪽 추천 영상 */
-.related-videos2 {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 400px;
-}
-
 /* 영상 이미지 */
 .video-media {
   width: 100%;
@@ -220,6 +205,15 @@
   font-size: 14px;
   color: white;
   word-wrap: break-word;  /* 긴 텍스트가 잘리지 않게 자동 줄바꿈 */
+}
+
+/* 오른쪽 추천 영상 */
+.related-videos2 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
 }
 
 
