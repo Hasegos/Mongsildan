@@ -27,6 +27,7 @@ html, body {
 header {
     height: 56px;
     z-index: 1000;
+    background-color: #212121;
 }
 /* main 기본 layout */
 main {
