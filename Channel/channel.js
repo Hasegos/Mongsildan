@@ -1,16 +1,16 @@
-document.addEventListener("DOMContentLoaded", () => {
-    
+document.addEventListener("DOMContentLoaded", () => {    
 
   const params = new URLSearchParams(window.location.search);
   const channelId = parseInt(params.get("id")); 
+  
   // 좋아요, 타이틀 , 조회수, 날짜
   let like = 0 , videoMainDescription, view,date; 
 
-    // 최상단바 추가
-  loadHtml("header", "../home/상단바/header-top.html", () => {  
+   // 최상단바 불러오기
+  loadHtml("header", "../top/html/header-top.html", () => {  
       let headerstyle = document.createElement("link");
       headerstyle.rel = "stylesheet";
-      headerstyle.href = "../home/상단바/styles/header-top.css";
+      headerstyle.href = "../top/style/header-top.css";
       document.head.appendChild(headerstyle); 
       document
       .getElementById("searchButton")
@@ -23,117 +23,51 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });     
   });     
-
-    // 사이드바 불러오기
-  loadHtml("aside", "../home/sidebar/aside.html", () => {
-      const menuButton = document.getElementById("menuButton");
-      // width 넓이 수정을위해서
-      const aside = document.querySelector("aside");      
-      
-      let cuurrentPage = 1;
-      let sidebarStyle = document.createElement("link");
-      sidebarStyle.rel = "stylesheet";
-      sidebarStyle.href = "../home/sidebar/style/aside.css";      
-      document.head.appendChild(sidebarStyle); 
-      aside.style.width = "190px";
-
-      menuButton.addEventListener("click", () => {  
-        document.querySelectorAll("link[rel='stylesheet']").forEach(link => {
-          if(link.href.includes("aside")) {
-              link.remove();
-          }
-        })   
-        if(cuurrentPage == 1){        
-          loadHtml("aside","../home/sidebar/aside2.html", () => {            
-            sidebarStyle.href = "../home/sidebar/style/aside2.css";
-            document.head.appendChild(sidebarStyle);                        
-            aside.style.width = "70px";        
-            aside.style.display = "flex";
-            aside.style.justifyContent = "center"; 
-
-          });
-          cuurrentPage = 2;
-        }      
-        else if (cuurrentPage == 2){
-          loadHtml("aside","../home/sidebar/aside.html",() =>{          
-              sidebarStyle.href = "../home/sidebar/style/aside.css";
-            document.head.appendChild(sidebarStyle); 
-            cuurrentPage = 1;     
-            aside.style.width = "190px";
-            aside.style.display = "";
-            aside.style.justifyContent = "";          
-          });        
-        }      
-      });      
+  // 사이드바 불러오기
+  let cuurrentPage = 1 , check = 1;
+  loadHtml("aside", "../sidebar/html/aside.html",() => {      
+    menuButton(cuurrentPage,check);
   });
-  /* channel-title */
-  loadHtml(".header", "./html/channel-title.html", () => {
 
-    let channelTitle = document.createElement("link");
-    channelTitle.rel = "stylesheet";
-    channelTitle.href = "./styles/channel-title.css";
-    document.head.appendChild(channelTitle); 
+  /* channel-smallvideo */   
+  const video = document.getElementById("main-video"); // 어디있는거임?  
+  const playBtn = document.getElementById("play-button");
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const subscribeBtn = document.getElementById('subscribe-btn');
-      let subscribed = false;
-  
-      subscribeBtn.addEventListener('click', () => {
-        subscribed = !subscribed;
-        subscribeBtn.textContent = subscribed ? 'SUBSCRIBED' : 'SUBSCRIBES';
-        subscribeBtn.style.backgroundColor = subscribed ? 'gray' : 'red';
-      });
-    });
-  })
-
-  /* channel-smallvideo */
-  loadHtml(".main", "./html/channel-smallvideo.html", () => {
-    let smallvideo = document.createElement("link");
-    smallvideo.rel = "stylesheet";
-    smallvideo.href = "./styles/channel-smallvideo.css";
-    document.head.appendChild(smallvideo); 
-    
-    const video = document.getElementById("main-video");
-    const playBtn = document.getElementById("play-button");
-
-    playBtn.addEventListener("click", () => {
-      video.play();
-      playBtn.style.display = "none";
-      video.setAttribute("controls", true); // 재생 후 controls 표시
-    });          
-  })
+  playBtn.addEventListener("click", () => {
+    video.play();
+    playBtn.style.display = "none";
+    video.setAttribute("controls", true); // 재생 후 controls 표시
+  });          
 
   /* channel-playlist */
-  loadHtml(".footer", "./html/channel-playlist.html", () => {
-    let playlist = document.createElement("link");
-    playlist.rel = "stylesheet";
-    playlist.href = "./styles/channel-playlist.css";
-    document.head.appendChild(playlist); 
-    
-    const subscribeBtn = document.getElementById('subscribe-btn');
-    let subscribed = false;
+  
+  /* 구독 버튼 */
+  const subscribeBtn = document.getElementById('subscribe-btn');
+  let subscribed = false;
 
-    subscribeBtn.addEventListener('click', () => {
-      subscribed = !subscribed;
-      subscribeBtn.textContent = subscribed ? 'SUBSCRIBED' : 'SUBSCRIBES';
-      subscribeBtn.style.backgroundColor = subscribed ? 'gray' : 'red';
+  subscribeBtn.addEventListener('click', () => {
+    subscribed = !subscribed;
+    subscribeBtn.textContent = subscribed ? '구독' : '구독중';
+    subscribeBtn.style.backgroundColor = subscribed ? 'white' : '#3f3e3e';
     });
-  });
-
+  
 
  /* title */
   async function title() { 
     
-  const videos = await getChannelInfo(channelId);        
+    const videos = await getChannelInfo(channelId);        
 
-  const bannerImg = document.getElementById("banner-img");
-  bannerImg.src = videos.channel_banner;
+    const bannerImg = document.getElementById("banner-img");
+    bannerImg.src = videos.channel_banner;
 
-  const profileImg = document.getElementById("profile-img");
-  profileImg.src = videos.channel_profile;
+    const profileImg = document.getElementById("profile-img");
+    profileImg.src = videos.channel_profile;
 
-  const channelName = document.getElementById("channel-name");
-  channelName.textContent = videos.channel_name;   
+    const channelName = document.getElementById("channel-name");
+    channelName.textContent = videos.channel_name;   
+
+    const subscribers = document.getElementById("subscribers");
+    subscribers.textContent = getSubscriber(videos.subscribers);
   }  
   /* smallVideo */
   async function smallvideo(like,videoMainDescription,views,date){
@@ -188,60 +122,34 @@ document.addEventListener("DOMContentLoaded", () => {
           </a>
         `;
         fragment.appendChild(channelDiv);
-      });
-      
-      smallvideo(like,videoMainDescription,view,getTimeAgo(date));  
+      });      
 
-      
       Div.appendChild(fragment);
-
       currentIndex += chunkSize;
       if (currentIndex < videos.length) {
-        setTimeout(renderChunk, 1);
+        setTimeout(renderChunk, 1);        
       }
+      // smallvideo
+      smallvideo(like,videoMainDescription,view,getTimeAgo(date));
     }
     renderChunk();
   }
   playlist();
   title();
-
-  // 날짜 차이 계산 함수
-  function getTimeAgo(dateString) {
-    const createdDate = new Date(dateString);
-    const now = new Date();
-
-    const diffTime = now - createdDate;
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-
-    if (diffDays === 0) return "오늘";
-    if (diffDays === 1) return "어제";
-    if (diffDays < 30) return `${diffDays}일 전`;
-
-    const months = Math.floor(diffDays / 30);
-    if (months < 12) return `${months}개월 전`;
-
-    const years = Math.floor(months / 12);
-    return `${years}년 전`;
-  }
-
-
-
-
+  
   /* 1315px 미만일때 작동 */
-  let cuurrentSidebarPage = null;
+  let currentSidebarPage = null;
   function handleResponsiveSidebar() {
-    const meideaQuery = window.matchMedia("(max-width: 1315px)");
-    if(meideaQuery.matches && cuurrentSidebarPage !==2){      
+    const mediaQuery = window.matchMedia("(max-width: 1315px)");
+    if(mediaQuery.matches && currentSidebarPage !==2){      
       switchSidebar(2);
-      cuurrentSidebarPage = 2;
+      currentSidebarPage = 2;
     }
-    else if(!meideaQuery.matches && cuurrentSidebarPage !==1){
+    else if(!mediaQuery.matches && currentSidebarPage !==1){
       switchSidebar(1);
-      cuurrentSidebarPage = 1;
+      currentSidebarPage = 1;
     }
-  }
-    
+  }    
   handleResponsiveSidebar();
   window.addEventListener("resize", handleResponsiveSidebar);
-
 });

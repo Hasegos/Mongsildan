@@ -1,0 +1,98 @@
+/* 최상단바 */
+.header-top {
+  width: 100%;  
+  background-color: #212121;
+  display: flex;  
+  justify-content: space-between;
+  padding: 0 16px;  
+  position: fixed;  
+  z-index: 1000;
+}
+
+/* 공통 아이콘 스타일 */
+.icon {
+  width: 40px;  
+  object-fit: contain;
+}
+
+/* 로고 버튼 스타일 */
+.logo {
+  height: 20px;
+  object-fit: contain;  
+}
+
+/* Youtube */
+.logo-button {
+  display: flex;
+  align-items: center;
+  padding: 18px 14px 18px 16px;
+  height: 56px;
+  text-decoration: none;
+  flex-direction: row;
+  cursor: pointer;
+}
+
+/* 왼쪽 */
+.header-top .left {
+  display: flex;  
+  gap: 10px;
+  margin-left: 40px;
+}
+
+/* 오른쪽 */
+.header-top .right {
+  display: flex;  
+  gap: 16px;
+}
+
+/* 가운데 */
+.header-top .center {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 햄버그 */
+.menu-button {
+  background-color: #212121;
+  border: none;
+}
+
+.menu-button :hover{
+  background-color: #333;  
+}
+
+/* 검색창 */
+.search-form {
+  display: flex;
+  width: 426px;
+  height: 40px;
+  border: 1px solid #333;
+  border-radius: 2px;  
+}
+
+.search-input {
+  flex: 1;
+  background-color: #121212;
+  color: white;
+  border: none;
+  padding: 0 12px;
+  font-size: 14px;
+}
+
+.search-input:focus {
+  outline: none;
+}
+
+.search-button {
+  width: 64px;
+  background-color: #333;
+  border: none;  
+  cursor: pointer;
+}
+
+.mic-button {  
+  background-color: #212121;
+  border: none;  
+  cursor: pointer;
+}

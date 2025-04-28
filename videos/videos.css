@@ -1,103 +1,66 @@
-html,
-body {
-  height: 100%;
-}
-
-.wrapper {
-  height: 100%;
+/* 비디오 페이지 */
+.video-page {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
 }
 
-body {
-  font-family: "Roboto" ,'Noto Sans KR', sans-serif;
-  background-color: #181818;
-  color: #fff;
-}
-
-.main-layout {
-  margin-top: 56px;
-  display: flex;
-  padding: 20px;
-}
-
-.video-section {
-  flex: 3;
-  margin-right: 20px;
-  margin-left: 50px;
-}
-
-.video-player video {
+/* 영상 이미지 */
+.video-media {
   width: 100%;
   border: none;
   border-radius: 10px;
-  aspect-ratio: 16 / 9;
-  max-width: 1500px;
+  aspect-ratio: 16 / 9;  
+  max-width: 1300px;
 }
-
+/* 영상 제목 */
 .video-title {
-  margin: 15px 0 5px;
-  font-size: 22px;
+  margin: 15px 0 5px;  
 }
 
-.video-info {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
+/* 영상 더보기 */
 .video-summary {
+  margin-bottom: 20px;
   background-color: #202020;
-  padding: 16px;
-  border-radius: 8px;
-  margin-top: 12px;
-  color: #ccc;
-  font-size: 14px;
-  line-height: 1.4;
+  padding: 10px;
+  border-radius: 8px;    
+  font-size: 14px;  
 }
-
+/* 영상 더보기 조회수 + 만든일자 */
 .video-meta {
-  margin-bottom: 8px;
-  color: #aaa;
+  
 }
-
+/* 영상 설명 */
 .video-description {
-  margin: 0;
+  font-size: 14px;  
   white-space: pre-line;
   color: #ccc;
   font-size: 14px;
   line-height: 1.5;
   margin-bottom: 30px;
 }
-
+/* 비디오 액션 버튼 묶음 */
 .video-actions {
   display: flex;
   align-items: center;
   margin-left: auto;
-  gap: 12px;
-  margin-bottom: 16px;
+  gap: 12px;  
 }
-
+/* 액션 버튼 */
 .video-actions button {
   display: flex;
   align-items: center; 
   background-color: #181818;
-  border: none;
-  color: white;
+  border: none;  
   padding: 8px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: 600;
+  border-radius: 15px;
+  cursor: pointer;  
 }
 
 .video-actions button:hover {
   background-color: #333;
 }
 
-.video-actions button svg {
-  margin-right: 4px;
-}
-
+/* 채널 정보 */
 .channel-info {
   display: flex;
   align-items: center;
@@ -105,158 +68,118 @@ body {
   gap: 12px;
   margin-bottom: 16px;
 }
-
-.channel-avatar {
-  width: 48px;
+/* 채널 프로필 */
+.channel-avatar {  
   height: 48px;
-  border-radius: 50%;
+  border-radius: 50%;  
 }
-
+/* 채널 정보 */
 .channel-details {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 20px;
 }
-
+/* 채널 이름 */
 .channel-details h3 {
-  font-size: 16px;
-  margin: 0;
-  color: white;
+  font-size: 16px;  
 }
-
-.subscribers {
-  font-weight: normal;
-  color: #aaa;
-  font-size: 14px;
-  margin: 0;
+/* 구독자 수*/
+.subscribers {  
+  color: #aaa;   
 }
-
-.subscribe-btn {
-  margin-left: auto;
-  background-color: white;
-  border: none;
+/* 구독 버튼 */
+.subscribe-btn {  
+  background-color: white;  
   color: black;
+  border: none;  
   padding: 8px 13px;
   border-radius: 10px;
   font-weight: 700;
   cursor: pointer;
 }
-
+/* 구독 버튼 올릴시 */
 .subscribe-btn:hover {
-  background-color: #e60000;
+  background-color: #d9d9d9;
 }
 
-
-.video-buttons button {
-  margin-right: 10px;
-  padding: 6px 12px;
-  background-color: #222;
-  border: none;
-  color: white;
-  cursor: pointer;
-  border-radius: 6px;
-}
-
-.video-buttons button:hover {
-  background-color: #333;
-}
-
-.related-videos2 {
-  flex: 0.75;
+/* 관련 추천 영상 layout */
+.related-videos1 {  
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
+/* 관련 추천 영상들 */
 .related-video {
   display: flex;
   align-items: center;
-  gap: 10px;
-  background-color: #1a1a1a;
-  border-radius: 8px;
+  gap: 10px;  
   padding: 8px;
   cursor: pointer;
 }
 
+/* 관련 추천 영상 이미지 */
 .related-video img {
-  width: 120px;
-  height: 70px;
-  border-radius: 4px;
+  width: 160px;
+  height: 90px;
+  border-radius: 15px;
   object-fit: cover;
 }
-
+/* 댓글 layout*/
 .comment-section {
   margin-top: 30px;
 }
+/* 댓글 */
+.comment-section h3 {
+  margin-bottom: 10px;
+}
 
+/* 댓글 입력 layout */
 .comment-input {
   display: flex;
   margin-bottom: 15px;
 }
 
-#comment-input {
+/* 댓글 입력*/
+.comment-input input{
   flex: 1;
   padding: 8px;
   border-radius: 6px;
   border: none;
+  background: transparent;
+  border-bottom: 1px solid #3f3f3f;
+  outline: none;
+  color: white;
 }
 
-#submit-comment {
+/* 댓글 버튼 */
+.comment-input button {
   margin-left: 10px;
   padding: 8px 12px;
   border-radius: 6px;
   border: none;
-  background-color: #444;
-  color: white;
+  background-color: #444;  
   cursor: pointer;
 }
 
-#submit-comment:hover {
+.comment-input button:hover {
   background-color: #666;
 }
 
-.comment-list {
-  list-style: none;
-  padding: 0;
-}
-
+/* 댓글 내용 */
 .comment-list li {
   padding: 6px 0;
   border-bottom: 1px solid #333;
 }
 
-@media (min-width: 1316px) {
-  .related-videos1{
-    display: none;
-  }
-
-}
-@media (max-width: 1315px) {
-  .main-layout {
-    flex-direction: column;
-  }
-
-  .video-section {
-    order: 1;
-  }
-
-  .related-videos {
-    order: 2;
-    margin: 20px 0;
-  }
-
-  .comment-section {
-    order: 3;
-  }
+@media (max-width: 1315px) { 
   .related-videos2{
     display: none;
-  }
-  
+  }  
 }
 
 @media (min-width: 1316px) {
   .related-videos1{
     display: none;
   }
-
 }

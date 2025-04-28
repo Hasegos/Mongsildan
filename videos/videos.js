@@ -1,59 +1,123 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-  // 상단 바 불러오기
-  loadHtml("header", "../home/상단바/header-top.html", () => {    
+  const params = new URLSearchParams(window.location.search);
+  const channelId = parseInt(params.get("channel_id")); 
+  const videoId = parseInt(params.get("video_id"));
 
+  // 상단 바 불러오기
+  loadHtml("header", "../top/html/header-top.html", () => { 
     let styleLink = document.createElement("link");
     styleLink.rel = "stylesheet";
-    styleLink.href = "../home/상단바/styles/header-top.css";
+    styleLink.href = "../top/style/header-top.css";
     document.head.appendChild(styleLink);   
+      // 검색기능
+      document.getElementById("searchButton")
+      .addEventListener("click", function () {
+        const keyword = document.getElementById("searchInput").value.trim();
+        if (keyword) {
+          alert("검색어: " + keyword);
+        } else {
+          alert("검색어를 입력하세요!");
+        }
+      });
+  });  
+  
+  // 사이드바 불러오기
+  let cuurrentPage = 3 , check = 2;
+  loadHtml("aside", "../sidebar/html/aside.html",() => {
+    const aside = document.querySelector("aside");    
+    let styleLink = document.createElement("link");
+    styleLink.rel = "stylesheet";
+    styleLink.href = "../sidebar/style/aside.css";
+    document.head.appendChild(styleLink);    
 
-    // 사이드바 불러오기  
-    const menuButton = document.getElementById("menuButton");    
-    const aside = document.querySelector("aside");   
+    // 초기에 안보이게 설정
+    aside.style.display = "none";     
+    menuButton(cuurrentPage, check);
+  });  
+
+  // 비디오 내용 불러오기
+  async function video() {   
     
-    let sidebar = document.createElement("link");
-    sidebar.rel = "stylesheet";
-    sidebar.href = "../home/상단바/styles/header-top.css";
-    document.head.appendChild(sidebar); 
-    let cuurrentPage = 1;
+    const videos = await getVideoInfo(videoId);     
+    const channel = await getChannelInfo(channelId);
 
-    menuButton.addEventListener("click", () => {
-      if(cuurrentPage == 1){        
-        loadHtml("aside","../home/sidebar/aside.html", () => { 
-          const sidebarSytle = document.querySelector(".sidebar");           
-          sidebar.href = "../home/sidebar/style/aside.css";
-          document.head.appendChild(sidebar);         
-              
-          aside.style.width = "70px";        
-          aside.style.display = "flex";
-          aside.style.justifyContent = "center";  
-          sidebarSytle.style.backgroundColor = "#212121";    
-          sidebarSytle.style.left = "0";    
-          sidebarSytle.style.width = "190px";
-          sidebarSytle.style.marginTop = "56px";
-          
-        });
-        cuurrentPage = 2;
-      }      
-      else if (cuurrentPage == 2){
-        aside.style.display = "none";
-        cuurrentPage = 1;
-      }    
-    });
-  
-    // 검색기능
-    document.getElementById("searchButton")
-    .addEventListener("click", function () {
-      const keyword = document.getElementById("searchInput").value.trim();
-      if (keyword) {
-        alert("검색어: " + keyword);
-      } else {
-        alert("검색어를 입력하세요!");
+    const video = document.getElementById("video");
+    const channelProfile = document.getElementById("channel-profile");
+    const videoTitle = document.getElementById("video-title");
+    const channelName = document.getElementById("channel-name");
+    const subscribers = document.getElementById("subscribers");
+    const like = document.getElementById("like");
+    const dislike = document.getElementById("dislike");
+    const views = document.getElementById("views");
+    const date = document.getElementById("date");
+
+    // 채널 프로필
+    channelProfile.src = channel.channel_profile;
+    // 비디오 영상
+    video.src = videos.thumbnail;
+    // 영상 제목
+    videoTitle.textContent = videos.title;    
+    // 채널 주인 이름
+    channelName.textContent = channel.channel_name;
+    // 구독자 수
+    subscribers.textContent = getSubscriber(channel.subscribers);
+    // 좋아요    
+    like.textContent = getLikeAndDislike(videos.likes);
+    // 싫어요
+    dislike.textContent = getLikeAndDislike(videos.dislikes);
+    // 조회수
+    views.textContent = getViews(videos.views);    
+    // 업로드 날짜
+    date.textContent = getTimeAgo(videos.created_dt);
+  }
+  video();
+
+  async function relatedVidos(){
+    const getVideos = await getVideoList();
+    
+    const Div = document.querySelector(".related-videos1");
+
+    const chunkSize = 4;
+    let currentIndex = 0;
+
+    async function renderChunk() {
+      const fragment = document.createDocumentFragment();
+      const chunk = getVideos.slice(currentIndex, currentIndex + chunkSize);
+
+      const channelInfos = await Promise.all(
+        chunk.map((video) => getChannelInfo(video.channel_id))        
+      );
+      
+
+      chunk.forEach((video, index) => {
+        const { channel_name, channel_profile } = channelInfos[index];   
+        console.log(channelInfos[index]);
+
+        const channelDiv = document.createElement("div");
+        channelDiv.classList.add("related-video");
+        channelDiv.innerHTML = `            
+              <a href="../videos/videos.html?channel_id=${video.channel_id}&video_id=${video.id}" class="card-link">
+                <img src="${video.thumbnail}" loading="lazy" />
+              </a>
+              <div class="video-text">
+                <h4>제목2</h4>
+                <p>텍스트2</p>
+              </div>
+          `;
+        fragment.appendChild(channelDiv);
+      });
+
+      Div.appendChild(fragment);
+      currentIndex += chunkSize;
+      if (currentIndex < getVideos.length) {
+        setTimeout(renderChunk, 1);
       }
-    });
-  });    
-  
+    }
+    renderChunk();
+  }
+
+  relatedVidos();
   
   const commentList = document.getElementById("comment-list");
   const commentInput = document.getElementById("comment-input");
@@ -82,66 +146,5 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       alert("댓글을 입력해주세요.");
     }
-  });  
-
-
-  // 채널 이름과 구독자 수 삽입
-  
-  // async function getChannelInfo(channelID) {
-  //   try{
-  //     const channelInfo = await channel.json();
-
-  //     // 채널 이름과 구독자 수를 HTML에 삽입
-  //     const channelName = document.querySelector(".channel-details h3");
-  //     const subscribers = document.querySelector(".channel-details .subscribers");
-  
-  //     // 채널 이름과 구독자 수 업데이트
-  //     channelName.innerHTML = `${channelInfo.channel_name} <br><span class="subscribers">${formatSubscribers(channelInfo.subscribers)}</span>`;
-    
-  
-  //   // 구독자 수 포맷 함수 (예: 1.2M, 105K 형태로 변환)
-  //   function formatSubscribers(subscribers) {
-  //     if (subscribers >= 1000000) {
-  //       return (subscribers / 1000000).toFixed(1) + "M";
-  //     } else if (subscribers >= 1000) {
-  //       return (subscribers / 1000).toFixed(1) + "K";
-  //     } else {
-  //       return subscribers;
-  //     }
-  //   }
-  //   }catch(error){
-  //     console.error("채널 정보를 불러오는 중 오류 발생:", error);
-  //   }
-    
-  // }
-
-  // getChannelInfo(channelId);
-
-
-  const params = new URLSearchParams(window.location.search);
-  const videoId = parseInt(params.get("video_id")); 
-  const channelId = parseInt(params.get("channel_id"));
-
-  async function loadVideo(videoId) {
-    try {
-      const videoInfo = await window.getVideoInfo(videoId);
-
-      // video에 src 설정
-      const video = document.getElementById("player");
-      video.src = `https://storage.googleapis.com/youtube-clone-video/${videoId}.mp4`;
-      
-
-      // 제목 및 설명 등 정보 삽입
-      document.querySelector(".video-title").textContent = videoInfo.title || "제목 없음";
-      document.querySelector(".views").textContent = `조회수 ${videoInfo.views}회` || "조회수 없음";
-      document.querySelector(".video-description").textContent = videoInfo.description || "설명 없음";
-      document.querySelector(".like_count").textContent = videoInfo.likes || 0;
-      document.querySelector(".dislike_count").textContent = videoInfo.dislikes || 0;
-    } catch (error) {
-      console.error("영상 정보를 불러오는 중 오류 발생:", error);
-    }
-  }
-
-  // 페이지가 로드되면 videoId로 영상 불러오기
-  loadVideo(videoId);
+  });    
 });
