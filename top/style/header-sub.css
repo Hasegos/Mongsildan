@@ -110,7 +110,8 @@
 .filter-columns {
   flex-wrap: nowrap;  
   margin-top: 8px;
-  justify-content: space-between;    
+  justify-content: space-between;
+  align-items: start; 
 }
 
 /* 필터 text */
