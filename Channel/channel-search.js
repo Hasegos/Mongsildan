@@ -56,7 +56,7 @@ function displayResults(videos) {
 
 // 검색 버튼 클릭 시 실행
 document.getElementById('searchButton').addEventListener('click', () => {
-    const query = document.getElementById('searchInput').value.trim();
+    const query = document.getElementById('searchInput').value;
     if (query) {
         document.getElementById('searchQuery').innerText = query;  // 검색어 표시
         searchVideos(query);  // 검색 실행
