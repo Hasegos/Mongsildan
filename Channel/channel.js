@@ -153,3 +153,4 @@ document.addEventListener("DOMContentLoaded", () => {
   handleResponsiveSidebar();
   window.addEventListener("resize", handleResponsiveSidebar);
 });
+

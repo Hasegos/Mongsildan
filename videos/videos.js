@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // 고정된 프로필 정보 (동물의 왕국)
   const profile = {
     name: "동물의 왕국",
-    profileImage: "http://techfree-oreumi-api.kro.kr:5000/video/getVideoInfo?video_id=1"  // 실제 프로필 이미지 URL을 넣으세요
+    profileImage: "https://storage.googleapis.com/youtube-clone-video/channel_profile_1.png"  // 실제 프로필 이미지 URL을 넣으세요
   };
 
   // 댓글 배열 초기화 (각 댓글에 작성자 이름과 프로필 이미지 포함)
