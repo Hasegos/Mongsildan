@@ -8,20 +8,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
    // 최상단바 불러오기
   loadHtml("header", "../top/html/header-top.html", () => {  
-      let headerstyle = document.createElement("link");
-      headerstyle.rel = "stylesheet";
-      headerstyle.href = "../top/style/header-top.css";
-      document.head.appendChild(headerstyle); 
-      document
-      .getElementById("searchButton")
-      .addEventListener("click", function () {
-        const keyword = document.getElementById("searchInput").value.trim();
-        if (keyword) {
-            alert("검색어: " + keyword);
-        } else {
-            alert("검색어를 입력하세요!");
-        }
-      });     
+    let headerstyle = document.createElement("link");
+    headerstyle.rel = "stylesheet";
+    headerstyle.href = "../top/style/header-top.css";
+    document.head.appendChild(headerstyle); 
+
+    /* 상단 600px 일때 */   
+    topLoad600px(); 
+    /* 초기 검색시 */
+    initSearchButton();          
   });     
   // 사이드바 불러오기
   let cuurrentPage = 1 , check = 1;
