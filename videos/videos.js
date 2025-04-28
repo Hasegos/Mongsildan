@@ -73,27 +73,25 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   video();
 
-  async function relatedVidos(){
+  async function renderRelatedVideos(selector) {
     const getVideos = await getVideoList();
     
-    const Div = document.querySelector(".related-videos1");
-
+    const Div = document.querySelector(selector);
+  
     const chunkSize = 4;
     let currentIndex = 0;
-
+  
     async function renderChunk() {
       const fragment = document.createDocumentFragment();
       const chunk = getVideos.slice(currentIndex, currentIndex + chunkSize);
-
+  
       const channelInfos = await Promise.all(
         chunk.map((video) => getChannelInfo(video.channel_id))        
       );
-      
-
+  
       chunk.forEach((video, index) => {
         const { channel_name, channel_profile } = channelInfos[index];   
-        console.log(channelInfos[index]);
-
+  
         const channelDiv = document.createElement("div");
         channelDiv.classList.add("related-video");
         channelDiv.innerHTML = `            
@@ -101,13 +99,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 <img src="${video.thumbnail}" loading="lazy" />
               </a>
               <div class="video-text">
-                <h4>제목2</h4>
-                <p>텍스트2</p>
+                <h4>${video.title}</h4>
+                <p>${channel_name}</p>
               </div>
           `;
         fragment.appendChild(channelDiv);
       });
-
+  
       Div.appendChild(fragment);
       currentIndex += chunkSize;
       if (currentIndex < getVideos.length) {
@@ -116,8 +114,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     renderChunk();
   }
-
-  relatedVidos();
+  
+  // 관련 영상 1과 2 호출
+  renderRelatedVideos(".related-videos1");
+  renderRelatedVideos(".related-videos2");
   
   const commentList = document.getElementById("comment-list");
   const commentInput = document.getElementById("comment-input");
@@ -146,5 +146,20 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       alert("댓글을 입력해주세요.");
     }
-  });    
+  });  
+  
+  // 구독 버튼
+  const subscribeBtn = document.getElementById('subscribe-btn');
+  const subscribeIcon = document.getElementById('subscribe-icon');
+  const subscribeText = document.getElementById('subscribe-text');
+  let subscribed = false;
+
+  subscribeBtn.addEventListener('click', () => {
+    subscribed = !subscribed;
+    subscribeBtn.style.backgroundColor = subscribed ? '#3f3e3e' : 'white';
+    subscribeText.textContent = subscribed ? '구독중' : '구독';
+    subscribeText.style.color = subscribed ? 'white' : '#3f3e3e';
+    subscribeIcon.style.display = subscribed ? 'block' : 'none';
+  });
+
 });
