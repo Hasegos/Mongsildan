@@ -17,6 +17,7 @@
       <main class="video-page">
         <!-- 플레이어 + 정보-->              
         <div class="video-page__player">
+          <div class="video-main-content">
           <img id="video" class="video-media">
           <!-- 제목 -->
           <h2 class="video-title" id="video-title"></h2>
@@ -77,9 +78,8 @@
               <!-- 업로드 날짜 -->
               <span id="date"></span>
             </div>
-            <p class="video-description">
-              고양이가 점프하다가 넘어지는 영상이에요
-            </p>
+            <span id="description" class="video-description">
+            </span>
           </section>
             
           <!--- 추천영상 밑 정렬 -->
@@ -94,7 +94,8 @@
               <button id="submit-comment">작성</button>
             </div>
             <ul id="comment-list" class="comment-list"></ul>
-          </section>        
+          </section>
+          </div>        
   
           <!-- 추천영상 오른쪽 정렬 -->
           <div class="related-videos2">        
