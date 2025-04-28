@@ -11,6 +11,7 @@
   align-items: flex-start;
 }
 
+
 /* 왼쪽 콘텐츠 */
 .video-main-content {
   flex: 3;
@@ -22,6 +23,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  max-width: 400px;
 }
 
 /* 영상 이미지 */
@@ -118,14 +120,13 @@
   font-weight: 700;
   cursor: pointer;
   display: flex;
-  align-items: center;
+  align-items: center;  
 }
-
-.subscribe-icon {
-  display: none; 
-  margin-right: 8px;
+.subscribe-icon{
+  display: none;
+  margin-right: 10px;
 }
-
+/* 구독 버튼 올릴시 */
 .subscribe-btn:hover {
   background-color: #d9d9d9;
 }
@@ -135,6 +136,8 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+
 }
 
 /* 관련 추천 영상들 */
@@ -143,8 +146,7 @@
   align-items: center;
   gap: 10px;
   padding: 8px;
-  cursor: pointer;
-  max-width: 400px;
+  cursor: pointer;  
 }
 
 .related-video img {
@@ -192,10 +194,36 @@
   background-color: #666;
 }
 
+/* 댓글 항목 스타일 */
 .comment-list li {
   padding: 6px 0;
   border-bottom: 1px solid #333;
+  display: flex;
+  align-items: center;  /* 수직 가운데 정렬 */
 }
+
+/* 프로필 이미지 스타일 */
+.comment-item .profile-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;  /* 원형 프로필 이미지 */
+  margin-right: 10px;  /* 프로필 이미지와 댓글 내용 사이 간격 */
+}
+
+/* 댓글 작성자 이름 스타일 */
+.comment-item .author {
+  font-weight: bold;
+  color: #007bff;  /* 작성자 이름에 색상 추가 */
+}
+
+/* 댓글 내용 스타일 */
+.comment-item .text {
+  margin-left: 15px;
+  font-size: 14px;
+  color: white;
+  word-wrap: break-word;  /* 긴 텍스트가 잘리지 않게 자동 줄바꿈 */
+}
+
 
 @media (max-width: 1315px) {
   .related-videos2 {
@@ -207,4 +235,14 @@
   .related-videos1 {
     display: none;
   }
+}
+
+@media (max-width: 600px) {
+  .video-page__player{
+    width: 100%;
+  }
+  .video-actions{
+    display: block;
+  }
+
 }
