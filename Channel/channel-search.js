@@ -69,7 +69,7 @@ function displayResults(videos) {
   renderChunk();
 }
 
-// 🔥 추가: 화면 크기에 따라 search-btn + header searchButton 이동
+// 추가: 화면 크기에 따라 search-btn + header searchButton 이동
 document.addEventListener("DOMContentLoaded", () => {
   const navSearchBtn = document.querySelector(".channel-nav .search-btn"); // 네비게이션 검색 버튼
   const headerSearchBtn = document.getElementById("searchButton");          // 헤더 검색 버튼

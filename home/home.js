@@ -119,27 +119,33 @@ document.addEventListener("DOMContentLoaded", () => {
         const { channel_name, channel_profile } = channelInfos[index];
         // console.log(channelInfos[index]);
         console.log(video);
+        
 
-        const channelDiv = document.createElement("div");
-        channelDiv.classList.add("card");
-        channelDiv.innerHTML = `
-          <a href="../videos/videos.html?channel_id=${video.channel_id}&video_id=${video.id}" class="card-link">
-            <img src="${video.thumbnail}" loading="lazy" />
-          </a>
-          <div class="card-content">
-            <a href="../Channel/channel.html?id=${video.channel_id}">
-              <p class="card-title">
-                <img src="${channel_profile}" style="width:90px; height:90px; object-fit:cover;">
-              </p>
-            </a>
-            <div class="card-description">
-              <p class="card-text1">${video.title}</p>
-              <p class="card-text2">${channel_name}</p>
-            </div>
-          </div>
-        `;
-        fragment.appendChild(channelDiv);
-      });
+  // ✅ 조회수와 날짜 포맷 적용 (값이 없으면 기본 문구)
+  const viewsText = (video.views!= null) ? getViews(video.views) : "";
+  const dateText = (video.created_dt) ? getTimeAgo(video.created_dt) : "";
+
+  const channelDiv = document.createElement("div");
+  channelDiv.classList.add("card");
+  channelDiv.innerHTML = `
+    <a href="../videos/videos.html?channel_id=${video.channel_id}&video_id=${video.id}" class="card-link">
+      <img src="${video.thumbnail}" loading="lazy" />
+    </a>
+    <div class="card-content">
+      <a href="../Channel/channel.html?id=${video.channel_id}">
+        <p class="card-title">
+          <img src="${channel_profile}" style="width:70px; height:70px; object-fit:cover; border-radius:50%;">
+        </p>
+      </a>
+      <div class="card-description">
+        <p class="card-text1">${video.title}</p>
+        <p class="card-text2">${channel_name}</p>
+        <p class="card-text3">${viewsText} · ${dateText}</p>
+      </div>
+    </div>
+  `;
+  fragment.appendChild(channelDiv);
+});
 
       Div.appendChild(fragment);
       currentIndex += chunkSize;

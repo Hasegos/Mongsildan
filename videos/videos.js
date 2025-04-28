@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     renderChunk();
   }
-
+// 댓글 작성시 프로필+작성자명 보이게
   relatedVidos();
   
   const commentList = document.getElementById("comment-list");
