@@ -96,3 +96,29 @@
   border: none;  
   cursor: pointer;
 }
+
+@media (max-width: 600px) {
+  .search-input {
+    display: none;
+  }
+  .header-top .left {
+    margin-left: 0px;
+  }
+  .search-form{
+    width: auto
+  }
+
+  .searching .search-input {
+    display: block;
+    flex: 1;
+  }
+
+  .searching .left,
+  .searching .right {
+    display: none;
+  }
+
+  .searching .mic-button {
+    display: block;
+  }
+}
