@@ -199,16 +199,13 @@
     font-size: 16px;  
     color: #aaa;
 }
-
-/* ============= 채널 PlayList layout ============= */
-
 /* 채널 플레이리스트 layout */
 .playlist-section {  
     display: flex;
     flex-direction: column;
     align-items: center;  
     border-top: 5px solid #212121;
-}  
+}
 
 /* 채널 플레이 리스트 header layout */
 .playlist-header {
@@ -238,27 +235,34 @@
     font-size: 14px;
     border-radius: 4px;  
 }
-
-/* 카드 배치: 카드 크기는 고정, 개수는 자동 반응형 layout */
+/* 카드 배치 수정 */
 .playlist-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 214px); /* 고정 크기 카드 반복 */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* 카드 기본 크기 */
     gap: 15px;
-    justify-content: center;
     width: 100%;
     max-width: 1280px;
-    padding: 0 16px; 
+    padding: 0 16px;
 }
 
-/* 카드 크기 고정 */
+/* 카드 스타일 수정 */
 .playlist-card {  
     cursor: pointer;  
     text-decoration: none;  
+    width: 100%; 
 }
 
 .playlist-card:hover {
     transform: scale(1.02);
     box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+}
+
+/* 485px 이하에서는 2개 고정 */
+@media (max-width: 485px) {
+  .playlist-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
 }
 
 /* 썸네일 이미지 layout */
@@ -332,4 +336,3 @@
         display: none;
     }
 }
-
