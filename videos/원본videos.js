@@ -10,8 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
     styleLink.rel = "stylesheet";
     styleLink.href = "../top/style/header-top.css";
     document.head.appendChild(styleLink);   
-    // 검색기능
-    document.getElementById("searchButton")
+      // 검색기능
+      document.getElementById("searchButton")
       .addEventListener("click", function () {
         const keyword = document.getElementById("searchInput").value.trim();
         if (keyword) {
@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 비디오 내용 불러오기
   async function video() {   
+    
     const videos = await getVideoInfo(videoId);     
     const channel = await getChannelInfo(channelId);
 
@@ -74,6 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   async function relatedVidos(){
     const getVideos = await getVideoList();
+    
     const Div = document.querySelector(".related-videos1");
 
     const chunkSize = 4;
@@ -86,9 +88,11 @@ document.addEventListener("DOMContentLoaded", function () {
       const channelInfos = await Promise.all(
         chunk.map((video) => getChannelInfo(video.channel_id))        
       );
+      
 
       chunk.forEach((video, index) => {
         const { channel_name, channel_profile } = channelInfos[index];   
+        console.log(channelInfos[index]);
 
         const channelDiv = document.createElement("div");
         channelDiv.classList.add("related-video");
@@ -115,63 +119,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
   relatedVidos();
   
-  // 댓글 관련 코드
   const commentList = document.getElementById("comment-list");
   const commentInput = document.getElementById("comment-input");
   const submitBtn = document.getElementById("submit-comment");
   const commentCount = document.getElementById("comment-count");
 
-  // 고정된 프로필 정보 (동물의 왕국)
-  const profile = {
-    name: "동물의 왕국",
-    profileImage: "http://techfree-oreumi-api.kro.kr:5000/video/getVideoInfo?video_id=1"  // 실제 프로필 이미지 URL을 넣으세요
-  };
+  let comments = [];
 
-  // 댓글 배열 초기화 (각 댓글에 작성자 이름과 프로필 이미지 포함)
-  let comments = [];  // 댓글 배열 선언
-
-  // 댓글 렌더링 함수
   function renderComments() {
-    commentList.innerHTML = "";  // 기존 댓글 초기화
-    comments.forEach((comment) => {
+    commentList.innerHTML = "";
+    comments.forEach((text, index) => {
       const li = document.createElement("li");
-      li.classList.add("comment-item");
-
-      // 댓글 항목에 프로필 이미지와 작성자 이름, 댓글 내용 추가
-      li.innerHTML = `
-        <img src="${comment.profileImage}" alt="${comment.author}" class="profile-image" />
-        <div class="author">${comment.author}</div>
-        <div class="text">${comment.text}</div>
-      `;
-
+      li.textContent = text;
       commentList.appendChild(li);
     });
-
-    // 댓글 개수 갱신
     commentCount.textContent = comments.length;
   }
 
-  // 댓글 작성 버튼 클릭 시 댓글 추가
   submitBtn.addEventListener("click", () => {
     const text = commentInput.value.trim();
-
     if (text) {
-      // 새 댓글 객체 생성 (작성자 이름과 프로필 이미지 추가)
-      const newComment = {
-        author: profile.name,  
-        text: text,  
-        profileImage: profile.profileImage 
-      };
-
-      comments.push(newComment);  // 댓글 배열에 추가
-      commentInput.value = "";  
-      renderComments();        
+      comments.push(text);
+      commentInput.value = "";
+      renderComments();
     } else {
       alert("댓글을 입력해주세요.");
     }
-  });
-
-  // 초기 댓글 렌더링
-  renderComments();  // 페이지 로드 시 초기 댓글 렌더링
-
+  });    
 });

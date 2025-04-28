@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* channel-smallvideo */   
-  const video = document.getElementById("main-video"); // 어디있는거임?  
+  const video = document.getElementById("video-main-preview"); // 어디있는거임?  
   const playBtn = document.getElementById("play-button");
 
   playBtn.addEventListener("click", () => {
