@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+  window.isSeraching = false;
    // 최상단바 불러오기
   loadHtml("header", "../top/html/header-top.html", () => {
 
@@ -11,9 +12,12 @@ document.addEventListener("DOMContentLoaded", () => {
     document
       .getElementById("searchButton")
       .addEventListener("click", function () {
-        const keyword = document.getElementById("searchInput").value.trim();
+        const keyword = document.getElementById("searchInput").value;
+        const inputValue = keyword.replace(/\s/g, "");
         if (keyword) {
-          alert("검색어: " + keyword);
+          alert("검색어: " + inputValue);
+          window.isSeraching = true;
+          searchVideos(inputValue);  // 검색 실행
         } else {
           alert("검색어를 입력하세요!");
         }
@@ -100,14 +104,13 @@ document.addEventListener("DOMContentLoaded", () => {
   // 총 영상 정보 찍어주기
   async function URL() {    
     const videos = await getVideoList();  
-
-    console.log(videos);
+    
     const Div = document.querySelector("section");
-
     const chunkSize = 4;
     let currentIndex = 0;
 
     async function renderChunk() {
+      if(window.isSeraching) return;
       const fragment = document.createDocumentFragment();
       const chunk = videos.slice(currentIndex, currentIndex + chunkSize);
 
@@ -116,9 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
       );
 
       chunk.forEach((video, index) => {
-        const { channel_name, channel_profile } = channelInfos[index];
-        // console.log(channelInfos[index]);
-        console.log(video);
+        const { channel_name, channel_profile } = channelInfos[index];       
 
         const channelDiv = document.createElement("div");
         channelDiv.classList.add("card");
