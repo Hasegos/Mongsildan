@@ -11,16 +11,11 @@ document.addEventListener("DOMContentLoaded", function () {
     styleLink.rel = "stylesheet";
     styleLink.href = "../top/style/header-top.css";
     document.head.appendChild(styleLink);   
-      // 검색기능
-      document.getElementById("searchButton")
-      .addEventListener("click", function () {
-        const keyword = document.getElementById("searchInput").value.trim();
-        if (keyword) {
-          alert("검색어: " + keyword);
-        } else {
-          alert("검색어를 입력하세요!");
-        }
-      });
+    
+    /* 상단 600px 일때 */   
+    topLoad600px(); 
+    /* 초기 검색시 */
+    initSearchButton(); 
   });  
   
   // 사이드바 불러오기
