@@ -28,50 +28,29 @@ document.addEventListener("DOMContentLoaded", () => {
   loadHtml("aside", "../sidebar/html/aside.html",() => {      
     menuButton(cuurrentPage,check);
   });
+
+  /* channel-smallvideo */   
+  const video = document.getElementById("main-video"); // 어디있는거임?  
+  const playBtn = document.getElementById("play-button");
+
+  playBtn.addEventListener("click", () => {
+    video.play();
+    playBtn.style.display = "none";
+    video.setAttribute("controls", true); // 재생 후 controls 표시
+  });          
+
+  /* channel-playlist */
   
-  /* channel-title */ 
+  /* 구독 버튼 */
   const subscribeBtn = document.getElementById('subscribe-btn');
   let subscribed = false;
 
   subscribeBtn.addEventListener('click', () => {
     subscribed = !subscribed;
-    subscribeBtn.textContent = subscribed ? 'SUBSCRIBED' : 'SUBSCRIBES';
-    subscribeBtn.style.backgroundColor = subscribed ? 'gray' : 'red';
-  });
-
-  /* channel-smallvideo */
-  loadHtml(".main", "./html/channel-smallvideo.html", () => {
-    let smallvideo = document.createElement("link");
-    smallvideo.rel = "stylesheet";
-    smallvideo.href = "./styles/channel-smallvideo.css";
-    document.head.appendChild(smallvideo); 
-    
-    const video = document.getElementById("main-video");
-    const playBtn = document.getElementById("play-button");
-
-    playBtn.addEventListener("click", () => {
-      video.play();
-      playBtn.style.display = "none";
-      video.setAttribute("controls", true); // 재생 후 controls 표시
-    });          
-  })
-
-  /* channel-playlist */
-  loadHtml(".footer", "./html/channel-playlist.html", () => {
-    let playlist = document.createElement("link");
-    playlist.rel = "stylesheet";
-    playlist.href = "./styles/channel-playlist.css";
-    document.head.appendChild(playlist); 
-    
-    const subscribeBtn = document.getElementById('subscribe-btn');
-    let subscribed = false;
-
-    subscribeBtn.addEventListener('click', () => {
-      subscribed = !subscribed;
-      subscribeBtn.textContent = subscribed ? '구독' : '구독중';
-      subscribeBtn.style.backgroundColor = subscribed ? 'white' : '#3f3e3e';
+    subscribeBtn.textContent = subscribed ? '구독' : '구독중';
+    subscribeBtn.style.backgroundColor = subscribed ? 'white' : '#3f3e3e';
     });
-  });
+  
 
  /* title */
   async function title() { 

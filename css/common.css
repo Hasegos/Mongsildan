@@ -26,6 +26,7 @@ html, body {
 /* header 높이 설정 */
 header {
     height: 56px;
+    z-index: 1000;
 }
 /* main 기본 layout */
 main {
@@ -53,10 +54,12 @@ aside {
     background-color: var(--color-aside);
 }
 
+/* 목록 */
 ul {
     list-style: none;
 }
 
+/* 버튼*/
 button {
     color: var(--color-font);
 }
