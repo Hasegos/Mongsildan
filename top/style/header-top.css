@@ -8,7 +8,11 @@
   position: fixed;  
   z-index: 1000;
 }
-
+/* 뒤로가기 이미지*/
+.back-Button{
+  border: none;
+  margin-right: 10px;  
+}
 /* 공통 아이콘 스타일 */
 .icon {
   width: 40px;  
@@ -66,7 +70,7 @@
 .search-form {
   display: flex;
   width: 426px;
-  height: 40px;
+  height: 55px;
   border: 1px solid #333;
   border-radius: 2px;  
 }
@@ -96,7 +100,6 @@
   border: none;  
   cursor: pointer;
 }
-
 
 /* 600px 미만일때 */
 @media (max-width: 600px) {

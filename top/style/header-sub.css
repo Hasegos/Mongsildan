@@ -90,9 +90,9 @@
 
 /* 필터 보일때 */
 .filter-modal-popup.show {  
-  display: block;
   opacity: 1;
-  visibility: visible;
+  visibility: visible;  
+  display: block;
 }
 
 /* X */
@@ -113,7 +113,7 @@
   flex-wrap: nowrap;  
   margin-top: 8px;
   justify-content: space-between;
-  align-items: start;    
+  align-items: flex-start;    
 }
 
 /* 필터 text */
