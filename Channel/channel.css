@@ -1,6 +1,7 @@
-/* 채널페이지 올시 aside 넓이 조절*/
-.sidebar {
-    width: auto !important;
+/* 채널 화면 비율 맞추기 */
+.right-content {
+    flex: 1;
+    min-width: 0;
 }
 
 /* ============= 채널 Title layout ============= */
@@ -49,19 +50,22 @@
 
 /* 구독자 버튼 */
 .subscribe-btn {
-    color: black;
+    color: black;    
     border: none;
-    padding: 10px 16px;
+    width: 116px;
+    height: 36px;
+    padding: 10px;
     font-weight: bold;
-    border-radius: 10px;
+    border-radius: 30px; 
     cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.2s ease;  /* 구독중 시 효과 */   
-    align-self: center;    
+    transition: background-color 0.2s ease, transform 0.2s ease; /* 구독시 효과*/
+    align-self: center;
+    position: relative;    
     font-size: 16px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 10px; /* 벨과 글자 간격 */
+    gap: 5px; /* 벨과 글자 간격 */
 }
 
 /* 구독 버튼 누를시 활성화 */
@@ -296,10 +300,7 @@
 /* ============= 반응형 ============= */
 
 @media (max-width: 1285px) {
-    /* fixed 된 포지션 원래대로 돌리기위함 */
-    .sidebar{
-        position: static !important;
-    }
+   
 }
   /* 875px 이하일때 */
 @media (max-width: 875px) {
@@ -318,15 +319,6 @@
     .video-description {
         text-align: center;
         align-items: center;
-    }
-}
-
-@media (max-width: 625px) {
-    aside {
-        display: none;
-    }
-    .sidebar {
-        display: none;
     }
 }
 /* 485px 이하에서는 2개 고정 */
