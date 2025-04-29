@@ -22,29 +22,32 @@ document.addEventListener("DOMContentLoaded", () => {
   let cuurrentPage = 1 , check = 1;
   loadHtml("aside", "../sidebar/html/aside.html",() => {      
     menuButton(cuurrentPage,check);
-  });
-
-  /* channel-smallvideo */   
-  const video = document.getElementById("main-video"); // 어디있는거임?  
-  const playBtn = document.getElementById("play-button");
-
-  playBtn.addEventListener("click", () => {
-    video.play();
-    playBtn.style.display = "none";
-    video.setAttribute("controls", true); // 재생 후 controls 표시
-  });          
-
-  /* channel-playlist */
+  }); 
   
   /* 구독 버튼 */
   const subscribeBtn = document.getElementById('subscribe-btn');
+  const subscribeText = document.getElementById('subscribe-text');
+  const bellIcon = document.getElementById('bell-icon');
   let subscribed = false;
 
   subscribeBtn.addEventListener('click', () => {
     subscribed = !subscribed;
-    subscribeBtn.textContent = subscribed ? '구독' : '구독중';
-    subscribeBtn.style.backgroundColor = subscribed ? 'white' : '#3f3e3e';
-    });
+    if (subscribed) {
+      subscribeText.textContent = '구독중';
+      subscribeBtn.style.backgroundColor = '#e5e5e5'; // 구독중 배경
+      bellIcon.style.display = 'inline';
+      bellIcon.classList.add('bell-shake');
+  
+      bellIcon.addEventListener('animationend', () => {
+        bellIcon.classList.remove('bell-shake');
+      }, { once: true });
+  
+    } else {
+      subscribeText.textContent = '구독';
+      subscribeBtn.style.backgroundColor = 'white'; // 구독전 배경
+      bellIcon.style.display = 'none';
+    }  
+  });  
   
 
  /* title */
@@ -147,4 +150,17 @@ document.addEventListener("DOMContentLoaded", () => {
   }    
   handleResponsiveSidebar();
   window.addEventListener("resize", handleResponsiveSidebar);
+
+
+   /* 비디오 재생 */   
+  function replayVideo() {  
+    const video = document.getElementById("main-video"); 
+    const playBtn = document.getElementById("play-button");
+
+    playBtn.addEventListener("click", () => {
+      video.play();
+      playBtn.style.display = "none";
+      video.setAttribute("controls", true); // 재생 후 controls 표시
+    });   
+  }
 });
