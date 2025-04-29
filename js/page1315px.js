@@ -1,6 +1,4 @@
-(function (){
-    function switchSidebar(page) {
-
+function switchSidebar(page) {
     document.querySelectorAll("link[rel='stylesheet']").forEach(link => {
         if(link.href.includes("aside")) {
             link.remove();
@@ -23,4 +21,3 @@
     }
 }
 window.switchSidebar = switchSidebar;
-})(); 
