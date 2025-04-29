@@ -3,7 +3,8 @@ function menuButton(cuurrentPage,check) {
     // width 넓이 수정을위해서
     const aside = document.querySelector("aside");    
 
-    menuButton.addEventListener("click", () => {           
+    menuButton.addEventListener("click", () => {    
+        aside.classList.remove("mobile-open");       
         let styleLink = document.createElement("link");     
         styleLink.rel = "stylesheet";                
         document.querySelectorAll("link[rel='stylesheet']").forEach(link => {
@@ -14,12 +15,18 @@ function menuButton(cuurrentPage,check) {
         if(cuurrentPage == 1){             
             loadHtml("aside","../sidebar/html/aside2.html", () => {            
                 styleLink.href = "../sidebar/style/aside2.css";
-                document.head.appendChild(styleLink);                                        
-                if(check == 2){                    
-                    cuurrentPage = 3;
-                }                
-                else if(check == 1){
+                document.head.appendChild(styleLink);  
+                // 홈 페이지
+                if(check == 1){                    
                     cuurrentPage = 2;
+                }            
+                // 비디오 페이지    
+                else if(check == 2){
+                    cuurrentPage = 1;
+                }
+                // 채널페이지
+                else if(check == 3){            
+                    cuurrentPage = 2;                    
                 }
             });            
         }      
@@ -29,12 +36,24 @@ function menuButton(cuurrentPage,check) {
                 document.head.appendChild(styleLink);                 
                 
                 aside.style.display = "";
-                cuurrentPage = 1;                     
+                cuurrentPage = 1; 
+                if(window.innerWidth <= 625) {
+                    if(check == 3 || check == 1){                        
+                        cuurrentPage = 3;
+                        aside.classList.toggle("mobile-open");                       
+                    }
+                } 
+                
+                if(window.innerWidth > 625){
+                    aside.classList.remove("mobile-open");
+                }
+                
+
                 if(check == 2) {
                     aside.style.width = "0px";
                     cuurrentPage = 3;
                 }
-                else{
+                else {
                     cuurrentPage = 1;      
                 }
             });            
