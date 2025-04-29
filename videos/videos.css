@@ -1,3 +1,6 @@
+.sidebar {
+  position: fixed;
+}
 /* 비디오 페이지 */
 .video-page {
   display: flex;
@@ -284,5 +287,4 @@
   .video-actions{
     display: block;
   }
-
 }
