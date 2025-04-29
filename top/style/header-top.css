@@ -96,3 +96,39 @@
   border: none;  
   cursor: pointer;
 }
+
+
+/* 600px 미만일때 */
+@media (max-width: 600px) {
+
+  /* 기본 숨김 */
+  .search-input,
+  .mic-button {
+    display: none;
+  }
+
+  .header-top .left {
+    margin-left: 0px;
+  }
+
+  .search-form {
+    width: auto;
+  }
+  /* 돋보기 버튼 클릭시 */
+  .header-top.searching .search-input {
+    display: block;
+  }
+  .header-top.searching .left,
+  .header-top.searching .right {
+    display: none; /* 왼쪽/오른쪽 숨기기 */
+  }
+
+  .header-top.searching .center {
+    flex: 1; /* center를 화면 꽉 채우게 */
+    justify-content: center;
+  }
+  
+  .header-top.searching .mic-button {
+    display: block;
+  }
+}

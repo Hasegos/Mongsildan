@@ -1,24 +1,27 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
+  const searchQuery = params.get('search');
 
+  window.isSeraching = false;
    // 최상단바 불러오기
   loadHtml("header", "../top/html/header-top.html", () => {
 
     let styleLink = document.createElement("link");
     styleLink.rel = "stylesheet";
     styleLink.href = "../top/style/header-top.css";
-    document.head.appendChild(styleLink);
+    document.head.appendChild(styleLink); 
 
-    document
-      .getElementById("searchButton")
-      .addEventListener("click", function () {
-        const keyword = document.getElementById("searchInput").value.trim();
-        if (keyword) {
-          alert("검색어: " + keyword);
-        } else {
-          alert("검색어를 입력하세요!");
-        }
-      });     
-  });    
+    /* 상단 600px 일때 */   
+    topLoad600px(); 
+    /* 초기 검색시 */
+    initSearchButton();    
+
+    /* URL 에 검색 값이 있는 경우 */
+    if (searchQuery) {
+        window.isSeraching = true;
+        searchVideos(searchQuery);
+    }
+  });
 
   // 헤더 서브바 불러오기
   loadHtml(".nav", "../top/html/header-sub.html", () => { 
@@ -172,4 +175,4 @@ document.addEventListener("DOMContentLoaded", () => {
   }    
   handleResponsiveSidebar();
   window.addEventListener("resize", handleResponsiveSidebar);
-});
+})
