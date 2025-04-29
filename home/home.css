@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 :root {
   --text-align: left;}
 
+=======
+>>>>>>> suho
 .right-content {
   flex: 1;
   min-width: 0;
@@ -12,58 +15,80 @@
   grid-template-columns: repeat(4,minmax(240px,1fr));
   overflow: hidden;
   gap: 20px;
+<<<<<<< HEAD
   justify-content: flex-start;
+=======
+  justify-content: flex-start;  
+>>>>>>> suho
 }
 /* 카드 영역 */
 .card {  
   max-width: 100%;
   aspect-ratio: 4 / 3;
+<<<<<<< HEAD
   text-align: center;
   display: flex;
   flex-direction: column;
   border-radius: 5%
+=======
+  text-align: center;  
+  display: flex;
+  flex-direction: column;
+  border-radius: 5%;
+>>>>>>> suho
 }
-/* 카드 이미지 */
 .card img {
   width: 100%;
   height: auto;
   aspect-ratio: 16 / 9;
   object-fit: cover;
+<<<<<<< HEAD
   border-radius: 5%
+=======
+  border-radius: 5%;
+>>>>>>> suho
 }
-/* 내용 칸 */
+
+/* 내용 칸 layout */
 .card-content {
   display: flex;
   flex: 1;
   gap: 10px;
   object-fit: cover;
 }
-/* 카드 구독자 모습 */
+
+/* 카드 프로필 layout */
 .card-title {
   writing-mode: vertical-rl;
   padding: 12px 26px 12px 0;
   width: auto;
   white-space: nowrap;
 }
-
-/* 카드 내용 */
+/* 카드 내용 layout*/
 .card-description {
   display: flex;
   flex: 1;
   flex-direction: column;
   gap: 10px;
 }
-/* 카드 내용 중 첫 텍스트 */
+
+/* 카드 제목 */
 .card-text1 {
   padding-top: 12px;
   text-align: left;
   font-weight: bold;
+  text-align: left;
 }
-
+/* 카드 주인 */
 .card-text2 {
   color: #aaaaaa;
   text-align: left;
 }
+<<<<<<< HEAD
+=======
+
+/* 카드 조회수 , 업로드 날짜 */
+>>>>>>> suho
 .card-text3 {
   color: #aaaaaa;
   text-align: left;

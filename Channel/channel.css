@@ -17,13 +17,21 @@
     object-fit: cover;
     display: block;
 }
+<<<<<<< HEAD
   /* 채널 주인 정보 */
+=======
+/* 채널 주인 정보 */
+>>>>>>> suho
 .channel-info {
     display: flex;  
     padding: 20px 65px;
     gap: 20px;
 }
+<<<<<<< HEAD
   /* 채널 주인 프로필 */
+=======
+/* 채널 주인 프로필 */
+>>>>>>> suho
 .profile-img {
     width: 100px;  
     border-radius: 50%;  
@@ -36,7 +44,11 @@
     justify-content: center;
 }
 
+<<<<<<< HEAD
   /* 채널 이름 */
+=======
+/* 채널 이름 */
+>>>>>>> suho
 .channel-name {
     font-size: 24px;
     font-weight: bold;
@@ -47,6 +59,7 @@
     color: gray;
 }
 
+<<<<<<< HEAD
 /* 구독 버튼 */
 .subscribe-btn {
     color: black;
@@ -61,10 +74,23 @@
     align-self: center;
     position: relative;
     overflow: hidden;
+=======
+/* 구독자 버튼 */
+.subscribe-btn {
+    color: black;
+    border: none;
+    padding: 10px 16px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;  /* 구독중 시 효과 */   
+    align-self: center;    
+>>>>>>> suho
     font-size: 16px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+<<<<<<< HEAD
     gap: 5px; /* 벨과 글자 간격 */
 }
 
@@ -95,11 +121,47 @@
 
 /* 벨 아이콘 스타일 */
 #bell-icon {
+=======
+    gap: 10px; /* 벨과 글자 간격 */
+}
+
+/* 구독 버튼 누를시 활성화 */
+.subscribe-btn:active {
+    transform: scale(0.96);
+}
+
+/* 벨 효과 */
+@keyframes bell-swing {
+    0% { transform: rotate(0deg); }
+    10% { transform: rotate(15deg); }
+    20% { transform: rotate(-15deg); }
+    30% { transform: rotate(12deg); }
+    40% { transform: rotate(-12deg); }
+    50% { transform: rotate(8deg); }
+    60% { transform: rotate(-8deg); }
+    70% { transform: rotate(4deg); }
+    80% { transform: rotate(-4deg); }
+    90% { transform: rotate(2deg); }
+    100% { transform: rotate(0deg); }
+}
+/* 벨 애니메이션 */
+.bell-shake {
+    animation: bell-swing 1s ease forwards;
+    transform-origin: top center;
+}
+
+/* 벨 아이콘 스타일 */
+.bell-icon {
+>>>>>>> suho
     width: 20px;
     height: 20px;
     vertical-align: middle;
 }
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> suho
 /* 채널 정보 목차 */
 .channel-nav ul {
     display: flex;
@@ -156,9 +218,16 @@
 }
 
 /* 채널 Main Preview 화살표 layout */
+<<<<<<< HEAD
 .video-thumb {
     width: 90%;
     height: 90%;
+=======
+.video-thumb {    
+    width: 90%;
+    height: 90%;
+    margin-left: 20px;
+>>>>>>> suho
     object-fit: cover;
     border-radius: 12px;
     display: block;
@@ -198,13 +267,23 @@
     font-size: 16px;  
     color: #aaa;
 }
+<<<<<<< HEAD
+=======
+
+/* ============= 채널 PlayList layout ============= */
+
+>>>>>>> suho
 /* 채널 플레이리스트 layout */
 .playlist-section {  
     display: flex;
     flex-direction: column;
     align-items: center;  
     border-top: 5px solid #212121;
+<<<<<<< HEAD
 }
+=======
+}  
+>>>>>>> suho
 
 /* 채널 플레이 리스트 header layout */
 .playlist-header {
@@ -234,6 +313,7 @@
     font-size: 14px;
     border-radius: 4px;  
 }
+<<<<<<< HEAD
 /* 카드 배치 수정 */
 .playlist-grid {
     display: grid;
@@ -245,6 +325,21 @@
 }
 
 /* 카드 스타일 수정 */
+=======
+
+/* 카드 배치: 카드 크기는 고정, 개수는 자동 반응형 layout */
+.playlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* 고정 크기 카드 반복 */
+    gap: 15px;
+    justify-content: center;
+    width: 100%;
+    max-width: 1280px;
+    padding: 0 16px; 
+}
+
+/* 카드 크기 고정 */
+>>>>>>> suho
 .playlist-card {  
     cursor: pointer;  
     text-decoration: none;  
@@ -256,6 +351,7 @@
     box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
 }
 
+<<<<<<< HEAD
 /* 485px 이하에서는 2개 고정 */
 @media (max-width: 485px) {
   .playlist-grid {
@@ -264,6 +360,8 @@
   }
 }
 
+=======
+>>>>>>> suho
 /* 썸네일 이미지 layout */
 .video-preview {  
     height: 120px;
@@ -334,4 +432,14 @@
     .sidebar {
         display: none;
     }
+<<<<<<< HEAD
+=======
+}
+/* 485px 이하에서는 2개 고정 */
+@media (max-width: 700px) {
+    .playlist-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+>>>>>>> suho
 }

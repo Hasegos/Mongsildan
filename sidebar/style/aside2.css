@@ -1,5 +1,9 @@
 aside{
+<<<<<<< HEAD
     width: 80px;
+=======
+    width: 70px;
+>>>>>>> suho
     display: flex;
     justify-content: center;    
 }
