@@ -15,12 +15,7 @@ function menuButton(cuurrentPage,check) {
             loadHtml("aside","../sidebar/html/aside2.html", () => {            
                 styleLink.href = "../sidebar/style/aside2.css";
                 document.head.appendChild(styleLink);                                        
-<<<<<<< HEAD
-                if(cehck == 2){
-                    
-=======
                 if(check == 2){                    
->>>>>>> suho
                     cuurrentPage = 3;
 
                 }                
@@ -36,11 +31,7 @@ function menuButton(cuurrentPage,check) {
                 
                 aside.style.display = "";
                 cuurrentPage = 1;                     
-<<<<<<< HEAD
-                if(cehck == 2) {
-=======
                 if(check == 2) {
->>>>>>> suho
                     aside.style.width = "0px";
                     cuurrentPage = 3;
                 }

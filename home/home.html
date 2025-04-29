@@ -3,13 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Home</title>
     <link href="home.css" rel="stylesheet" />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
       rel="stylesheet"
     />    
     <link rel="stylesheet" href="../css/common.css"/>
+    
   </head>
   <body>
     <div class="wrapper">
@@ -49,5 +50,13 @@
     <script src="./home.js"></script>   
     <!-- 조회수, 작성일 -->
     <script src="../js/getChannelEverything.js"></script>
+    <script src="../js/errorHandlers.js"></script>
+    <!-- 에러 핸들러 -->
+    <script src="../js/errorHandlers.js"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        initErrorHandlers();  // 페이지 다 불러온 후 자동 실행
+      });
+    </script>
   </body>
 </html>

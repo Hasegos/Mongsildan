@@ -123,6 +123,11 @@
   <script src="../js/getChannelEverything.js"></script>
   <script src="../js/searching.js"></script>
   <script src="../js/topLoad600px.js"></script>
-  <script src="./videos.js"></script>  
+  <script src="./videos.js"></script>
+  <!-- Error Handler -->
+  <script type="module">
+      import { initErrorHandlers } from '../js/errorHandlers.js';
+      initErrorHandlers();  // 페이지 로드 후 자동으로 에러 핸들러 초기화
+  </script>
 </body>
 </html>

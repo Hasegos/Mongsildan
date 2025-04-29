@@ -3,8 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchQuery = params.get('search');
 
   window.isSearching = false;
-   // 최상단바 불러오기
-   loadHtml("header", "../top/html/header-top.html", () => {
+  // 최상단바 불러오기
+  loadHtml("header", "../top/html/header-top.html", () => {
 
     let styleLink = document.createElement("link");
     styleLink.rel = "stylesheet";
@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
       chunk.forEach((video, index) => {
         const { channel_name, channel_profile } = channelInfos[index];       
         // 조회수
-        const viewsText = (video.views!= null) ? getViews(video.views) : "죄회수가 없습니다.";
+        const viewsText = (video.views!= null) ? getViews(video.views) : "조회수가 없습니다.";
         // 업로드 날짜
         const dateText = (video.created_dt) ? getTimeAgo(video.created_dt) : "";
 
@@ -171,6 +171,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }    
   handleResponsiveSidebar();
   window.addEventListener("resize", handleResponsiveSidebar);
+
+  // 에러 핸들링 초기화
+  initErrorHandlers();  // 자동으로 에러 핸들링 설정
+
 })
 
 // 검색버튼 클릭+엔터로 기능
