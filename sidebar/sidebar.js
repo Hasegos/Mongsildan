@@ -1,4 +1,4 @@
-function menuButton(cuurrentPage,cehck) {
+function menuButton(cuurrentPage,check) {
     const menuButton = document.getElementById("menuButton");    
     // width 넓이 수정을위해서
     const aside = document.querySelector("aside");    
@@ -15,12 +15,10 @@ function menuButton(cuurrentPage,cehck) {
             loadHtml("aside","../sidebar/html/aside2.html", () => {            
                 styleLink.href = "../sidebar/style/aside2.css";
                 document.head.appendChild(styleLink);                                        
-                if(cehck == 2){
-                    
+                if(check == 2){                    
                     cuurrentPage = 3;
-
                 }                
-                else if(cehck == 1){
+                else if(check == 1){
                     cuurrentPage = 2;
                 }
             });            
@@ -32,7 +30,7 @@ function menuButton(cuurrentPage,cehck) {
                 
                 aside.style.display = "";
                 cuurrentPage = 1;                     
-                if(cehck == 2) {
+                if(check == 2) {
                     aside.style.width = "0px";
                     cuurrentPage = 3;
                 }

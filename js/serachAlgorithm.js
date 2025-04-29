@@ -38,14 +38,13 @@ async function searchVideos(query) {
         const titleMatches = titleWords.toLowerCase().includes(query.toLowerCase());
         // 태그 기준
         const tagMatches = video.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase()));  
-        // 
+        // 채널명
         const channelNameMatches = channelNames[index].toLowerCase().includes(query.toLowerCase());
     
         // 태그와 제목 기준 포함되어있을때
         return titleMatches || tagMatches || channelNameMatches;
         });
-    }
-    
+    }    
     displayResults(filteredVideos);  // 필터링된 결과 출력
 }
 window.searchVideos = searchVideos;

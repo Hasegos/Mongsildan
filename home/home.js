@@ -1,28 +1,27 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
+  const searchQuery = params.get('search');
 
-  window.isSeraching = false;
+  window.isSearching = false;
    // 최상단바 불러오기
-  loadHtml("header", "../top/html/header-top.html", () => {
+   loadHtml("header", "../top/html/header-top.html", () => {
 
     let styleLink = document.createElement("link");
     styleLink.rel = "stylesheet";
     styleLink.href = "../top/style/header-top.css";
-    document.head.appendChild(styleLink);
+    document.head.appendChild(styleLink); 
 
-    document
-      .getElementById("searchButton")
-      .addEventListener("click", function () {
-        const keyword = document.getElementById("searchInput").value;
-        const inputValue = keyword.replace(/\s/g, "");
-        if (keyword) {
-          alert("검색어: " + inputValue);
-          window.isSeraching = true;
-          searchVideos(inputValue);  // 검색 실행
-        } else {
-          alert("검색어를 입력하세요!");
-        }
-      });     
-  });    
+    /* 상단 600px 일때 */   
+    topLoad600px(); 
+    /* 초기 검색시 */
+    searching();   
+    
+    if(searchQuery) {  
+      window.isSearching = true;
+      searchVideos(searchQuery);         
+      history.replaceState(null, "", window.location.pathname);
+    }
+  });
 
   // 헤더 서브바 불러오기
   loadHtml(".nav", "../top/html/header-sub.html", () => { 
@@ -110,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentIndex = 0;
 
     async function renderChunk() {
-      if(window.isSeraching) return;
+      if(window.isSearching) return;
       const fragment = document.createDocumentFragment();
       const chunk = videos.slice(currentIndex, currentIndex + chunkSize);
 
@@ -120,22 +119,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
       chunk.forEach((video, index) => {
         const { channel_name, channel_profile } = channelInfos[index];       
+        // 조회수
+        const viewsText = (video.views!= null) ? getViews(video.views) : "죄회수가 없습니다.";
+        // 업로드 날짜
+        const dateText = (video.created_dt) ? getTimeAgo(video.created_dt) : "";
 
         const channelDiv = document.createElement("div");
         channelDiv.classList.add("card");
         channelDiv.innerHTML = `
           <a href="../videos/videos.html?channel_id=${video.channel_id}&video_id=${video.id}" class="card-link">
-            <img src="${video.thumbnail}" loading="lazy" />
+            <img src="${video.thumbnail}" loading="lazy" class="card-image" />
           </a>
           <div class="card-content">
             <a href="../Channel/channel.html?id=${video.channel_id}">
               <p class="card-title">
-                <img src="${channel_profile}" style="width:90px; height:90px; object-fit:cover;">
+                <img src="${channel_profile}" style="width:90px; height:90px; object-fit:cover; border-radius:50%;">
               </p>
             </a>
             <div class="card-description">
               <p class="card-text1">${video.title}</p>
-              <p class="card-text2">${channel_name}</p>
+              <span class="card-text2">${channel_name}</span>
+              <p class="card-text3">${viewsText} · ${dateText}</p>
             </div>
           </div>
         `;
