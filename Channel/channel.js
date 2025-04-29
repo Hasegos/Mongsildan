@@ -64,11 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
   
-  
-  
-
-  
-
  /* title */
   async function title() { 
     
