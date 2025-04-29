@@ -1,6 +1,5 @@
 /* 검색시 해당 페이지 확인 */
 function searching() {
-
     const searchButton = document.getElementById("searchButton");
     const searchInput = document.getElementById("searchInput");
 
