@@ -2,9 +2,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
   const searchQuery = params.get('search');
 
-  window.isSeraching = false;
+  window.isSearching = false;
    // 최상단바 불러오기
-  loadHtml("header", "../top/html/header-top.html", () => {
+   loadHtml("header", "../top/html/header-top.html", () => {
 
     let styleLink = document.createElement("link");
     styleLink.rel = "stylesheet";
@@ -14,12 +14,12 @@ document.addEventListener("DOMContentLoaded", () => {
     /* 상단 600px 일때 */   
     topLoad600px(); 
     /* 초기 검색시 */
-    initSearchButton();    
-
-    /* URL 에 검색 값이 있는 경우 */
-    if (searchQuery) {
-        window.isSeraching = true;
-        searchVideos(searchQuery);
+    searching();   
+    
+    if(searchQuery) {  
+      window.isSearching = true;
+      searchVideos(searchQuery);         
+      history.replaceState(null, "", window.location.pathname);
     }
   });
 
@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentIndex = 0;
 
     async function renderChunk() {
-      if(window.isSeraching) return;
+      if(window.isSearching) return;
       const fragment = document.createDocumentFragment();
       const chunk = videos.slice(currentIndex, currentIndex + chunkSize);
 
