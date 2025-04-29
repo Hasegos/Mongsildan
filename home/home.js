@@ -176,3 +176,35 @@ document.addEventListener("DOMContentLoaded", () => {
   handleResponsiveSidebar();
   window.addEventListener("resize", handleResponsiveSidebar);
 })
+
+function initSearchButton() {
+  const searchButton = document.getElementById("headerSearchButton");
+  const searchInput = document.getElementById("headerSearchInput");
+
+  if (!searchButton || !searchInput) return;
+
+  // 버튼 클릭 시
+  searchButton.addEventListener("click", () => {
+    const keyword = searchInput.value.trim();
+    if (keyword) {
+      window.isSeraching = true;
+      searchVideos(keyword);
+    } else {
+      alert("검색어를 입력하세요!");
+    }
+  });
+
+  // 엔터 키 검색
+  searchInput.addEventListener("keypress", function (e) {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      const keyword = searchInput.value.trim();
+      if (keyword) {
+        window.isSeraching = true;
+        searchVideos(keyword);
+      } else {
+        alert("검색어를 입력하세요!");
+      }
+    }
+  });
+}
