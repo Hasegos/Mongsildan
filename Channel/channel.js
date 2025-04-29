@@ -22,45 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let cuurrentPage = 1 , check = 1;
   loadHtml("aside", "../sidebar/html/aside.html",() => {      
     menuButton(cuurrentPage,check);
-<<<<<<< HEAD
-  });
-
-  // /* channel-smallvideo */   
-  const playBtn = document.getElementById("play-button");
-
-  playBtn.addEventListener("click", () => {
-    video.play();
-    playBtn.style.display = "none";
-    video.setAttribute("controls", true); // 재생 후 controls 표시
-  });          
-
-  /* channel-playlist 구독버튼*/
-  const subscribeBtn = document.getElementById('subscribe-btn');
-  const subscribeText = document.getElementById('subscribe-text');
-  const bellIcon = document.getElementById('bell-icon');
-  let subscribed = false;
-  
-  subscribeBtn.addEventListener('click', () => {
-    subscribed = !subscribed;
-  
-    if (subscribed) {
-      subscribeText.textContent = '구독중';
-      subscribeBtn.style.backgroundColor = 'gray'; // 구독중 배경
-      bellIcon.style.display = 'inline';
-      bellIcon.classList.add('bell-shake');
-  
-      bellIcon.addEventListener('animationend', () => {
-        bellIcon.classList.remove('bell-shake');
-      }, { once: true });
-  
-    } else {
-      subscribeText.textContent = '구독';
-      subscribeBtn.style.backgroundColor = 'white'; // 구독전 배경
-      bellIcon.style.display = 'none';
-    }
-  });
-  
-=======
   }); 
   
   /* 구독 버튼 */
@@ -89,7 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });  
   
 
->>>>>>> suho
  /* title */
   async function title() { 
     

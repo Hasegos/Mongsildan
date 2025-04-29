@@ -4,8 +4,6 @@
   justify-content: center;
 }
 
-<<<<<<< HEAD
-=======
 /* 비디오 플레이어 전체 레이아웃 */
 .video-page__player {
   display: flex;
@@ -13,7 +11,6 @@
   align-items: flex-start;
 }
 
->>>>>>> suho
 /* 영상 이미지 */
 .video-media {
   width: 100%;
@@ -22,8 +19,6 @@
   aspect-ratio: 16 / 9;  
   max-width: 1200px;
 }
-<<<<<<< HEAD
-=======
 
 .video-wrapper {
   position: relative;
@@ -65,7 +60,6 @@
 
 
 
->>>>>>> suho
 /* 영상 제목 */
 .video-title {
   margin: 15px 0 5px;  
@@ -137,62 +131,6 @@
 .subscribers {  
   color: #aaa;   
 }
-<<<<<<< HEAD
-
-/* 구독 버튼 */
-.subscribe-btn {
-  color: black;
-  border: none;
-  width: 116px;
-  height: 36px;
-  padding: 10px;
-  font-weight: bold;
-  border-radius: 20px; 
-  cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-  align-self: center;
-  position: relative;
-  font-size: 16px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px; /* 벨과 글자 간격 */
-}
-
-/* 버튼 누를 때 살짝 눌리는 효과 */
-.subscribe-btn:active {
-  transform: scale(0.95); 
-}
-
-/* 벨 흔들기 애니메이션 */
-@keyframes bell-swing {
-0% { transform: rotate(0deg); }
-10% { transform: rotate(15deg); }
-20% { transform: rotate(-15deg); }
-30% { transform: rotate(12deg); }
-40% { transform: rotate(-12deg); }
-50% { transform: rotate(8deg); }
-60% { transform: rotate(-8deg); }
-70% { transform: rotate(4deg); }
-80% { transform: rotate(-4deg); }
-90% { transform: rotate(2deg); }
-100% { transform: rotate(0deg); }
-}
-
-.bell-shake {
-animation: bell-swing 1s ease forwards;
-transform-origin: top center;
-}
-
-/* 벨 아이콘 스타일 */
-#bell-icon {
-  width: 20px;
-  height: 20px;
-  vertical-align: middle;
-}
-
-
-=======
 /* 구독 버튼 */
 .subscribe-btn {  
   background-color: white;  
@@ -214,7 +152,6 @@ transform-origin: top center;
   background-color: #d9d9d9;
 }
 
->>>>>>> suho
 /* 관련 추천 영상 layout */
 .related-videos1 {  
   display: flex;
@@ -281,11 +218,7 @@ transform-origin: top center;
   background-color: #666;
 }
 
-<<<<<<< HEAD
-/* 댓글 내용 */
-=======
 /* 댓글 항목 스타일 */
->>>>>>> suho
 .comment-list li {
   padding: 6px 0;
   border-bottom: 1px solid #333;
@@ -293,8 +226,6 @@ transform-origin: top center;
   align-items: center;  /* 수직 가운데 정렬 */
 }
 
-<<<<<<< HEAD
-=======
 /* 프로필 이미지 스타일 */
 .comment-item .profile-image {
   width: 40px;
@@ -334,7 +265,6 @@ transform-origin: top center;
 }
 
 
->>>>>>> suho
 @media (max-width: 1315px) { 
   .related-videos2{
     display: none;
@@ -345,8 +275,6 @@ transform-origin: top center;
   .related-videos1{
     display: none;
   }
-<<<<<<< HEAD
-=======
 }
 
 @media (max-width: 600px) {
@@ -357,5 +285,4 @@ transform-origin: top center;
     display: block;
   }
 
->>>>>>> suho
 }

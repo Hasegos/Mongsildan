@@ -2,11 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
   const searchQuery = params.get('search');
 
-<<<<<<< HEAD
-  window.isSeraching = false;
-=======
   window.isSearching = false;
->>>>>>> suho
    // 최상단바 불러오기
    loadHtml("header", "../top/html/header-top.html", () => {
 
@@ -18,21 +14,12 @@ document.addEventListener("DOMContentLoaded", () => {
     /* 상단 600px 일때 */   
     topLoad600px(); 
     /* 초기 검색시 */
-<<<<<<< HEAD
-    initSearchButton();    
-
-    /* URL 에 검색 값이 있는 경우 */
-    if (searchQuery) {
-        window.isSeraching = true;
-        searchVideos(searchQuery);
-=======
     searching();   
     
     if(searchQuery) {  
       window.isSearching = true;
       searchVideos(searchQuery);         
       history.replaceState(null, "", window.location.pathname);
->>>>>>> suho
     }
   });
 
@@ -116,12 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // 총 영상 정보 찍어주기
   async function URL() {    
     const videos = await getVideoList();  
-<<<<<<< HEAD
-
-    console.log(videos);
-=======
     
->>>>>>> suho
     const Div = document.querySelector("section");
     const chunkSize = 4;
     let currentIndex = 0;
@@ -136,38 +118,6 @@ document.addEventListener("DOMContentLoaded", () => {
       );
 
       chunk.forEach((video, index) => {
-<<<<<<< HEAD
-        const { channel_name, channel_profile } = channelInfos[index];
-        // console.log(channelInfos[index]);
-        console.log(video);
-        
-
-  // ✅ 조회수와 날짜 포맷 적용 (값이 없으면 기본 문구)
-  const viewsText = (video.views!= null) ? getViews(video.views) : "";
-  const dateText = (video.created_dt) ? getTimeAgo(video.created_dt) : "";
-
-  const channelDiv = document.createElement("div");
-  channelDiv.classList.add("card");
-  channelDiv.innerHTML = `
-    <a href="../videos/videos.html?channel_id=${video.channel_id}&video_id=${video.id}" class="card-link">
-      <img src="${video.thumbnail}" loading="lazy" />
-    </a>
-    <div class="card-content">
-      <a href="../Channel/channel.html?id=${video.channel_id}">
-        <p class="card-title">
-          <img src="${channel_profile}" style="width:70px; height:70px; object-fit:cover; border-radius:50%;">
-        </p>
-      </a>
-      <div class="card-description">
-        <p class="card-text1">${video.title}</p>
-        <p class="card-text2">${channel_name}</p>
-        <p class="card-text3">${viewsText} · ${dateText}</p>
-      </div>
-    </div>
-  `;
-  fragment.appendChild(channelDiv);
-});
-=======
         const { channel_name, channel_profile } = channelInfos[index];       
         // 조회수
         const viewsText = (video.views!= null) ? getViews(video.views) : "죄회수가 없습니다.";
@@ -195,7 +145,6 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
         fragment.appendChild(channelDiv);
       });
->>>>>>> suho
 
       Div.appendChild(fragment);
       currentIndex += chunkSize;
