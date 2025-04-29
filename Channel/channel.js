@@ -1,8 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {    
 
   const params = new URLSearchParams(window.location.search);
-  const channelId = parseInt(params.get("id")); 
-  
+  const channelId = parseInt(params.get("id"));   
   // 좋아요, 타이틀 , 조회수, 날짜
   let like = 0 , videoMainDescription, view,date; 
 
@@ -19,9 +18,20 @@ document.addEventListener("DOMContentLoaded", () => {
     searching();          
   });     
   // 사이드바 불러오기
-  let cuurrentPage = 1 , check = 1;
+  let cuurrentPage = 1 , check = 3;
   loadHtml("aside", "../sidebar/html/aside.html",() => {      
+    const aside = document.querySelector("aside");
+    
+    if(window.innerWidth > 625){
+      aside.classList.remove("mobile-open");
+    }
+  
     menuButton(cuurrentPage,check);
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 625) {
+        aside.classList.remove("mobile-open");
+      }
+    });    
   }); 
   
   /* 구독 버튼 */
@@ -34,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
     subscribed = !subscribed;
     if (subscribed) {
       subscribeText.textContent = '구독중';
-      subscribeBtn.style.backgroundColor = '#e5e5e5'; // 구독중 배경
+      subscribeBtn.style.backgroundColor = '#515353'; // 구독중 배경
       bellIcon.style.display = 'inline';
       bellIcon.classList.add('bell-shake');
   
