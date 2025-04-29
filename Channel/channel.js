@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
     if (subscribed) {
       subscribeText.textContent = '구독중';
-      subscribeBtn.style.backgroundColor = '#cc0000'; // 구독중 배경
+      subscribeBtn.style.backgroundColor = 'gray'; // 구독중 배경
       bellIcon.style.display = 'inline';
       bellIcon.classList.add('bell-shake');
   

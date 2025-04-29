@@ -1,17 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
   const params = new URLSearchParams(window.location.search);
-  const channelId = parseInt(params.get("channel_id")); 
+  const channelId = parseInt(params.get("channel_id"));
   const videoId = parseInt(params.get("video_id"));
 
   let currentChannelProfile = "";
   let currentChannelName = "";
 
   // 상단 바 불러오기
-  loadHtml("header", "../top/html/header-top.html", () => { 
+  loadHtml("header", "../top/html/header-top.html", () => {
     let styleLink = document.createElement("link");
     styleLink.rel = "stylesheet";
     styleLink.href = "../top/style/header-top.css";
-    document.head.appendChild(styleLink);   
+    document.head.appendChild(styleLink);
 
     // 검색 기능
     document.getElementById("searchButton")
@@ -23,24 +23,24 @@ document.addEventListener("DOMContentLoaded", function () {
           alert("검색어를 입력하세요!");
         }
       });
-  });  
+  });
 
   // 사이드바 불러오기
   let cuurrentPage = 3, check = 2;
   loadHtml("aside", "../sidebar/html/aside.html", () => {
-    const aside = document.querySelector("aside");    
+    const aside = document.querySelector("aside");
     let styleLink = document.createElement("link");
     styleLink.rel = "stylesheet";
     styleLink.href = "../sidebar/style/aside.css";
-    document.head.appendChild(styleLink);    
+    document.head.appendChild(styleLink);
 
-    aside.style.display = "none";     
+    aside.style.display = "none";
     menuButton(cuurrentPage, check);
-  });  
+  });
 
   // 비디오 내용 불러오기
-  async function video() {   
-    const videos = await getVideoInfo(videoId);     
+  async function video() {
+    const videos = await getVideoInfo(videoId);
     const channel = await getChannelInfo(channelId);
 
     const video = document.getElementById("video");
@@ -57,23 +57,15 @@ document.addEventListener("DOMContentLoaded", function () {
     currentChannelProfile = channel.channel_profile;
     currentChannelName = channel.channel_name;
 
-    // 채널 프로필
+    // 화면에 세팅
     channelProfile.src = channel.channel_profile;
-    // 비디오 영상
     video.src = videos.thumbnail;
-    // 영상 제목
-    videoTitle.textContent = videos.title;    
-    // 채널 주인 이름
+    videoTitle.textContent = videos.title;
     channelName.textContent = channel.channel_name;
-    // 구독자 수
     subscribers.textContent = getSubscriber(channel.subscribers);
-    // 좋아요    
     like.textContent = getLikeAndDislike(videos.likes);
-    // 싫어요
     dislike.textContent = getLikeAndDislike(videos.dislikes);
-    // 조회수
-    views.textContent = getViews(videos.views);    
-    // 업로드 날짜
+    views.textContent = getViews(videos.views);
     date.textContent = getTimeAgo(videos.created_dt);
   }
   video();
@@ -95,12 +87,11 @@ document.addEventListener("DOMContentLoaded", function () {
       );
 
       chunk.forEach((video, index) => {
-        const { channel_name, channel_profile } = channelInfos[index];   
-        console.log(channelInfos[index]);
+        const { channel_name, channel_profile } = channelInfos[index];
 
         const channelDiv = document.createElement("div");
         channelDiv.classList.add("related-video");
-        channelDiv.innerHTML = `            
+        channelDiv.innerHTML = `
           <a href="../videos/videos.html?channel_id=${video.channel_id}&video_id=${video.id}" class="card-link">
             <img src="${video.thumbnail}" loading="lazy" />
           </a>
@@ -128,12 +119,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const submitBtn = document.getElementById("submit-comment");
   const commentCount = document.getElementById("comment-count");
 
-  let comments = []; // [{ text: "", timestamp: Date.now() }, {...}]
+  let comments = [];
 
   function formatTimeAgo(timestamp) {
     const now = Date.now();
     const diffMs = now - timestamp;
-    const diffMinutes = Math.floor(diffMs / 60000); // 1분 = 60,000ms
+    const diffMinutes = Math.floor(diffMs / 60000);
 
     if (diffMinutes < 1) return "방금 전";
     if (diffMinutes < 60) return `${diffMinutes}분 전`;
@@ -198,4 +189,33 @@ document.addEventListener("DOMContentLoaded", function () {
       e.preventDefault();
       submitComment();
     }
-  })})
+  });
+
+  // 구독 버튼 기능 추가 
+  const subscribeBtn = document.getElementById('subscribe-btn');
+  const subscribeText = document.getElementById('subscribe-text');
+  const bellIcon = document.getElementById('bell-icon');
+  let subscribed = false;
+
+  if (subscribeBtn && subscribeText && bellIcon) {
+    subscribeBtn.addEventListener('click', () => {
+      subscribed = !subscribed;
+
+      if (subscribed) {
+        subscribeText.textContent = '구독중';
+        subscribeBtn.style.backgroundColor = 'gray';
+        bellIcon.style.display = 'inline';
+        bellIcon.classList.add('bell-shake');
+
+        bellIcon.addEventListener('animationend', () => {
+          bellIcon.classList.remove('bell-shake');
+        }, { once: true });
+
+      } else {
+        subscribeText.textContent = '구독';
+        subscribeBtn.style.backgroundColor = 'white';
+        bellIcon.style.display = 'none';
+      }
+    });
+  }
+});

@@ -83,20 +83,61 @@
 .subscribers {  
   color: #aaa;   
 }
+
 /* 구독 버튼 */
-.subscribe-btn {  
-  background-color: white;  
+.subscribe-btn {
   color: black;
-  border: none;  
-  padding: 8px 13px;
-  border-radius: 10px;
-  font-weight: 700;
+  background-color: white;
+  border: none;
+  width: 100px;
+  height: 36px;
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 20px; 
   cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  align-self: center;
+  position: relative;
+  overflow: hidden;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px; /* 벨과 글자 간격 */
 }
-/* 구독 버튼 올릴시 */
-.subscribe-btn:hover {
-  background-color: #d9d9d9;
+
+/* 버튼 누를 때 살짝 눌리는 효과 */
+.subscribe-btn:active {
+  transform: scale(0.95); 
 }
+
+/* 벨 흔들기 애니메이션 */
+@keyframes bell-swing {
+0% { transform: rotate(0deg); }
+10% { transform: rotate(15deg); }
+20% { transform: rotate(-15deg); }
+30% { transform: rotate(12deg); }
+40% { transform: rotate(-12deg); }
+50% { transform: rotate(8deg); }
+60% { transform: rotate(-8deg); }
+70% { transform: rotate(4deg); }
+80% { transform: rotate(-4deg); }
+90% { transform: rotate(2deg); }
+100% { transform: rotate(0deg); }
+}
+
+.bell-shake {
+animation: bell-swing 1s ease forwards;
+transform-origin: top center;
+}
+
+/* 벨 아이콘 스타일 */
+#bell-icon {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+
 
 /* 관련 추천 영상 layout */
 .related-videos1 {  
