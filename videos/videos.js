@@ -49,6 +49,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const subscribers = document.getElementById("subscribers");
     const like = document.getElementById("like");
     const dislike = document.getElementById("dislike");
+    const likeBtn = document.getElementById('like-button');
+    const dislikeBtn = document.getElementById('dislike-button');
     const views = document.getElementById("views");
     const date = document.getElementById("date");
 
@@ -68,10 +70,6 @@ document.addEventListener("DOMContentLoaded", function () {
     channelName.textContent = channel.channel_name;
     // 구독자 수
     subscribers.textContent = getSubscriber(channel.subscribers);
-    // 좋아요    
-    like.textContent = getLikeAndDislike(videos.likes);
-    // 싫어요
-    dislike.textContent = getLikeAndDislike(videos.dislikes);
     // 조회수
     views.textContent = getViews(videos.views);    
     // 업로드 날짜
@@ -102,6 +100,63 @@ document.addEventListener("DOMContentLoaded", function () {
     video.addEventListener("play", () => {
       playBtn.style.display = "none";
     });
+
+    // 좋아요 싫어요 로직
+    let currentLikes = videos.likes;
+    let currentDislikes = videos.dislikes;
+    let isLiked = false;    // 현재 좋아요 버튼 상태
+    let isDisliked = false; // 현재 싫어요 버튼 상태
+
+    function formatCount(count) {
+      return getLikeAndDislike(count);
+    }
+    
+    function updateCountsDisplay() {
+      like.textContent = formatCount(currentLikes);
+      dislike.textContent = formatCount(currentDislikes);
+    }
+
+    updateCountsDisplay();
+
+    // 좋아요 버튼 클릭 이벤트
+    likeBtn.addEventListener('click', () => {
+      if (!isLiked) { // 1. 좋아요를 누르지 않은 상태 -> 좋아요 활성화
+        currentLikes++;
+        isLiked = true;
+        likeBtn.classList.add('active');
+
+        if (isDisliked) { // 만약 싫어요가 눌려있었다면 -> 싫어요 비활성화
+          currentDislikes--;
+          isDisliked = false;
+          dislikeBtn.classList.remove('active');
+        }
+      } else { // 2. 이미 좋아요를 누른 상태 -> 좋아요 비활성화
+        currentLikes--;
+        isLiked = false;
+        likeBtn.classList.remove('active');
+      }
+      updateCountsDisplay(); // 화면 업데이트
+    });
+
+    // 싫어요 버튼 클릭 이벤트
+    dislikeBtn.addEventListener('click', () => {
+      if (!isDisliked) { // 1. 싫어요를 누르지 않은 상태 -> 싫어요 활성화
+        currentDislikes++;
+        isDisliked = true;
+        dislikeBtn.classList.add('active');
+
+        if (isLiked) { // 만약 좋아요가 눌려있었다면 -> 좋아요 비활성화
+          currentLikes--;
+          isLiked = false;
+          likeBtn.classList.remove('active');
+        }
+      } else { // 2. 이미 싫어요를 누른 상태 -> 싫어요 비활성화
+        currentDislikes--;
+        isDisliked = false;
+        dislikeBtn.classList.remove('active');
+      }
+      updateCountsDisplay(); // 화면 업데이트
+    });
   }
   video();
   
@@ -125,7 +180,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const { channel_name, channel_profile } = channelInfos[index];  
             
         // 조회수
-        const viewsText = (video.views!= null) ? getViews(video.views) : "죄회수가 없습니다.";
+        const viewsText = (video.views!= null) ? getViews(video.views) : "조회수가 없습니다.";
         // 업로드 날짜
         const dateText = (video.created_dt) ? getTimeAgo(video.created_dt) : "잘못된 영상입니다.";             
 
