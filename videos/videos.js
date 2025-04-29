@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
     /* 상단 600px 일때 */   
     topLoad600px(); 
     /* 초기 검색시 */
-    initSearchButton(); 
+    searching(); 
   });  
   
   // 사이드바 불러오기
