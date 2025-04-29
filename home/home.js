@@ -119,22 +119,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
       chunk.forEach((video, index) => {
         const { channel_name, channel_profile } = channelInfos[index];       
+        // 조회수
+        const viewsText = (video.views!= null) ? getViews(video.views) : "죄회수가 없습니다.";
+        // 업로드 날짜
+        const dateText = (video.created_dt) ? getTimeAgo(video.created_dt) : "";
 
         const channelDiv = document.createElement("div");
         channelDiv.classList.add("card");
         channelDiv.innerHTML = `
           <a href="../videos/videos.html?channel_id=${video.channel_id}&video_id=${video.id}" class="card-link">
-            <img src="${video.thumbnail}" loading="lazy" />
+            <img src="${video.thumbnail}" loading="lazy" class="card-image" />
           </a>
           <div class="card-content">
             <a href="../Channel/channel.html?id=${video.channel_id}">
               <p class="card-title">
-                <img src="${channel_profile}" style="width:90px; height:90px; object-fit:cover;">
+                <img src="${channel_profile}" style="width:90px; height:90px; object-fit:cover; border-radius:50%;">
               </p>
             </a>
             <div class="card-description">
               <p class="card-text1">${video.title}</p>
-              <p class="card-text2">${channel_name}</p>
+              <span class="card-text2">${channel_name}</span>
+              <p class="card-text3">${viewsText} · ${dateText}</p>
             </div>
           </div>
         `;
