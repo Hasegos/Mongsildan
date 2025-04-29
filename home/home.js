@@ -177,13 +177,13 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", handleResponsiveSidebar);
 })
 
+// 검색버튼 클릭+엔터로 기능
 function initSearchButton() {
-  const searchButton = document.getElementById("headerSearchButton");
-  const searchInput = document.getElementById("headerSearchInput");
+  const searchButton = document.getElementById("searchButton");
+  const searchInput = document.getElementById("searchInput"); 
 
   if (!searchButton || !searchInput) return;
 
-  // 버튼 클릭 시
   searchButton.addEventListener("click", () => {
     const keyword = searchInput.value.trim();
     if (keyword) {
@@ -194,7 +194,6 @@ function initSearchButton() {
     }
   });
 
-  // 엔터 키 검색
   searchInput.addEventListener("keypress", function (e) {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
