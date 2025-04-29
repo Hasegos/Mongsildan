@@ -35,7 +35,10 @@
   flex-direction: row;
   cursor: pointer;
 }
-
+/* 상단 */
+.header-top {
+  height: 56px; 
+}
 /* 왼쪽 */
 .header-top .left {
   display: flex;  

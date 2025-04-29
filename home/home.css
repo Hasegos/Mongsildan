@@ -85,5 +85,6 @@
 @media (max-width: 500px) {
   .card-container{
     grid-template-columns: repeat(1,minmax(240px,1fr));
+    margin-top: 20px;
   }  
 }
