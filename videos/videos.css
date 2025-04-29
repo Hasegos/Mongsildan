@@ -359,3 +359,32 @@
     width: 100%;
   }
 }
+
+#like-button.active svg path {
+  fill: #3EA6FF;
+}
+
+/* 애니메이션 */
+@keyframes like-pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.4);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* 애니메이션을 SVG에 적용하기 위한 클래스 */
+#like-button svg.like-animation {
+  animation-name: like-pop;
+  animation-duration: 0.3s;           /* 애니메이션 지속 시간 (0.3초) */
+  animation-timing-function: ease-in-out;
+}
+
+/* 선택사항: 좋아요 취소 시 색상 변경이 부드럽도록 transition 추가 */
+#like-button svg path {
+  transition: fill 0.1s ease-in-out;
+}

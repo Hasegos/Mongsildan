@@ -120,11 +120,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 좋아요 버튼 클릭 이벤트
     likeBtn.addEventListener('click', () => {
+      const likeSvg = likeBtn.querySelector('svg'); 
+
       if (!isLiked) { // 1. 좋아요를 누르지 않은 상태 -> 좋아요 활성화
         currentLikes++;
         isLiked = true;
-        likeBtn.classList.add('active');
+        likeBtn.classList.add('active'); // 버튼에 active 클래스 추가 (색상 변경 등)
 
+        // 애니메이션 실행
+        if (likeSvg) { // SVG 요소가 있는지 확인
+          likeSvg.classList.add('like-animation');
+
+          // 애니메이션이 끝나면 클래스를 제거하는 이벤트 리스너 추가
+          // { once: true } 옵션으로 이벤트가 한 번 실행된 후 자동으로 제거되도록 함
+          likeSvg.addEventListener('animationend', () => {
+              likeSvg.classList.remove('like-animation');
+          }, { 
+            once: true
+          });
+        }
         if (isDisliked) { // 만약 싫어요가 눌려있었다면 -> 싫어요 비활성화
           currentDislikes--;
           isDisliked = false;
