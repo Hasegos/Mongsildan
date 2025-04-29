@@ -53,6 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const dislikeBtn = document.getElementById('dislike-button');
     const views = document.getElementById("views");
     const date = document.getElementById("date");
+    const channelLink = document.getElementById("channel-link");
 
     const description = document.getElementById("description");
 
@@ -62,6 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 채널 프로필
     channelProfile.src = channel.channel_profile;
+    channelLink.href = `../Channel/channel.html?id=${channelId}`;
     // 비디오 영상
     video.src = `https://storage.googleapis.com/youtube-clone-video/${videoId}.mp4`
     // 영상 제목
