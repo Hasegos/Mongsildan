@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="styles/channel.css" rel="stylesheet" />
     <link rel="stylesheet" href="../css/common.css"/>    
-    <link rel="stylesheet" href="./channel.css"/>    
+    <link rel="stylesheet" href="./channel.css"/>
 </head>
 <body>
     <div class="wrapper">
@@ -55,7 +54,7 @@
                         </nav>                                         
                     </section>
 
-                    <!-- SmallVideo -->                                           
+                    SmallVideo                                           
                     <section class="smallVideo-section">
                         <div class="video-main-preview" >
                             <img id="main-img" class="video-thumb" >      
@@ -85,16 +84,23 @@
     <script src="../sidebar/sidebar.js"></script>
     <script src="../api/getChannelVideoList.js"></script>  
     <script src="../api/getChannelInfo.js"></script>
-    <script src="../js/getTimeAgo.js"></script>
+    <!-- <script src="../js/getTimeAgo.js"></script> 기능 없음-->
     <script src="../js/getChannelEverything.js"></script>
     <script src="../js/searching.js"></script>
     <script src="../js/topLoad600px.js"></script>
     <script src="./channel.js"></script>       
     <script src="./channel-search.js"></script>
     <!-- Error Handler -->
-    <script type="module">
-        import { initErrorHandlers } from '../js/errorHandlers.js';
-        initErrorHandlers();  // 페이지 로드 후 자동으로 에러 핸들러 초기화
+    <script src="/Channel/channel-errorHandlers.js"></script>
+    <script>
+    // DOM 로드 후 자동 실행
+    window.addEventListener('DOMContentLoaded', () => {
+        if (window.initChannelErrorHandlers) {
+        window.initChannelErrorHandlers();
+        } else {
+        console.error("initChannelErrorHandlers 함수가 없습니다.");
+        }
+    });
     </script>
 </body>
 </html>
