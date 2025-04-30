@@ -39,8 +39,15 @@ document.addEventListener("DOMContentLoaded", function () {
   // 비디오 내용 불러오기
   async function video() {   
     
-    const videos = await getVideoInfo(videoId);     
-    const channel = await getChannelInfo(channelId);
+    let videos, channel;
+    try {
+      videos = await getVideoInfo(videoId);
+      channel = await getChannelInfo(channelId);
+    } catch (error) {
+      console.error("영상 또는 채널 정보를 불러오는 중 오류 발생:", error);
+      alert("영상을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.");
+      return;
+    }
 
     const video = document.getElementById("video");
     const channelProfile = document.getElementById("channel-profile");
