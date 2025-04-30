@@ -26,32 +26,34 @@
             <!-- 제목 -->
             <h2 class="video-title" id="video-title"></h2>
             <!-- 채널 정보 -->
-            <seciton class="channel-info">
-              <img alt="채널 프로필" class="channel-avatar" id="channel-profile"/>
-              <div class="channel-details">
-                <div>
-                  <h3 id="channel-name"></h3>
-                  <span class="subscribers" id="subscribers">subscribers</span>
+            <section class="channel-info-section">
+              <div class="channel-info">
+                <a href="" id="channel-link">
+                <img alt="채널 프로필" class="channel-avatar" id="channel-profile"/>
+                </a>
+                <div class="channel-details">
+                  <div>
+                    <h3 id="channel-name"></h3>
+                    <span class="subscribers" id="subscribers">subscribers</span>
+                  </div>
+                  <!-- 구독 버튼 -->                        
+                  <button id="subscribe-btn" class="subscribe-btn">
+                    <img class="bell-icon" id="bell-icon" src="../img/bell.png" alt="bell" style="display: none;">
+                    <span id="subscribe-text">구독</span>
+                  </button>         
                 </div>
-                <!-- 구독 버튼 -->
-                <button class="subscribe-btn" id="subscribe-btn">
-                  <svg class="subscribe-icon" id="subscribe-icon" width="16" height="21" viewBox="0 0 16 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M6 19H10C10 20.1 9.1 21 8 21C6.9 21 6 20.1 6 19ZM16 16.35V18H0V16.35L2 14.47V9.32001C2 6.40001 3.56 4.10001 6 3.34001V2.96001C6 1.54001 7.49 0.460006 8.99 1.20001C9.64 1.52001 10 2.23001 10 2.96001V3.35001C12.44 4.10001 14 6.41001 14 9.33001V14.48L16 16.35ZM15 16.77L13 14.89V9.42001C13 6.95001 11.81 5.06001 9.87 4.32001C8.61 3.79001 7.23 3.82001 6.03 4.35001C4.15 5.11001 3 6.99001 3 9.42001V14.89L1 16.77V17H15V16.77Z" fill="white"/>
-                  </svg>                    
-                  <span id="subscribe-text">구독</span>
-                </button>
               </div>
               <!-- 비디오 액션 버튼 그룹 -->
               <div class="video-actions">
                 <!-- 좋아요버튼 -->
-                <button>
+                <button id="like-button">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M18.77 11H14.54L16.06 6.06C16.38 5.03 15.54 4 14.38 4C13.8 4 13.24 4.24 12.86 4.65L7 11H3V21H7H8H17.43C18.49 21 19.41 20.33 19.62 19.39L20.96 13.39C21.23 12.15 20.18 11 18.77 11ZM7 20H4V12H7V20ZM19.98 13.17L18.64 19.17C18.54 19.65 18.03 20 17.43 20H8V11.39L13.6 5.33C13.79 5.12 14.08 5 14.38 5C14.64 5 14.88 5.11 15.01 5.3C15.08 5.4 15.16 5.56 15.1 5.77L13.58 10.71L13.18 12H14.53H18.76C19.17 12 19.56 12.17 19.79 12.46C19.92 12.61 20.05 12.86 19.98 13.17Z" fill="white"/>
                   </svg>
                   <span id="like"></span>
                 </button>
                 <!-- 싫어요버튼 -->
-                <button>
+                <button id="dislike-button">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M16.9999 4H15.9999H6.56995C5.49995 4 4.58995 4.67 4.37995 5.61L3.03995 11.61C2.76995 12.85 3.81995 14 5.22995 14H9.45995L7.93995 18.94C7.61995 19.97 8.45995 21 9.61995 21C10.1999 21 10.7599 20.76 11.1399 20.35L16.9999 14H20.9999V4H16.9999ZM10.3999 19.67C10.2099 19.88 9.91995 20 9.61995 20C9.35995 20 9.11995 19.89 8.98995 19.7C8.91995 19.6 8.83995 19.44 8.89995 19.23L10.4199 14.29L10.8199 13H9.45995H5.22995C4.81995 13 4.42995 12.83 4.19995 12.54C4.07995 12.39 3.94995 12.14 4.01995 11.82L5.35995 5.82C5.45995 5.35 5.96995 5 6.56995 5H15.9999V13.61L10.3999 19.67ZM19.9999 13H16.9999V5H19.9999V13Z" fill="white"/>
                   </svg>                
@@ -78,33 +80,32 @@
                   </svg>
                 </button>
               </div>
-            </seciton>
+            </section>
 
-          <!-- 영상 상세정보 -->
-          <section class="video-summary">
-            <div class="video-meta">
-              <!-- 조회수 -->
-              <span id="views">views</span>
-              <!-- 업로드 날짜 -->
-              <span id="date"></span>
-            </div>
-            <span id="description" class="video-description">
-            </span>
-          </section>
+            <!-- 영상 상세정보 -->
+            <section class="video-summary">
+              <div class="video-meta">
+                <!-- 조회수 -->
+                <span id="views">views</span>
+                <!-- 업로드 날짜 -->
+                <span id="date"></span>
+              </div>
+              <span id="description" class="video-description"></span>
+            </section>
             
-          <!--- 추천영상 밑 정렬 -->
-          <div class="related-videos1">          
-          </div>      
+            <!--- 추천영상 밑 정렬 -->
+            <div class="related-videos1">          
+            </div>      
 
-          <!-- 댓글 -->
-          <section class="comment-section">
-            <h3>댓글 <span id="comment-count">0</span>개</h3>
-            <div class="comment-input">
-              <input type="text" id="comment-input" placeholder="댓글을 입력하세요..." />
-              <button id="submit-comment">작성</button>
-            </div>
-            <ul id="comment-list" class="comment-list"></ul>
-          </section>
+            <!-- 댓글 -->
+            <section class="comment-section">
+              <h3>댓글 <span id="comment-count">0</span>개</h3>
+              <div class="comment-input">
+                <input type="text" id="comment-input" placeholder="댓글을 입력하세요..." />
+                <button id="submit-comment">작성</button>
+              </div>
+              <ul id="comment-list" class="comment-list"></ul>
+            </section>
           </div>        
   
           <!-- 추천영상 오른쪽 정렬 -->
