@@ -12,7 +12,7 @@ function showError(message, timeout = 5000) {
 window.showError = showError;
 
 /* 비디오, 이미지 로드 실패시 */
-// 초기화: 모든 <img>와 <video>에 원본 URL 저장 
+// 모든 <img>와 <video>에 원본 URL 저장 
 function cacheOriginalMediaSrc() {
     document.querySelectorAll('img').forEach(img => {
         img.dataset.originalSrc = img.src;
@@ -58,12 +58,13 @@ function handleMediaError(el, retriesLeft, delay) {
     // 이미지 요소 앞에 넣기
     el.parentNode.insertBefore(placeholder, el);
 
-    // 3-3) 재시도 함수
+    // 재시도
     (function retry(count, wait) {
         if (count <= 0) {            
             placeholder.textContent = '미디어 로드 실패 : ';
             // 버튼 (새로고침 기능 + text 추가)
             const btn = document.createElement('button');
+            btn.className = 'retry-btn';           
             btn.textContent = '페이지 새로고침';
             btn.onclick = () => window.location.reload();
             placeholder.appendChild(btn);
