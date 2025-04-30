@@ -71,3 +71,10 @@ aside.mobile-open {
     position: fixed;
     z-index: 10;;        
 }
+
+.retry-btn {
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+    padding: 5px;
+}
