@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
   const channelId = parseInt(params.get("id"));   
   // 좋아요, 타이틀 , 조회수, 날짜
-  let like = 0 , videoMainDescription, view,date; 
+   
 
    // 최상단바 불러오기
   loadHtml("header", "../top/html/header-top.html", () => {  
@@ -78,13 +78,15 @@ document.addEventListener("DOMContentLoaded", () => {
     subscribers.textContent = getSubscriber(videos.subscribers);
   }  
   /* smallVideo */
-  async function smallvideo(like,videoMainDescription,views,date){
+  async function smallvideo(like,videoMainDescription,views,date, linkvideoId, linkChannelId){
       /* 가장 추천수가 많은 페이지 띄우기 */
+      const smallVideoLink = document.getElementById("video-link");
       const mainImg = document.getElementById("main-img");
       const videoDescription = document.getElementById("video-description");
       const viewText = document.getElementById("viewText");
       const beforeDay = document.getElementById("date");
       
+      smallVideoLink.href = `../videos/videos.html?channel_id=${linkChannelId}&video_id=${linkvideoId}`;
       viewText.textContent = views;
       mainImg.src = like;      
       beforeDay.textContent = date
@@ -93,6 +95,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* playlist-grid */
   async function playlist() {   
+
+    let like = 0  /* 좋아요 */
+    let videoMainDescription = "" /* 영상 제목 */
+    let view = 0  /* 조회수 */
+    let date = "" /* 업로드 날짜 */
+    let linkvideoId = 0  /* 영상 id */
+    let linkChannelId = 0; /* 채널 id */
     
     const videos = await getChannelVideoList(channelId);     
     const Div = document.querySelector(".playlist-grid");
@@ -115,14 +124,16 @@ document.addEventListener("DOMContentLoaded", () => {
           videoMainDescription = video.title;       
           view =  video.views;
           date = video.created_dt;
+          linkvideoId = video.id;
+          linkChannelId = video.channel_id;
         }
         const channelDiv = document.createElement("div");
         channelDiv.classList.add("card");
         channelDiv.innerHTML = `
-          <a href="#" class="playlist-card" target="_blank">
-            <div class="video-preview">
-              <img src="${video.thumbnail}" alt="썸네일" class="thumb-img" />
-              <div class="play-icon-overlay">▶</div>
+          <a href="../videos/videos.html?channel_id=${video.channel_id}&video_id=${video.id}" class="playlist-card">
+            <div class="video-preview">              
+                <img src="${video.thumbnail}" alt="썸네일" class="thumb-img" />
+                <div class="play-icon-overlay">▶</div>              
             </div>
             <div class="playlist-text">
               <p>${video.title}</p>              
@@ -138,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(renderChunk, 1);        
       }
       // smallvideo
-      smallvideo(like,videoMainDescription,view,getTimeAgo(date));
+      smallvideo(like,videoMainDescription,view,getTimeAgo(date), linkvideoId, linkChannelId);
     }
     renderChunk();
   }
