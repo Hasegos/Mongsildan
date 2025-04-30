@@ -167,6 +167,7 @@
 
 /* ▶ 아이콘 버튼 */
 .custom-play-button {
+    color: white;
     position: absolute;
     top: 45%;
     left: 45%;
