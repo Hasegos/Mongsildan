@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const videoTitle = document.getElementById("video-title");
     const channelName = document.getElementById("channel-name");
     const subscribers = document.getElementById("subscribers");
-    const like = document.getElementById("like");
+    const like = document.getElementById("like");    
     const dislike = document.getElementById("dislike");
     const likeBtn = document.getElementById('like-button');
     const dislikeBtn = document.getElementById('dislike-button');
@@ -70,6 +70,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 채널 프로필
     channelProfile.src = channel.channel_profile;
+    // 채널 프로필 링크
+    channelLink.href = `../Channel/channel.html?id=${channelId}`;
     channelLink.href = `../Channel/channel.html?id=${channelId}`;
     // 비디오 영상
     video.src = `https://storage.googleapis.com/youtube-clone-video/${videoId}.mp4`
@@ -110,6 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
       playBtn.style.display = "none";
     });
 
+    
     // 좋아요 싫어요 로직
     let currentLikes = videos.likes;
     let currentDislikes = videos.dislikes;
@@ -119,7 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function formatCount(count) {
       return getLikeAndDislike(count);
     }
-    
+
     function updateCountsDisplay() {
       like.textContent = formatCount(currentLikes);
       dislike.textContent = formatCount(currentDislikes);
@@ -127,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     updateCountsDisplay();
 
-    // 좋아요 버튼 클릭 이벤트
+     // 좋아요 버튼 클릭 이벤트
     likeBtn.addEventListener('click', () => {
       const likeSvg = likeBtn.querySelector('svg'); 
 
@@ -313,16 +316,27 @@ document.addEventListener("DOMContentLoaded", function () {
   
   /* 구독 버튼 */
   const subscribeBtn = document.getElementById('subscribe-btn');
-  const subscribeIcon = document.getElementById('subscribe-icon');
   const subscribeText = document.getElementById('subscribe-text');
+  const bellIcon = document.getElementById('bell-icon');
   let subscribed = false;
 
   subscribeBtn.addEventListener('click', () => {
     subscribed = !subscribed;
-    subscribeBtn.style.backgroundColor = subscribed ? '#3f3e3e' : 'white';
-    subscribeText.textContent = subscribed ? '구독중' : '구독';
-    subscribeText.style.color = subscribed ? 'white' : '#3f3e3e';
-    subscribeIcon.style.display = subscribed ? 'block' : 'none';   
-  });
-
+    if (subscribed) {
+      subscribeText.textContent = '구독중';
+      subscribeBtn.style.backgroundColor = '#515353'; // 구독중 배경
+      bellIcon.style.display = 'inline';
+      bellIcon.classList.add('bell-shake');
+  
+      bellIcon.addEventListener('animationend', () => {
+        bellIcon.classList.remove('bell-shake');
+      }, { once: true });
+  
+    } else {
+      subscribeText.textContent = '구독';
+      subscribeBtn.style.backgroundColor = 'white'; // 구독전 배경
+      bellIcon.style.display = 'none';
+    }  
+  });  
+  
 });

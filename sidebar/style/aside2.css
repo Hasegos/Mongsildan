@@ -1,7 +1,8 @@
-aside{
+aside{       
+    z-index: 10;
     width: 70px;
     display: flex;
-    justify-content: center;    
+    justify-content: center;        
 }
 ul {       
     display: flex;
@@ -24,4 +25,10 @@ a:hover {
 
 svg {
     width: 30px;
+}
+
+@media (max-width: 625px) {
+    aside{
+        display: none;
+    }    
 }

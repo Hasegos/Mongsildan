@@ -1,9 +1,15 @@
+.sidebar {
+  position: fixed;
+}
+
 /* 비디오 페이지 */
 .video-page {
   display: flex;
   justify-content: center;
 }
-
+.video-main-content{
+  flex: 3;
+}
 /* 비디오 플레이어 전체 레이아웃 */
 .video-page__player {
   display: flex;
@@ -76,47 +82,6 @@
   100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
 }
 
-
-
-
-.video-wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 1200px;
-}
-
-/* 재생 버튼 */
-.custom-play-button {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 64px;  
-  opacity: 0.85;
-  cursor: pointer;  
-  transition: transform 0.2s ease;
-}
-
-.custom-play-button:hover {
-  transform: translate(-50%, -50%) scale(1.1);
-}
-
-/* ▶ 오버레이 */
-.play-icon-overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;  
-  font-size: 36px;
-  color: white;  
-  animation: pulse 1.5s infinite;
-}
-/* ▶ 오버레이 애니 */
-@keyframes pulse {
-  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
-  50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
-  100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
-}
-
 /* 영상 제목 */
 .video-title {
   margin: 15px 0 5px;
@@ -143,9 +108,8 @@
 /* 비디오 액션 버튼 묶음 */
 .video-actions {
   display: flex;
-  align-items: center;
-  margin-left: auto;
-  gap: 12px;
+  align-items: center;  
+  gap: 12px;  
 }
 
 /* 액션 버튼 */
@@ -158,6 +122,7 @@
   border-radius: 15px;
   cursor: pointer;
 }
+
 
 .video-actions button:hover {
   background-color: #333;
@@ -200,35 +165,58 @@
 .subscribers {
   color: #aaa;
 }
-
+/* 구독자 버튼 */
 .subscribe-btn {
-  background-color: white;
-  color: black;
+  color: black;    
   border: none;
-  padding: 8px 13px;
-  border-radius: 10px;
-  font-weight: 700;
+  width: 116px;
+  height: 36px;
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 30px; 
   cursor: pointer;
-  display: flex;
-  align-items: center;  
-}
-.subscribe-icon{
-  display: none;
-  margin-right: 10px;
-}
-/* 구독 버튼 올릴시 */
-.subscribe-btn:hover {
-  background-color: #d9d9d9;
+  transition: background-color 0.2s ease, transform 0.2s ease; /* 구독시 효과*/
+  align-self: center;
+  position: relative;    
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px; /* 벨과 글자 간격 */
 }
 
-/* 관련 추천 영상 (모바일) */
-.related-videos1 {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-
-
+/* 구독 버튼 누를시 활성화 */
+.subscribe-btn:active {
+  transform: scale(0.96);
 }
+
+/* 벨 효과 */
+@keyframes bell-swing {
+  0% { transform: rotate(0deg); }
+  10% { transform: rotate(15deg); }
+  20% { transform: rotate(-15deg); }
+  30% { transform: rotate(12deg); }
+  40% { transform: rotate(-12deg); }
+  50% { transform: rotate(8deg); }
+  60% { transform: rotate(-8deg); }
+  70% { transform: rotate(4deg); }
+  80% { transform: rotate(-4deg); }
+  90% { transform: rotate(2deg); }
+  100% { transform: rotate(0deg); }
+}
+/* 벨 애니메이션 */
+.bell-shake {
+  animation: bell-swing 1s ease forwards;
+  transform-origin: top center;
+}
+
+/* 벨 아이콘 스타일 */
+.bell-icon {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+
 
 /* 관련 추천 영상들 */
 .related-video {
@@ -239,6 +227,23 @@
   cursor: pointer;  
 }
 
+/* 관련 추천 영상 layout */
+.related-videos1 {  
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* 오른쪽 추천 영상 */
+.related-videos2 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+}
+
+/* 관련 추천 영상 이미지 */
 .related-video img {
   width: 160px;
   height: 90px;
@@ -246,7 +251,9 @@
   object-fit: cover;
 }
 
-/* 댓글 영역 */
+/* ============= 댓글 ============= */
+
+/* 댓글 layout*/
 .comment-section {
   margin-top: 30px;
 }
@@ -300,7 +307,7 @@
   margin-right: 10px;  /* 프로필 이미지와 댓글 내용 사이 간격 */
 }
 
-/* 댓글 작성자 이름 스타일 */
+/* 댓글 작성자 이름 */
 .comment-item .author {
   font-weight: bold;
   color: #007bff;  /* 작성자 이름에 색상 추가 */
@@ -316,20 +323,13 @@
   word-wrap: break-word;  /* 긴 텍스트가 잘리지 않게 자동 줄바꿈 */
 }
 
+/* 댓글 날짜 */
 .comment-item .date {
   margin-left: 5px;
   color: #676767;
 }
 
-/* 오른쪽 추천 영상 */
-.related-videos2 {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 400px;
-}
-
+/* ============= 반응형 ============= */
 
 @media (max-width: 1315px) {
   .related-videos2 {
@@ -346,13 +346,13 @@
 @media (max-width: 600px) {
   .video-page__player{
     width: 100%;
-  }
+  }  
 }
 
 @media (max-width: 700px) {
   .channel-info-section {
     flex-direction: column;
-    align-items: flex-start;
+    /* align-items: flex-start; */
   }
   .video-actions {
     justify-content: flex-start;
@@ -387,4 +387,11 @@
 /* 선택사항: 좋아요 취소 시 색상 변경이 부드럽도록 transition 추가 */
 #like-button svg path {
   transition: fill 0.1s ease-in-out;
+}
+
+/* 채널 정보 섹션 */
+.channel-info-section {
+  display: flex;              /* 기본: 가로 배치 (Flexbox 컨테이너) */
+  justify-content: space-between; /* 양쪽 끝으로 요소를 배치 */  
+  margin-bottom: 15px;          /* 아래 .video-summary와의 간격 */
 }

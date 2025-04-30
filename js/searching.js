@@ -32,5 +32,4 @@ function searching() {
         }
     });
 }
-
 window.searching = searching;

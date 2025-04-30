@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.isSearching = false;
    // 최상단바 불러오기
-   loadHtml("header", "../top/html/header-top.html", () => {
+    loadHtml("header", "../top/html/header-top.html", () => {
 
     let styleLink = document.createElement("link");
     styleLink.rel = "stylesheet";
@@ -97,7 +97,19 @@ document.addEventListener("DOMContentLoaded", () => {
   // 사이드바 불러오기
   let cuurrentPage = 1 , check = 1;
   loadHtml("aside", "../sidebar/html/aside.html",() => {
-    menuButton(cuurrentPage, check);
+
+    const aside = document.querySelector("aside");
+    
+    if(window.innerWidth > 625){
+      aside.classList.remove("mobile-open");
+    }
+  
+    menuButton(cuurrentPage,check);
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 625) {
+        aside.classList.remove("mobile-open");
+      }
+    });    
   });   
 
   // 총 영상 정보 찍어주기

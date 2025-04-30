@@ -14,68 +14,74 @@
         <header></header>
         <!-- 상세페이지 + 메인 -->
         <div class="container">
-            <!-- 상세페이지 -->
+            <!-- 왼쪽 사이드바 -->
             <aside></aside>       
-            <!--메인-->
-            <main>
-                <div class="card-container">
-                    <!-- Channel Title -->                    
-                    <section class="channel-header">
-                        <div class="banner">
-                            <img alt="채널 배너" class="banner-img" id="banner-img"/>
-                        </div>
-                        <div class="channel-info">
-                            <img alt="프로필 이미지" class="profile-img" id="profile-img" />
-                            <div class="text-info">
-                            <h1 class="channel-name" id="channel-name"></h1>
-                            <p class="subscribers" id="subscribers"> subscribers</p>
-                            </div>    
-                            <!-- 구독 버튼 -->                        
-                            <button id="subscribe-btn" class="subscribe-btn">
-                                <img class="bell-icon" id="bell-icon" src="../img/bell.png" alt="bell" style="display: none;">
-                                <span id="subscribe-text">구독</span>
-                            </button>         
-                        </div>
-                        <nav class="channel-nav">
-                            <ul>
-                            <li><button class="nav-btn">HOME</button></li>
-                            <li><button class="nav-btn">VIDEOS</button></li>
-                            <li><button class="nav-btn">PLAYLISTS</button></li>
-                            <li><button class="nav-btn">COMMUNITY</button></li>
-                            <li><button class="nav-btn">CHANNELS</button></li>
-                            <li><button class="nav-btn">ABOUT</button></li>
-                            <li class="search-item">
-                                <button class="search-btn">
-                                <img src="../img/search.png" alt="검색" class="search-icon" />
-                                </button>
-                            </li>
-                            </ul>
-                        </nav>                                         
-                    </section>
+            <!-- 채널 화면 layout -->
+            <div class="right-content">
+                <!--메인-->
+                <main>
+                    <!-- 화면 영역 -->
+                    <div class="card-container">
+                        <!-- Channel Title -->                    
+                        <section class="channel-header">
+                            <div class="banner">
+                                <img alt="채널 배너" class="banner-img" id="banner-img"/>
+                            </div>
+                            <div class="channel-info">                                
+                                <img alt="프로필 이미지" class="profile-img" id="profile-img" />                                
+                                <div class="text-info">
+                                <h1 class="channel-name" id="channel-name"></h1>
+                                <p class="subscribers" id="subscribers"> subscribers</p>
+                                </div>    
+                                <!-- 구독 버튼 -->                        
+                                <button id="subscribe-btn" class="subscribe-btn">
+                                    <img class="bell-icon" id="bell-icon" src="../img/bell.png" alt="bell" style="display: none;">
+                                    <span id="subscribe-text">구독</span>
+                                </button>         
+                            </div>
+                            <nav class="channel-nav">
+                                <ul>
+                                <li><button class="nav-btn">HOME</button></li>
+                                <li><button class="nav-btn">VIDEOS</button></li>
+                                <li><button class="nav-btn">PLAYLISTS</button></li>
+                                <li><button class="nav-btn">COMMUNITY</button></li>
+                                <li><button class="nav-btn">CHANNELS</button></li>
+                                <li><button class="nav-btn">ABOUT</button></li>
+                                <li class="search-item">
+                                    <button class="search-btn">
+                                        <img src="../img/search.png" alt="검색" class="search-icon" />
+                                    </button>
+                                </li>
+                                </ul>
+                            </nav>                                         
+                        </section>
 
-                    <!-- SmallVideo -->                                           
-                    <section class="smallVideo-section">
-                        <div class="video-main-preview" >
-                            <img id="main-img" class="video-thumb" >      
-                            <div class="custom-play-button" id="play-button">▶</div>
-                        </div>
-                        <div class="video-description" >
-                            <h2 id="video-description"></h2>
-                            <p><span id="viewText"></span> views  <span id="date"></span></p>      
-                        </div>
-                    </section>               
+                        <!-- SmallVideo -->                                           
+                        <section class="smallVideo-section">
+                            <div class="video-main-preview" >
+                                <a id="video-link">
+                                    <img id="main-img" class="video-thumb" >      
+                                    <div class="custom-play-button" id="play-button">▶</div>
+                                </a>
+                            </div>
+                            <div class="video-description" >
+                                <h2 id="video-description"></h2>
+                                <p><span id="viewText"></span> views  <span id="date"></span></p>      
+                            </div>
+                        </section>               
 
-                    <!--- playVideoList -->                       
-                    <section class="playlist-section">
-                        <div class="playlist-header">
-                            <h3>Search On '21</h3>
-                            <button class="play-all-btn">▶ PLAY ALL</button>
-                        </div>
-                        <div class="playlist-grid">                            
-                        </div>
-                    </section>                    
-                </div>
-            </main>            
+                        <!--- playVideoList -->                       
+                        <section class="playlist-section">
+                            <div class="playlist-header">
+                                <h3>Search On '21</h3>
+                                <button class="play-all-btn">▶ PLAY ALL</button>
+                            </div>
+                            <div class="playlist-grid">                            
+                            </div>
+                        </section>                    
+                    </div>
+                </main> 
+            </div>           
         </div>
     </div>
     <script src="../js/loadHTML.js"></script>     

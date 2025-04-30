@@ -36,7 +36,7 @@ main {
 }
 
 /* 사이드바 기본 색상 */
-aside {
+aside {    
     background-color: var(--color-aside);    
     width: 190px;       
 }
@@ -47,13 +47,13 @@ aside {
 }
 
 /* 사이드바 */
-.sidebar {               
-    position: fixed;
+.sidebar {        
+    position: fixed;           
     height: 100%;    
     overflow-y: auto;
     scrollbar-width: none;
     background-color: var(--color-aside);
-    z-index: 1000;
+    z-index: 10;
 }
 
 /* 목록 */
@@ -64,4 +64,17 @@ ul {
 /* 버튼*/
 button {
     color: var(--color-font);
+}
+
+/* 625px 미만 사이드바 눌렀을 시 */
+aside.mobile-open {
+    position: fixed;
+    z-index: 10;;        
+}
+
+.retry-btn {
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+    padding: 5px;
 }

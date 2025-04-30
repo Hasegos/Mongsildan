@@ -1,5 +1,6 @@
 /* 최상단바 */
 .header-top {
+  height: 56px;
   width: 100%;  
   background-color: #212121;
   display: flex;  
