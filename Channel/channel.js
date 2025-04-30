@@ -2,8 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const params = new URLSearchParams(window.location.search);
   const channelId = parseInt(params.get("id"));   
-  // 좋아요, 타이틀 , 조회수, 날짜
-   
 
    // 최상단바 불러오기
   loadHtml("header", "../top/html/header-top.html", () => {  
@@ -31,7 +29,10 @@ document.addEventListener("DOMContentLoaded", () => {
       if (window.innerWidth > 625) {
         aside.classList.remove("mobile-open");
       }
-    });    
+    }),// 에러가 발생시
+    (err) => {
+
+    }
   }); 
   
   /* 구독 버튼 */
