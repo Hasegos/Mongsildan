@@ -47,10 +47,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const videoTitle = document.getElementById("video-title");
     const channelName = document.getElementById("channel-name");
     const subscribers = document.getElementById("subscribers");
-    const like = document.getElementById("like");
+    const like = document.getElementById("like");    
     const dislike = document.getElementById("dislike");
+    const likeBtn = document.getElementById('like-button');
+    const dislikeBtn = document.getElementById('dislike-button');
     const views = document.getElementById("views");
     const date = document.getElementById("date");
+    const channelLink = document.getElementById("channel-link");
+
 
     // 채널 프로필 및 채널명 저장 (댓글용)
     currentChannelProfile = channel.channel_profile;
@@ -58,6 +62,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 채널 프로필
     channelProfile.src = channel.channel_profile;
+    // 채널 프로필 링크
+    channelLink.href = `../Channel/channel.html?id=${channelId}`;
     // 비디오 영상
     video.src = `https://storage.googleapis.com/youtube-clone-video/${videoId}.mp4`
     // 영상 제목
@@ -99,6 +105,78 @@ document.addEventListener("DOMContentLoaded", function () {
     /* 비디오 재생시 버튼 숨김 */
     video.addEventListener("play", () => {
       playBtn.style.display = "none";
+    });
+
+    
+    // 좋아요 싫어요 로직
+    let currentLikes = videos.likes;
+    let currentDislikes = videos.dislikes;
+    let isLiked = false;    // 현재 좋아요 버튼 상태
+    let isDisliked = false; // 현재 싫어요 버튼 상태
+
+    function formatCount(count) {
+      return getLikeAndDislike(count);
+    }
+
+    function updateCountsDisplay() {
+      like.textContent = formatCount(currentLikes);
+      dislike.textContent = formatCount(currentDislikes);
+    }
+
+    updateCountsDisplay();
+
+     // 좋아요 버튼 클릭 이벤트
+    likeBtn.addEventListener('click', () => {
+      const likeSvg = likeBtn.querySelector('svg'); 
+
+      if (!isLiked) { // 1. 좋아요를 누르지 않은 상태 -> 좋아요 활성화
+        currentLikes++;
+        isLiked = true;
+        likeBtn.classList.add('active'); // 버튼에 active 클래스 추가 (색상 변경 등)
+
+        // 애니메이션 실행
+        if (likeSvg) { // SVG 요소가 있는지 확인
+          likeSvg.classList.add('like-animation');
+
+          // 애니메이션이 끝나면 클래스를 제거하는 이벤트 리스너 추가
+          // { once: true } 옵션으로 이벤트가 한 번 실행된 후 자동으로 제거되도록 함
+          likeSvg.addEventListener('animationend', () => {
+              likeSvg.classList.remove('like-animation');
+          }, { 
+            once: true
+          });
+        }
+        if (isDisliked) { // 만약 싫어요가 눌려있었다면 -> 싫어요 비활성화
+          currentDislikes--;
+          isDisliked = false;
+          dislikeBtn.classList.remove('active');
+        }
+      } else { // 2. 이미 좋아요를 누른 상태 -> 좋아요 비활성화
+        currentLikes--;
+        isLiked = false;
+        likeBtn.classList.remove('active');
+      }
+      updateCountsDisplay(); // 화면 업데이트
+    });
+
+    // 싫어요 버튼 클릭 이벤트
+    dislikeBtn.addEventListener('click', () => {
+      if (!isDisliked) { // 1. 싫어요를 누르지 않은 상태 -> 싫어요 활성화
+        currentDislikes++;
+        isDisliked = true;
+        dislikeBtn.classList.add('active');
+
+        if (isLiked) { // 만약 좋아요가 눌려있었다면 -> 좋아요 비활성화
+          currentLikes--;
+          isLiked = false;
+          likeBtn.classList.remove('active');
+        }
+      } else { // 2. 이미 싫어요를 누른 상태 -> 싫어요 비활성화
+        currentDislikes--;
+        isDisliked = false;
+        dislikeBtn.classList.remove('active');
+      }
+      updateCountsDisplay(); // 화면 업데이트
     });
   }
   video();
@@ -233,16 +311,27 @@ document.addEventListener("DOMContentLoaded", function () {
   
   /* 구독 버튼 */
   const subscribeBtn = document.getElementById('subscribe-btn');
-  const subscribeIcon = document.getElementById('subscribe-icon');
   const subscribeText = document.getElementById('subscribe-text');
+  const bellIcon = document.getElementById('bell-icon');
   let subscribed = false;
 
   subscribeBtn.addEventListener('click', () => {
     subscribed = !subscribed;
-    subscribeBtn.style.backgroundColor = subscribed ? '#3f3e3e' : 'white';
-    subscribeText.textContent = subscribed ? '구독중' : '구독';
-    subscribeText.style.color = subscribed ? 'white' : '#3f3e3e';
-    subscribeIcon.style.display = subscribed ? 'block' : 'none';   
-  });
-
+    if (subscribed) {
+      subscribeText.textContent = '구독중';
+      subscribeBtn.style.backgroundColor = '#515353'; // 구독중 배경
+      bellIcon.style.display = 'inline';
+      bellIcon.classList.add('bell-shake');
+  
+      bellIcon.addEventListener('animationend', () => {
+        bellIcon.classList.remove('bell-shake');
+      }, { once: true });
+  
+    } else {
+      subscribeText.textContent = '구독';
+      subscribeBtn.style.backgroundColor = 'white'; // 구독전 배경
+      bellIcon.style.display = 'none';
+    }  
+  });  
+  
 });
