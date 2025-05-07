@@ -37,7 +37,13 @@ document.addEventListener("DOMContentLoaded", function () {
   });  
 
   // 비디오 내용 불러오기
-  async function video() {   
+  async function video() {  
+
+
+    // 태그 비교용
+    firstWord = "";
+    secondWord = "";   
+  
     
     const videos = await getVideoInfo(videoId);     
     const channel = await getChannelInfo(channelId);
@@ -54,6 +60,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const views = document.getElementById("views");
     const date = document.getElementById("date");
     const channelLink = document.getElementById("channel-link");
+
+
+    firstWord = '동물';
+
+    secondWord = '강아지';
+
+    console.log(firstWord);
+    console.log(secondWord);
+    
 
 
     // 채널 프로필 및 채널명 저장 (댓글용)
@@ -178,6 +193,9 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       updateCountsDisplay(); // 화면 업데이트
     });
+
+
+    
   }
   video();
   
