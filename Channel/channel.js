@@ -92,6 +92,12 @@ document.addEventListener("DOMContentLoaded", () => {
       mainImg.src = like;      
       beforeDay.textContent = date
       videoDescription.textContent = videoMainDescription;  
+
+       // 2) 에러 핸들러 등록 (한 번만)
+      mainImg.addEventListener("error", () => {
+        // 이미지 로드 실패했을 때만 실행
+        smallVideoLink.removeAttribute("href");
+      })       
   }
 
   /* playlist-grid */
