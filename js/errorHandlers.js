@@ -41,11 +41,15 @@ function handleMediaError(el, retriesLeft, delay) {
     el._isRetrying = true;
     
     // 기존 a태그 효과 무시
-    const link = el.closest('a');
-    if(link){
+    const link = el.closest('a');   
+    
+    if(link){        
         link.removeAttribute('href');        
-        link.style.opacity = '0.6';
-        link.style.cursor = "default";
+        Object.assign(link.style, {
+            opacity: '0.6',
+            cursor: 'default',
+            pointerEvnets : 'none'
+        })               
     }
 
     // Fallback UI 생성
