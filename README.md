@@ -23,8 +23,6 @@
 
 >어휘 간 유사도 분석 AI API를 통해 사용자에게 추천 페이지를 제공하고 검색과 관련 항목들을 볼수있게 제공하는 사이트
 
-<br><br>
-
 ## 팀원
 
 - 최수호 [Hasegos](https://github.com/Hasegos)
