@@ -107,34 +107,37 @@
 
 추가할 예정
 
-### 개발 환경
+## 개발 환경
 
 ### 🛠 주요 기술
 
-Frontend
+<h3>Frontend</h3>
 
-```
-- JavaScript
-- HTML5
-- CSS
-```
+<img src="https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white"> &nbsp;
+<img src="https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white"> &nbsp;
+<img src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E"> 
 
-API 
+<h3>API</h3>
+
 ```
 techfree-oreumi-api
 어휘간 유사도 분석 API (https://aiopen.etri.re.kr/)
 ```
 
+<h3>협업</h3>
+
+<img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white">&nbsp;
+<img src="https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white">
+
 ### 전체적인 흐름
 
 <img src="https://github.com/user-attachments/assets/20b30c50-38af-4861-81b0-2101830a5a94">
-
 
 ## 주요 기능
 
 ### 검색 기능
 
-> 각 영상마다  태그, 영상제목, 채널명에 대해 같거나 비슷할 경우 검색가능하게 구현했습니다.
+> 각 영상마다 태그, 영상제목, 채널명에 대해 같거나 비슷할 경우 검색가능하게 구현했습니다.
 
 ### 댓글 기능
 
@@ -147,8 +150,38 @@ techfree-oreumi-api
 
 ## 서비스 소개
 
+### 메인페이지
+
+> 전체 영상중 보고싶은 영상 검색과 보고싶은 영상페이지로 이동할 수 있습니다.
+
 <p>
-  <video src="https://github.com/user-attachments/assets/c17a691a-a4a7-4bab-82a5-fdfb74a28220" autoplay loop muted playsinline width="600" />
+    <video src="https://github.com/user-attachments/assets/f4036ae8-10a3-4689-add4-52470bafd067" width="500">
+</p>
+
+
+### 검색기능
+
+> 태그, 영상제목, 체널명이 같거나 비슷할 경우 검색이 가능합니다.
+
+<p>
+    <video src="https://github.com/user-attachments/assets/c5f688d8-83ab-4d37-bbeb-b6d8650d7e98" width="500">
+</p>
+
+### 비디오 페이지
+
+> 영상 출력과 댓글 작성, 영상과 관련된 추천영상을 보여줍니다.
+
+<p>
+    <video src="https://github.com/user-attachments/assets/58c3f0ef-b87a-4669-a1c1-ebba955f4c48" width="500">
+</p>
+
+
+### 채널 페이지
+
+> 해당 채널 주인의 정보와 올린 영상등 확인이 가능합니다.
+
+<p>
+    <video src="https://github.com/user-attachments/assets/d177deef-4586-4468-8261-3815973e2e1f" width="500">
 </p>
 
 ## 협업툴, 컨벤션
