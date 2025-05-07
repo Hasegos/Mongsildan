@@ -129,6 +129,11 @@ techfree-oreumi-api
 <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white">&nbsp;
 <img src="https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white">
 
+
+<h3>개발 도구</h3>
+
+<img src="https://skillicons.dev/icons?i=vscode" width="40" />
+
 ### 전체적인 흐름
 
 <img src="https://github.com/user-attachments/assets/20b30c50-38af-4861-81b0-2101830a5a94">
