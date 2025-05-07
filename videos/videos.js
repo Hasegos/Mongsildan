@@ -36,14 +36,12 @@ document.addEventListener("DOMContentLoaded", function () {
     menuButton(cuurrentPage, check);
   });  
 
+  function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
   // 비디오 내용 불러오기
   async function video() {  
-
-
-    // 태그 비교용
-    firstWord = "";
-    secondWord = "";   
-  
     
     let videos, channel;
     try {
@@ -67,17 +65,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const views = document.getElementById("views");
     const date = document.getElementById("date");
     const channelLink = document.getElementById("channel-link");
-
     const description = document.getElementById("description");
-
-    firstWord = '동물';
-
-    secondWord = '강아지';
-
-    console.log(firstWord);
-    console.log(secondWord);
-    
-
+    const allVideos = await getVideoList();
+    const currentVideoTags = videos.tags || [];
 
     // 채널 프로필 및 채널명 저장 (댓글용)
     currentChannelProfile = channel.channel_profile;
@@ -199,63 +189,109 @@ document.addEventListener("DOMContentLoaded", function () {
       updateCountsDisplay(); // 화면 업데이트
     });
 
+    // 비디오 태그 간의 유사도를 API를 통해 계산하고 결과를 저장
+    const similarityResults = [];
 
+    // 모든 비디오 태그와 현재 비디오의 태그 비교
+    for (let video of allVideos) {
+      let similarityScore = 0;
+
+      // 각 태그마다 유사도 계산
+      for (let tag of video.tags) {
+        for (let currentTag of currentVideoTags) {
+          const score = await getTagSimilarity(tag, currentTag);
+          similarityScore += score; // 유사도를 누적
+
+          await delay(500); // API 호출 간의 지연 시간 설정 (500ms)
+        }
+      }
+        // 결과 저장
+      similarityResults.push({ video, similarityScore });
+    }
+
+    // 유사도 높은 순으로 비디오 정렬
+    similarityResults.sort((a, b) => b.similarityScore - a.similarityScore);
+
+    // 정렬된 비디오 목록을 렌더링
+    renderRelatedVideos(similarityResults.map(result => result.video));
     
+    function renderRelatedVideos(sortedVideos) {
+      const relatedVideosContainer = document.querySelector(".related-videos");
+      relatedVideosContainer.innerHTML = '';  // 기존 관련 비디오 초기화
+
+      sortedVideos.forEach(video => {
+          const relatedVideoElement = document.createElement("div");
+          relatedVideoElement.classList.add("related-video");
+          relatedVideoElement.innerHTML = `
+              <a href="../videos/videos.html?channel_id=${video.channel_id}&video_id=${video.id}" class="card-link">
+                  <img src="${video.thumbnail}" loading="lazy" />
+              </a>
+              <div class="video-text">
+                  <h4>${video.title}</h4>
+                  <p>${video.channel_name}</p>
+                  <p>${video.views ? getViews(video.views) : "조회수가 없습니다."}</p>
+                  <p>${video.created_dt ? getTimeAgo(video.created_dt) : "잘못된 영상입니다."}</p>
+              </div>
+          `;
+          relatedVideosContainer.appendChild(relatedVideoElement);
+      });
+  }
+
   }
   video();
   
-  async function renderRelatedVideos(selector){
+  // async function renderRelatedVideos(selector){
     
-    const getVideos = await getVideoList();    
-    const Div = document.querySelector(selector);
+  //   const getVideos = await getVideoList();    
+  //   const Div = document.querySelector(selector);
 
-    const chunkSize = 4;
-    let currentIndex = 0;
+  //   const chunkSize = 4;
+  //   let currentIndex = 0;
   
-    async function renderChunk() {
-      const fragment = document.createDocumentFragment();
-      const chunk = getVideos.slice(currentIndex, currentIndex + chunkSize);
+  //   async function renderChunk() {
+  //     const fragment = document.createDocumentFragment();
+  //     const chunk = getVideos.slice(currentIndex, currentIndex + chunkSize);
   
-      const channelInfos = await Promise.all(
-        chunk.map((video) => getChannelInfo(video.channel_id))        
-      );      
+  //     const channelInfos = await Promise.all(
+  //       chunk.map((video) => getChannelInfo(video.channel_id))        
+  //     );      
 
-      chunk.forEach((video, index) => {
-        const { channel_name, channel_profile } = channelInfos[index];  
+  //     chunk.forEach((video, index) => {
+  //       const { channel_name, channel_profile } = channelInfos[index];  
             
-        // 조회수
-        const viewsText = (video.views!= null) ? getViews(video.views) : "조회수가 없습니다.";
-        // 업로드 날짜
-        const dateText = (video.created_dt) ? getTimeAgo(video.created_dt) : "잘못된 영상입니다.";             
+  //       // 조회수
+  //       const viewsText = (video.views!= null) ? getViews(video.views) : "조회수가 없습니다.";
+  //       // 업로드 날짜
+  //       const dateText = (video.created_dt) ? getTimeAgo(video.created_dt) : "잘못된 영상입니다.";             
 
-        const channelDiv = document.createElement("div");
-        channelDiv.classList.add("related-video");
-        channelDiv.innerHTML = `            
-              <a href="../videos/videos.html?channel_id=${video.channel_id}&video_id=${video.id}" class="card-link">
-                <img src="${video.thumbnail}" loading="lazy" />
-              </a>
-              <div class="video-text">
-                <h4>${video.title}</h4>
-                <p>${channel_name}</p>
-                <p>${viewsText}</p>
-                <p>${dateText}</p>
-              </div>
-          `;
-        fragment.appendChild(channelDiv);
-      });
+  //       const channelDiv = document.createElement("div");
+  //       channelDiv.classList.add("related-video");
+  //       channelDiv.innerHTML = `            
+  //             <a href="../videos/videos.html?channel_id=${video.channel_id}&video_id=${video.id}" class="card-link">
+  //               <img src="${video.thumbnail}" loading="lazy" />
+  //             </a>
+  //             <div class="video-text">
+  //               <h4>${video.title}</h4>
+  //               <p>${channel_name}</p>
+  //               <p>${viewsText}</p>
+  //               <p>${dateText}</p>
+  //             </div>
+  //         `;
+  //       fragment.appendChild(channelDiv);
+  //     });
   
-      Div.appendChild(fragment);
-      currentIndex += chunkSize;
-      if (currentIndex < getVideos.length) {
-        setTimeout(renderChunk, 1);
-      }
-    }
-    renderChunk();
-  }
+  //     Div.appendChild(fragment);
+  //     currentIndex += chunkSize;
+  //     if (currentIndex < getVideos.length) {
+  //       setTimeout(renderChunk, 1);
+  //     }
+  //   }
+  //   renderChunk();
+  // }
 
-  // 관련 영상 1과 2 호출
-  renderRelatedVideos(".related-videos1");
-  renderRelatedVideos(".related-videos2");  
+  // // 관련 영상 1과 2 호출
+  // renderRelatedVideos(".related-videos1");
+  // renderRelatedVideos(".related-videos2");  
 
   /* 댓글 시간 */
   function formatTimeAgo(timestamp) {
