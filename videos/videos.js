@@ -67,6 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const channelLink = document.getElementById("channel-link");
     const description = document.getElementById("description");
     const allVideos = await getVideoList();
+    // 현재 영상 태그 (목록들)
     const currentVideoTags = videos.tags || [];
 
     // 채널 프로필 및 채널명 저장 (댓글용)
@@ -188,38 +189,67 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       updateCountsDisplay(); // 화면 업데이트
     });
-
-    // 비디오 태그 간의 유사도를 API를 통해 계산하고 결과를 저장
-    const similarityResults = [];
-
-    // 모든 비디오 태그와 현재 비디오의 태그 비교
-    for (let video of allVideos) {
-      let similarityScore = 0;
-
-      // 각 태그마다 유사도 계산
-      for (let tag of video.tags) {
-        for (let currentTag of currentVideoTags) {
-          const score = await getTagSimilarity(tag, currentTag);
-          similarityScore += score; // 유사도를 누적
-
-          await delay(500); // API 호출 간의 지연 시간 설정 (500ms)
-        }
-      }
-        // 결과 저장
-      similarityResults.push({ video, similarityScore });
-    }
-
-    // 유사도 높은 순으로 비디오 정렬
-    similarityResults.sort((a, b) => b.similarityScore - a.similarityScore);
-
-    // 정렬된 비디오 목록을 렌더링
-    renderRelatedVideos(similarityResults.map(result => result.video));
     
-    function renderRelatedVideos(sortedVideos) {
-      const relatedVideosContainer = document.querySelector(".related-videos");
-      relatedVideosContainer.innerHTML = '';  // 기존 관련 비디오 초기화
+    // 현재 영상의 대표 태그 뽑기
+    async function findBestTag(tags) {
+      let bestTag = null;
+      let bestScore = -1;
+    
+      for (let i = 0; i < tags.length; i++) {
+        let total = 0;
+        for (let j = 0; j < tags.length; j++) {
+          // 자기 자신은 제외
+          if (i === j){
+            continue;                
+          } 
+          total += await getTagSimilarity(tags[i], tags[j]);
+        }
+        const avg = total / (tags.length - 1);
+        if (avg > bestScore) {
+          bestScore = avg;
+          bestTag = tags[i];
+        }
+      }    
+      return bestTag;
+    }
+  
+    // 비디오 유사도 계산
+    async function calculateSimilarities(allVideos, currentVideoTags) {
+      const similarityResults = [];
+      const baseTag = await findBestTag(currentVideoTags); // 대표 태그 1개만 사용
+    
+      for (let video of allVideos) {
+        let total = 0;      
+        for (let tag of video.tags) {        
+          total += await getTagSimilarity(baseTag, tag);
+        }    
+        const averageScore = total / video.tags.length;
+        similarityResults.push({ video, averageScore });
+      }
+    
+      similarityResults.sort((a, b) => b.averageScore - a.averageScore);
+      return similarityResults;
+    }
+    
+    // 추천 실행
+    async function recommendVideos() {
+      const similarityResults = await calculateSimilarities(allVideos, currentVideoTags);
+    
+      const filteredResults = similarityResults.filter(
+        result => result.averageScore >= 0.3
+      );      
+      renderRelatedVideos(filteredResults.map(result => result.video),".related-videos1");
+      renderRelatedVideos(filteredResults.map(result => result.video),".related-videos2");
+    }    
+    recommendVideos();
 
-      sortedVideos.forEach(video => {
+    async function renderRelatedVideos(sortedVideos,selector) {      
+      const relatedVideosContainer = document.querySelector(selector);
+      relatedVideosContainer.innerHTML = '';  // 기존 관련 비디오 초기화
+      for(const video of sortedVideos){     
+          const channelInfo =  await getChannelInfo(video.channel_id) ;
+          const channelName = channelInfo.channel_name;
+
           const relatedVideoElement = document.createElement("div");
           relatedVideoElement.classList.add("related-video");
           relatedVideoElement.innerHTML = `
@@ -228,71 +258,17 @@ document.addEventListener("DOMContentLoaded", function () {
               </a>
               <div class="video-text">
                   <h4>${video.title}</h4>
-                  <p>${video.channel_name}</p>
+                  <p>${channelName}</p>
                   <p>${video.views ? getViews(video.views) : "조회수가 없습니다."}</p>
                   <p>${video.created_dt ? getTimeAgo(video.created_dt) : "잘못된 영상입니다."}</p>
               </div>
           `;
           relatedVideosContainer.appendChild(relatedVideoElement);
-      });
-  }
-
+      };
+    }
   }
   video();
   
-  // async function renderRelatedVideos(selector){
-    
-  //   const getVideos = await getVideoList();    
-  //   const Div = document.querySelector(selector);
-
-  //   const chunkSize = 4;
-  //   let currentIndex = 0;
-  
-  //   async function renderChunk() {
-  //     const fragment = document.createDocumentFragment();
-  //     const chunk = getVideos.slice(currentIndex, currentIndex + chunkSize);
-  
-  //     const channelInfos = await Promise.all(
-  //       chunk.map((video) => getChannelInfo(video.channel_id))        
-  //     );      
-
-  //     chunk.forEach((video, index) => {
-  //       const { channel_name, channel_profile } = channelInfos[index];  
-            
-  //       // 조회수
-  //       const viewsText = (video.views!= null) ? getViews(video.views) : "조회수가 없습니다.";
-  //       // 업로드 날짜
-  //       const dateText = (video.created_dt) ? getTimeAgo(video.created_dt) : "잘못된 영상입니다.";             
-
-  //       const channelDiv = document.createElement("div");
-  //       channelDiv.classList.add("related-video");
-  //       channelDiv.innerHTML = `            
-  //             <a href="../videos/videos.html?channel_id=${video.channel_id}&video_id=${video.id}" class="card-link">
-  //               <img src="${video.thumbnail}" loading="lazy" />
-  //             </a>
-  //             <div class="video-text">
-  //               <h4>${video.title}</h4>
-  //               <p>${channel_name}</p>
-  //               <p>${viewsText}</p>
-  //               <p>${dateText}</p>
-  //             </div>
-  //         `;
-  //       fragment.appendChild(channelDiv);
-  //     });
-  
-  //     Div.appendChild(fragment);
-  //     currentIndex += chunkSize;
-  //     if (currentIndex < getVideos.length) {
-  //       setTimeout(renderChunk, 1);
-  //     }
-  //   }
-  //   renderChunk();
-  // }
-
-  // // 관련 영상 1과 2 호출
-  // renderRelatedVideos(".related-videos1");
-  // renderRelatedVideos(".related-videos2");  
-
   /* 댓글 시간 */
   function formatTimeAgo(timestamp) {
     const now = Date.now();
@@ -306,14 +282,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const diffDays = Math.floor(diffHours / 24);
     return `${diffDays}일 전`;
   }
-  
 
   /* 댓글 기능  */
   const commentList = document.getElementById("comment-list");
   const commentInput = document.getElementById("comment-input");
   const submitBtn = document.getElementById("submit-comment");
   const commentCount = document.getElementById("comment-count");  
-  
 
   let comments = [];
 
@@ -334,14 +308,11 @@ document.addEventListener("DOMContentLoaded", function () {
           </div>
         </div>              
       `;
-
       commentList.appendChild(li);
     });
-
     // 댓글 개수 갱신
     commentCount.textContent = comments.length;
   }
-
 
   // 댓글 작성 버튼 클릭 시 댓글 추가
   submitBtn.addEventListener("click", () => {
@@ -365,8 +336,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   
   // 초기 댓글 렌더링
-  renderComments();  
-  
+  renderComments();   
   
   /* 구독 버튼 */
   const subscribeBtn = document.getElementById('subscribe-btn');
@@ -391,6 +361,5 @@ document.addEventListener("DOMContentLoaded", function () {
       subscribeBtn.style.backgroundColor = 'white'; // 구독전 배경
       bellIcon.style.display = 'none';
     }  
-  });  
-  
+  });   
 });
