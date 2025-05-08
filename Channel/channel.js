@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const beforeDay = document.getElementById("date");
       
       smallVideoLink.href = `../videos/videos.html?channel_id=${linkChannelId}&video_id=${linkvideoId}`;
-      viewText.textContent = views;
+      viewText.textContent = getViews(views) +  " · ";
       mainImg.src = like;      
       beforeDay.textContent = date
       videoDescription.textContent = videoMainDescription;  
@@ -139,11 +139,13 @@ document.addEventListener("DOMContentLoaded", () => {
         channelDiv.innerHTML = `
           <a href="../videos/videos.html?channel_id=${video.channel_id}&video_id=${video.id}" class="playlist-card">
             <div class="video-preview">              
-                <img src="${video.thumbnail}" alt="썸네일" class="thumb-img" />
+                <img src="${video.thumbnail} " alt="썸네일" class="thumb-img" />
                 <div class="play-icon-overlay">▶</div>              
             </div>
             <div class="playlist-text">
-              <p>${video.title}</p>              
+              <p>${video.title}</p>      
+              <span>${video.views ? getViews(video.views) + " · " : "조회수가 없습니다."}</span>
+              <span>${video.created_dt ? getTimeAgo(video.created_dt) : "잘못된 영상입니다."}</span>
             </div>
           </a>
         `;
