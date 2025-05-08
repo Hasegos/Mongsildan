@@ -1,9 +1,12 @@
-// 검색어에 맞는 비디오 목록 필터링
+// 키워드에 맞는 비디오 목록 필터링
+function matchIncludes(source, query) {
+    return source.toLowerCase().includes(query.toLowerCase());
+}
 async function searchVideos(query) {
-    // 비디오 목록
-    const videos = await getVideoList();   
-    
-    // 채널 캐시 
+    // 전체목록
+    const videos = await getVideoList();
+
+    // 채널명 캐시
     const channelCache = {};
     const getChannelName = async (channelId) => {
         if (!channelCache[channelId]) {
@@ -11,41 +14,61 @@ async function searchVideos(query) {
             channelCache[channelId] = channelInfo.channel_name;
         }
         return channelCache[channelId];
-    }
-    /* 비디오 내용 */
-    const channelNamePromise = videos.map(video => getChannelName(video.channel_id));
-    const channelNames = await Promise.all(channelNamePromise);   
+    };
 
-    const mathchedChannelIds = [];
-    channelNames.forEach((channelInfo, index) => {        
-        if (channelInfo.toLowerCase() === query.toLowerCase()) {
-            mathchedChannelIds.push(videos[index].channel_id);
+    // 채널명 병렬 로딩
+    const channelNames = await Promise.all(
+        videos.map(video => getChannelName(video.channel_id))
+    );
+    // 검색 결과
+    const results = [];  
+
+    // 검색어로 필터링
+    for (let i = 0; i < videos.length; i++) {
+        const video = videos[i];
+        const channelName = channelNames[i];   
+        const queryLower = query.toLowerCase();    
+
+        // 특정 단어가 포함된경우
+        if (
+            matchIncludes(video.title, query) ||
+            matchIncludes(channelName, query) ||
+            video.tags.some(tag => matchIncludes(tag, query))
+        ) {
+            // 유사도 1
+            results.push({ video, score: 1 }); 
+            continue;
         }
-    });
+        // 특정 단어 포함 X , 유사도 계산 
+        const scores = [];
 
-    let filteredVideos;
-    // 검색어로 필터링 <- 채널 이름, 비디오 제목, 키워드
+        // 제목 유사도
+        const titleScore = await getTagSimilarity(query, video.title);
+        scores.push(titleScore);
 
-    // 채널명이 완전일치
-    if(mathchedChannelIds.length > 0){
-        filteredVideos = videos.filter(video => mathchedChannelIds.includes(video.channel_id));
+        // 채널명 유사도
+        const channelScore = await getTagSimilarity(query, channelName);
+        scores.push(channelScore);
+
+        // 태그 중 최고 유사도
+        let bestTagScore = 0;
+        for (let tag of video.tags) {
+            const score = await getTagSimilarity(query, tag);
+            if (score > bestTagScore) bestTagScore = score;
+        }
+        scores.push(bestTagScore);
+
+        // 평균 유사도 계산 (모든 점수를 더하고 더한 개수만큼 나누기)        
+        const avgScore = scores.reduce((a, b) => a + b, 0) / scores.length;
+        results.push({ video, score: avgScore });
     }
-    else{ // 다를 경우
-        filteredVideos = videos.filter((video,index) => {                   
-        // 제목
-        const titleWords = video.title.replace(/\s/g,"");
-        // 제목 기준
-        const titleMatches = titleWords.toLowerCase().includes(query.toLowerCase());
-        // 태그 기준
-        const tagMatches = video.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase()));  
-        // 채널명
-        const channelNameMatches = channelNames[index].toLowerCase().includes(query.toLowerCase());
-    
-        // 태그와 제목 기준 포함되어있을때
-        return titleMatches || tagMatches || channelNameMatches;
-        });
-    }    
-    displayResults(filteredVideos);  // 필터링된 결과 출력
+
+    // 유사도 높은 순 오름차순 정렬
+    results.sort((a, b) => b.score - a.score);
+
+    // 일정 기준 이상만 필터링 (유사도 0.2 이상)
+    const filtered = results.filter(r => r.score >= 0.2).map(r => r.video);    
+    displayResults(filtered);
 }
 window.searchVideos = searchVideos;
 

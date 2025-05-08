@@ -17,12 +17,30 @@
   align-items: flex-start;
 }
 
-/* 영상 이미지 */
+
+/* 왼쪽 콘텐츠 */
+.video-main-content {
+  flex: 3;
+}
+
+/* 오른쪽 추천 영상 */
+.related-videos2 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+}
+
+
+/* 영상 */
 .video-media {
   width: 100%;
   border: none;
   border-radius: 10px;
   aspect-ratio: 16 / 9;  
+  max-width: 1200px;
+  aspect-ratio: 16 / 9;
   max-width: 1200px;
 }
 
@@ -66,7 +84,7 @@
 
 /* 영상 제목 */
 .video-title {
-  margin: 15px 0 5px;  
+  margin: 15px 0 5px;
 }
 
 /* 영상 더보기 */
@@ -74,38 +92,48 @@
   margin-bottom: 20px;
   background-color: #202020;
   padding: 10px;
-  border-radius: 8px;    
-  font-size: 14px;  
+  border-radius: 8px;
+  font-size: 14px;
 }
-/* 영상 더보기 조회수 + 만든일자 */
-.video-meta {
-  
-}
+
 /* 영상 설명 */
 .video-description {
-  font-size: 14px;  
+  font-size: 14px;
   white-space: pre-line;
+  color: #ccc;
+  line-height: 1.5;
+  margin-bottom: 30px;
 }
+
 /* 비디오 액션 버튼 묶음 */
 .video-actions {
   display: flex;
   align-items: center;  
   gap: 12px;  
 }
+
 /* 액션 버튼 */
 .video-actions button {
   display: flex;
   align-items: center;
   background-color: #181818;
-  border: none;  
+  border: none;
   padding: 8px 12px;
   border-radius: 15px;
-  cursor: pointer;  
+  cursor: pointer;
 }
 
 
 .video-actions button:hover {
   background-color: #333;
+}
+
+/* 채널 정보 섹션 */
+.channel-info-section {
+  display: flex;              /* 기본: 가로 배치 (Flexbox 컨테이너) */
+  justify-content: space-between; /* 양쪽 끝으로 요소를 배치 */
+  align-items: center;          /* 수직 가운데 정렬 */
+  margin-bottom: 15px;          /* 아래 .video-summary와의 간격 */
 }
 
 /* 채널 정보 */
@@ -116,24 +144,26 @@
   gap: 12px;
   margin-bottom: 16px;
 }
+
 /* 채널 프로필 */
-.channel-avatar {  
+.channel-avatar {
   height: 48px;
-  border-radius: 50%;  
+  border-radius: 50%;
 }
+
 /* 채널 정보 */
 .channel-details {
   display: flex;
   align-items: center;
   gap: 20px;
 }
-/* 채널 이름 */
+
 .channel-details h3 {
-  font-size: 16px;  
+  font-size: 16px;
 }
-/* 구독자 수*/
-.subscribers {  
-  color: #aaa;   
+
+.subscribers {
+  color: #aaa;
 }
 /* 구독자 버튼 */
 .subscribe-btn {
@@ -192,7 +222,7 @@
 .related-video {
   display: flex;
   align-items: center;
-  gap: 10px;  
+  gap: 10px;
   padding: 8px;
   cursor: pointer;  
 }
@@ -227,19 +257,17 @@
 .comment-section {
   margin-top: 30px;
 }
-/* 댓글 */
+
 .comment-section h3 {
   margin-bottom: 10px;
 }
 
-/* 댓글 입력 layout */
 .comment-input {
   display: flex;
   margin-bottom: 15px;
 }
 
-/* 댓글 입력*/
-.comment-input input{
+.comment-input input {
   flex: 1;
   padding: 8px;
   border-radius: 6px;
@@ -250,13 +278,12 @@
   color: white;
 }
 
-/* 댓글 버튼 */
 .comment-input button {
   margin-left: 10px;
   padding: 8px 12px;
   border-radius: 6px;
   border: none;
-  background-color: #444;  
+  background-color: #444;
   cursor: pointer;
 }
 
@@ -304,14 +331,14 @@
 
 /* ============= 반응형 ============= */
 
-@media (max-width: 1315px) { 
-  .related-videos2{
+@media (max-width: 1315px) {
+  .related-videos2 {
     display: none;
-  }  
+  }
 }
 
 @media (min-width: 1316px) {
-  .related-videos1{
+  .related-videos1 {
     display: none;
   }
 }
