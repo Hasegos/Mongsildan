@@ -7,16 +7,13 @@
   display: flex;
   justify-content: center;
 }
-.video-main-content{
-  flex: 3;
-}
+
 /* 비디오 플레이어 전체 레이아웃 */
 .video-page__player {
   display: flex;
   gap: 20px;
   align-items: flex-start;
 }
-
 
 /* 왼쪽 콘텐츠 */
 .video-main-content {
@@ -31,7 +28,6 @@
   gap: 10px;
   max-width: 400px;
 }
-
 
 /* 영상 */
 .video-media {
