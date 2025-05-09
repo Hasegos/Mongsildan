@@ -68,25 +68,24 @@
     <tr>
         <td>
         <h3 align="center">최수호</h3>
-        - 메인 페이지 html, css 구현 <br>
-        - 검색 기능 구현 <br>
-        - 에러처리 구현 <br>
+        - 메인 페이지 구현 <br>
+        - 검색 기능, 에러처리 구현 <br>        
         - 사이드바, 최상단바 반응형추가 <br> 
         - 각 페이지별 사이드바 기능추가 <br>      
         </td>
         <td >
         <h3 align="center">이소연</h3>
-        - 채널페이지 html,css 구현 <br>
-        - 최상단, 상단바 (3페이지 공통) html, css 구현 <br>
-        - 검색 필터 구현 <br>
-        - 구독 기능 구현<br>
+        - 채널페이지 구현 <br>
+        - Header, Sub-top (공통) 반응형 구현 <br>
+        - 검색 필터, 구독 기능 구현 <br>
+        - PPT 작성 <br>
         </td>
         <td>
         <h3 align="center">김재경</h3>
-        - 비디오 페이지 html,css 구현 <br>
+        - 비디오 페이지 구현 <br>
         - 추천 영상 AI 활용 및 구현 <br>
-        - 댓글 작성 <br>
-        - 사이드바 html, css 구현 <br>        
+        - 댓글 작성 기능 구현 <br>
+        - 사이드바 구현 <br>        
         </td>
     </tr>
 </table>
@@ -97,14 +96,10 @@
 
 ### 개발 기간
 
-<strong>1️⃣ 1차 개발 : 25.04.21~25.04.30</strong>
+<strong>1️⃣ 총 개발 기간 : 25.04.21 ~ 25.05.13 </strong>
 
-<img src="https://github.com/user-attachments/assets/87f9b29c-400d-4f5d-ba9d-cf8508caaeb2">
+<img src="https://github.com/user-attachments/assets/95572b68-6729-4a14-9bdc-a257ee0024dc">
 <br><br>
-
-<strong>1️⃣ 2차 개발 : 25.05.07~25.05.13</strong>
-
-추가할 예정
 
 ## 개발 환경
 
