@@ -28,9 +28,9 @@ async function compareTagsWithApi(firstWord, secondWord) {
         return data;
     } catch (error) {
         console.error(`[API] 호출 오류: ${firstWord}, ${secondWord}`, error);
-        // 실제 api 문제일시 error 페이지 이동
-        location.href = "../error/error.html";  
+        // 실제 api 문제일시 error 페이지 이동        
         alert("지금 API 사용하실수없는 상태입니다.")
+        location.href = "../error/error.html";  
         return null;
     }
 }
@@ -39,7 +39,7 @@ async function compareTagsWithApi(firstWord, secondWord) {
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 const similarityCache = new Map();
 
-async function getTagSimilarity(tag1, tag2, retryCount = 3) {
+async function getTagSimilarity(tag1, tag2, retryCount = 5) {
     const [w1, w2] = [tag1, tag2].sort();
     // 중복 요청을 막기위해서 (ex '배' vs '과일' , '과일' vs '배')
     const key = `${w1}_${w2}`;
@@ -73,14 +73,14 @@ async function getTagSimilarity(tag1, tag2, retryCount = 3) {
     // 총 3번 retry (fallback, 백오프 방식으로 재시도)
     catch (err) {
         if (retryCount > 0) {
-            console.warn(`[재시도] ${tag1} vs ${tag2} (${3 - retryCount + 1}회차)`);
-            await delay(500); // 실패 시에만 지연
+            console.warn(`[재시도] ${tag1} vs ${tag2} (${5 - retryCount + 1}회차)`);
+            await delay(600); // 실패 시에만 지연
             return await getTagSimilarity(tag1, tag2, retryCount - 1);
         }
         else {
-            console.error(`[실패] ${tag1} vs ${tag2} → 최대 재시도 도달`);
-            location.href = "../../error/error.html";
+            console.error(`[실패] ${tag1} vs ${tag2} → 최대 재시도 도달`);            
             alert(`[실패] ${tag1} vs ${tag2} → 최대 재시도 도달`);
+            location.href = "../../error/error.html";
             similarityCache.set(key, 0);
             return 0;
         }
