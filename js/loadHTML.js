@@ -1,5 +1,5 @@
 // 다른 html 페이지 불러오는 함수 
-function loadHtml(targetSelector, filePath, callback){
+function loadHtml(targetSelector, filePath, callback){    
     fetch(filePath)
         .then((res) => {
         if (!res.ok) {
