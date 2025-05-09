@@ -14,7 +14,7 @@ function searching() {
                 searchVideos(keyword);
             }
             else {
-                const url = `/home/home.html?search=${encodeURIComponent(keyword)}`;
+                const url = `../../index.html?search=${encodeURIComponent(keyword)}`;
                 window.location.href = url;             
             }
         }
