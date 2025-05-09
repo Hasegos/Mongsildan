@@ -84,17 +84,28 @@
             </div>           
         </div>
     </div>
-    <script src="../js/loadHTML.js"></script>     
-    <script src="../js/page1315px.js"></script>
-    <script src="../sidebar/sidebar.js"></script>
+    <!-- 에러 핸들러 --> 
     <script src="../js/errorHandlers.js"></script>
-    <script src="../api/getChannelVideoList.js"></script>  
+
+    <!-- 채널 정보 -->
     <script src="../api/getChannelInfo.js"></script>
-    <script src="../js/getTimeAgo.js"></script>
-    <script src="../js/getChannelEverything.js"></script>
-    <script src="../js/searching.js"></script>
-    <script src="../js/topLoad600px.js"></script>
+    <!--채널 비디오 목록 정보 -->
+    <script src="../api/getChannelVideoList.js"></script>          
+
+    <!--로드-->
+    <script src="../js/loadHTML.js"></script> 
+    <!-- 사이드 바 -->
+    <script src="../sidebar/sidebar.js"></script>
+    <!-- 600px 미만일때 최상단 반응형 -->
+    <script src="../js/topLoad600px.js"></script>    
+    <!--1315 미만일때-->
+    <script src="../js/page1315px.js"></script>
+    <!-- 계산기 -->
+    <script src="../js/getChannelEverything.js"></script>        
     
+    <!-- 검색시 메인페이지 이동 -->
+    <script src="../js/searching.js"></script>   
+    <!-- 페이지 엔트리 포인트 -->
     <script src="./channel.js"></script>       
 </body>
 </html>
