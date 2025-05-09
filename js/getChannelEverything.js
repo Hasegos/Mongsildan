@@ -32,7 +32,7 @@ function getViews(count) {
 window.getViews = getViews;
 
  // 날짜 차이 계산 함수
- function getTimeAgo(dateString) {
+function getTimeAgo(dateString) {
     const createdDate = new Date(dateString);
     const now = new Date();
 
