@@ -1,16 +1,3 @@
-/* 알림창  */
-function showError(message, timeout = 5000) {    
-
-    const container = setTimeout(() => {
-        location.reload();
-    }, timeout)    
-    alert(message);   
-
-    clearTimeout(timeout);
-    location.reload();   
-}
-window.showError = showError;
-
 /* 비디오, 이미지 로드 실패시 */
 // 모든 <img>와 <video>에 원본 URL 저장 
 function cacheOriginalMediaSrc() {
@@ -108,8 +95,46 @@ function handleMediaError(el, retriesLeft, delay) {
     })(retriesLeft, delay);
 }
 
-  //  DOM 준비 후 초기화 실행 
+// 네트워크 지연 에러
+function monitorPageLoad(maxRtries, timeout){
+    let isPageLoaded = false;
+    let retriesLeft = (Number(localStorage.getItem("retriesLeft")) || maxRtries);       
+    
+    const timer = setTimeout(() => {
+        if(isPageLoaded){
+            console.log("정상적인 페이지 로드됨")
+            localStorage.removeItem("retriesLeft");
+            return;
+        }
+
+        if(localStorage.getItem("retriesLeft") == 0){
+            console.error("페이지 로딩 실패");
+            localStorage.removeItem("retriesLeft");                
+            location.href ="../error/error.html";
+            return;
+        }            
+        console.warn(`[${retriesLeft}번째 재시도]`);     
+        retriesLeft--;           
+        localStorage.setItem("retriesLeft", retriesLeft);                
+        location.reload();        
+        console.log(retriesLeft);
+        
+    },timeout);   
+
+    window.markPageAsLoaded = function () {
+        isPageLoaded = true;
+        localStorage.removeItem("retriesLeft");
+        console.log("페이지 로딩 성공");
+    }   
+}    
+
+//  DOM 준비 후 초기화 실행 
 window.addEventListener('DOMContentLoaded', () => {
+    monitorPageLoad(3,5000);
     cacheOriginalMediaSrc();
-    initMediaWithRetry({ retries: 3, delay: 1000 });
+    initMediaWithRetry({ retries: 3, delay: 1000 });    
+    
+    setTimeout(() => {
+        markPageAsLoaded();   
+    },4000)   
 });
