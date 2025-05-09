@@ -22,60 +22,73 @@ async function limitedMap(array, limit, asyncFn) {
     return Promise.all(results);
 }
 
+// 검색 알고리즘
 async function searchVideos(query) {
-    const videos = await getVideoList();
 
-    // 채널 정보 캐싱
-    const channelInfo = {};
-    await Promise.all(
-        videos.map(async (video) => {
-            if (!channelInfo[video.channel_id]) {
-                const info = await getChannelInfo(video.channel_id);
-                channelInfo[video.channel_id] = {
-                    channel_name: info.channel_name,
-                    channel_profile: info.channel_profile
-                };
-            }
-        })
-    );
-    const results = await limitedMap(videos, 5, async (video) => {   
-    
-        const { channel_name, channel_profile } = channelInfo[video.channel_id];
+    try{
+        const videos = await getVideoList();
 
-        if (
-            matchIncludes(video.title, query) ||
-            matchIncludes(channel_name, query) ||
-            video.tags.some(tag => matchIncludes(tag, query))
-        ) {
-            return { video, score: 1 };           
+        if(!videos || videos.length == 0){
+            alert("영상 목록 불러오는데 실패했습니다.")
+            return;
         }
 
-        const [titleScore, channelScore] = await Promise.all([
-            getTagSimilarity(query, video.title),
-            getTagSimilarity(query, channel_name)
-        ]);
-
-        // 태그 일부만 추출
-        const tagSubset = video.tags.slice(0, 2);
-        const tagScores = await Promise.all(
-            tagSubset.map(tag => getTagSimilarity(query, tag))
+        // 채널 정보 캐싱
+        const channelInfo = {};
+        await Promise.all(
+            videos.map(async (video) => {
+                if (!channelInfo[video.channel_id]) {
+                    const info = await getChannelInfo(video.channel_id);
+                    channelInfo[video.channel_id] = {
+                        channel_name: info.channel_name,
+                        channel_profile: info.channel_profile
+                    };
+                }
+            })
         );
-        const bestTagScore = tagScores.length ? Math.max(...tagScores) : 0;
+        const results = await limitedMap(videos, 5, async (video) => {   
+        
+            const { channel_name, channel_profile } = channelInfo[video.channel_id];
 
-        const avgScore = (titleScore + channelScore + bestTagScore) / 3;
-        return { video, score: avgScore };
-    });
+            if (
+                matchIncludes(video.title, query) ||
+                matchIncludes(channel_name, query) ||
+                video.tags.some(tag => matchIncludes(tag, query))
+            ) {
+                return { video, score: 1 };           
+            }
 
-    results.sort((a, b) => b.score - a.score);
+            const [titleScore, channelScore] = await Promise.all([
+                getTagSimilarity(query, video.title),
+                getTagSimilarity(query, channel_name)
+            ]);
 
-    const filtered = results
-        .filter(r => r.score >= 0.2)
-        .map(r => ({
-            ...r.video,
-            channelInfo: channelInfo[r.video.channel_id]
-        }));
+            // 태그 일부만 추출
+            const tagSubset = video.tags.slice(0, 2);
+            const tagScores = await Promise.all(
+                tagSubset.map(tag => getTagSimilarity(query, tag))
+            );
+            const bestTagScore = tagScores.length ? Math.max(...tagScores) : 0;
 
-    displayResults(filtered);
+            const avgScore = (titleScore + channelScore + bestTagScore) / 3;
+            return { video, score: avgScore };
+        });
+
+        results.sort((a, b) => b.score - a.score);
+
+        const filtered = results
+            .filter(r => r.score >= 0.2)
+            .map(r => ({
+                ...r.video,
+                channelInfo: channelInfo[r.video.channel_id]
+            }));
+
+        displayResults(filtered);
+    }
+    catch(error){        
+        alert("검색 결과를 불러오는데 실패했습니다. 새로고침해주세요.");       
+        location.reload();            
+    }
 }
 window.searchVideos = searchVideos;
 
