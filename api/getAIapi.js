@@ -20,7 +20,7 @@ async function compareTagsWithApi(firstWord, secondWord) {
         });
         // 정상적인 범위가 아닐때
         if (!response.ok) {
-            console.warn(`[API] 응답 실패 (${response.status}): ${firstWord}, ${secondWord}`);
+            console.warn(`[API] 응답 실패 (${response.status}): ${firstWord}, ${secondWord}`);           
             return null; 
         }
 
@@ -28,6 +28,9 @@ async function compareTagsWithApi(firstWord, secondWord) {
         return data;
     } catch (error) {
         console.error(`[API] 호출 오류: ${firstWord}, ${secondWord}`, error);
+        // 실제 api 문제일시 error 페이지 이동
+        location.href = "../error/error.html";  
+        alert("지금 API 사용하실수없는 상태입니다.")
         return null;
     }
 }
@@ -71,11 +74,13 @@ async function getTagSimilarity(tag1, tag2, retryCount = 3) {
     catch (err) {
         if (retryCount > 0) {
             console.warn(`[재시도] ${tag1} vs ${tag2} (${3 - retryCount + 1}회차)`);
-            await delay(200); // 실패 시에만 지연
+            await delay(500); // 실패 시에만 지연
             return await getTagSimilarity(tag1, tag2, retryCount - 1);
         }
         else {
             console.error(`[실패] ${tag1} vs ${tag2} → 최대 재시도 도달`);
+            location.href = "../../error/error.html";
+            alert(`[실패] ${tag1} vs ${tag2} → 최대 재시도 도달`);
             similarityCache.set(key, 0);
             return 0;
         }
