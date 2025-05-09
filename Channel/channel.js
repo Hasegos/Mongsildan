@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const beforeDay = document.getElementById("date");
         
         smallVideoLink.href = `../videos/videos.html?channel_id=${linkChannelId}&video_id=${linkvideoId}`;
-        viewText.textContent = getViews(views) +  " · ";
+        viewText.textContent = views +  " · ";
         mainImg.src = like;      
         beforeDay.textContent = date
         videoDescription.textContent = videoMainDescription;  
@@ -173,7 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
           setTimeout(renderChunk, 1);        
         }
         // smallvideo
-        smallvideo(like,videoMainDescription,view,getTimeAgo(date), linkvideoId, linkChannelId);
+        smallvideo(like,videoMainDescription,getViews(view),getTimeAgo(date), linkvideoId, linkChannelId);
       }
       renderChunk();
     }
