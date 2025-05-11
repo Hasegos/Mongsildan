@@ -1,7 +1,7 @@
 // 채널 아이디에 해당 내용
 async function getChannelInfo(channelID) {
     try {
-        const channel = await fetch(`http://techfree-oreumi-api.kro.kr:5000/channel/getChannelInfo?id=${channelID}`, {
+        const channel = await fetch(`https://www.techfree-oreumi-api.ai.kr/channel/getChannelInfo?id=${channelID}`, {
             method: "GET",
             headers: {
             "Content-Type": "application/json",
