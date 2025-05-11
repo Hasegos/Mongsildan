@@ -26,7 +26,7 @@
 ## 팀원
 
 - 최수호 [Hasegos](https://github.com/Hasegos)
-- 이소연 [BlueGraffie-hub](https://github.com/BlueGraffie-hub)
+- 이소연 [BlueGiraffe07](https://github.com/BlueGiraffe07)
 - 김재경 [Jaekyung89](https://github.com/Jaekyung89)
 
 ## 팀원 소개
