@@ -1,7 +1,7 @@
 // 총 영상 정보
 async function getVideoList() {
     try{
-        const videoList = await fetch(`http://techfree-oreumi-api.kro.kr:5000/video/getVideoList`);  
+        const videoList = await fetch(`https://www.techfree-oreumi-api.ai.kr/video/getVideoList`);  
         
         if(!videoList.ok){
             throw new Error(`HTTP 오류 ${videoList.status}`);

@@ -1,7 +1,7 @@
 // 영상 정보
 async function getVideoInfo(videoID) {
     try{
-        const video = await fetch(`http://techfree-oreumi-api.kro.kr:5000/video/getVideoInfo?video_id=${videoID}`, {
+        const video = await fetch(`https://www.techfree-oreumi-api.ai.kr/video/getVideoInfo?video_id=${videoID}`, {
             method: "GET",
             headers: {
             "Content-Type": "application/json",
