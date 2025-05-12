@@ -17,7 +17,9 @@ function menuButton(cuurrentPage,check) {
             try {         
                 loadHtml("aside","../sidebar/html/aside2.html", () => {            
                     styleLink.href = "../sidebar/style/aside2.css";
-                    document.head.appendChild(styleLink);  
+                    document.head.appendChild(styleLink); 
+                    // 초기 구독상태 확인
+                    renderSavedSubscriptions(aside);                     
                     // 홈 페이지
                     if(check == 1){                    
                         cuurrentPage = 2;
@@ -42,8 +44,9 @@ function menuButton(cuurrentPage,check) {
             try{
                 loadHtml("aside","../sidebar/html/aside.html",() =>{          
                     styleLink.href = "../sidebar/style/aside.css";
-                    document.head.appendChild(styleLink);                 
-                    
+                    document.head.appendChild(styleLink);  
+                    // 초기 구독상태 확인
+                    renderSavedSubscriptions(aside);                                   
                     aside.style.display = "";
                     cuurrentPage = 1; 
                     if(window.innerWidth <= 625) {
@@ -55,8 +58,7 @@ function menuButton(cuurrentPage,check) {
                     
                     if(window.innerWidth > 625){
                         aside.classList.remove("mobile-open");
-                    }
-                    
+                    }                    
 
                     if(check == 2) {
                         aside.style.width = "0px";
@@ -77,6 +79,5 @@ function menuButton(cuurrentPage,check) {
             cuurrentPage = 2;           
         }    
     });
-
 }
 window.menuButton = menuButton;
