@@ -1,5 +1,5 @@
 async function compareTagsWithApi(firstWord, secondWord) {
-    const openApiURL = 'http://aiopen.etri.re.kr:8000/WiseWWN/WordRel';
+    const openApiURL = 'https://www.techfree-oreumi-api.ai.kr/WiseWWN/WordRel';
     const access_key = 'd61d6f46-c58e-4888-900b-9a6615014a22';
 
     const requestJson = {
