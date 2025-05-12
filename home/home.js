@@ -48,6 +48,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const closeBtn = document.getElementById("closeFilter");
       const tabs = document.querySelectorAll(".tab-item");
 
+
+      // 토글 버튼
       function toggleScrollButtons() {
         const scrollLeft = scrollContainer.scrollLeft;
         const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
@@ -92,15 +94,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!filterModal.contains(e.target) && !filterBtn.contains(e.target)) {
           filterModal.classList.remove("show");
         }
-      });
-
-      document.querySelectorAll(".filter-option").forEach((btn) => {
-        btn.addEventListener("click", (e) => {
-          const filterValue = e.target.dataset.filter;
-          window.location.href = `/filtered.html?filter=${filterValue}`;
-        });
-      });      
+      });     
     });
+
   }
   catch(error){
     location.href = "../error/error.html";
@@ -135,15 +131,69 @@ document.addEventListener("DOMContentLoaded", () => {
   try{    
     async function URL() {    
       const videos = await getVideoList();  
+
+
+      // 필터 업로드날짜 기준
+      let currentFilter = null;    
+      const allowed = new Set(['today', 'this-week', 'this-month', 'this-year']);
       
       const Div = document.querySelector("section");
       const chunkSize = 4;
-      let currentIndex = 0;
+      let currentIndex = 0; 
+
+      document.querySelectorAll(".filter-option").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          const f = e.currentTarget.dataset.filter; // 걸래내기위해
+          if(!allowed.has(f)) return; // 업로드날짜 아니면 거르기
+
+          currentFilter = f;
+          currentIndex = 0;
+          Div.innerHTML = "";
+          renderChunk();
+        });
+      });
 
       async function renderChunk() {
         if(window.isSearching) return;
+
+        const now = new Date(); // 오늘 날짜
+        let startDate = null;
+        if(currentFilter === "today"){          
+          // 오늘 날짜
+          startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate()); 
+        }
+        else if(currentFilter === "this-week"){
+          startDate = new Date(now);
+          startDate.setDate(now.getDate() - 6);
+          startDate.setHours(0, 0, 0, 0);
+        }
+        else if(currentFilter === "this-month"){
+          // 이번달 1월 1일 기준
+          startDate = new Date(now);
+          startDate.setDate(now.getDate() - 30);
+          startDate.setHours(0, 0, 0, 0);
+        }
+        else if(currentFilter === "this-year"){
+          // 올해 1월 1일 기준
+          startDate = new Date(now);
+          startDate.setDate(now.getFullYear() - 1);
+          startDate.setHours(0, 0, 0, 0);          
+        } 
+        
+
+        let listToRender = videos;
+        if(startDate){
+          listToRender = videos.filter((video) => {            
+            const videoDate = new Date(video.created_dt);
+
+            console.log(videoDate, video.title);
+
+            return videoDate >= startDate && videoDate <= now;
+          });
+        }      
+
         const fragment = document.createDocumentFragment();
-        const chunk = videos.slice(currentIndex, currentIndex + chunkSize);
+        const chunk = listToRender.slice(currentIndex, currentIndex + chunkSize);
 
         const channelInfos = await Promise.all(
           chunk.map((video) => getChannelInfo(video.channel_id))
