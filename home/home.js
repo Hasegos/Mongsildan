@@ -102,13 +102,12 @@ document.addEventListener("DOMContentLoaded", () => {
     location.href = "../error/error.html";
     alert("헤더 서브바 불러오기 중 오류 발생");   
   }
-
   // 사이드바 불러오기
   try{    
     let cuurrentPage = 1 , check = 1;
     loadHtml("aside", "../sidebar/html/aside.html",() => {
-
       const aside = document.querySelector("aside");
+      renderSavedSubscriptions(aside);
       
       if(window.innerWidth > 625){
         aside.classList.remove("mobile-open");
@@ -131,8 +130,6 @@ document.addEventListener("DOMContentLoaded", () => {
   try{    
     async function URL() {    
       const videos = await getVideoList();  
-
-
 
       // 필터 업로드날짜 기준
       let currentFilter = null;    
