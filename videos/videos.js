@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const params = new URLSearchParams(window.location.search);
   const channelId = parseInt(params.get("channel_id")); 
   const videoId = parseInt(params.get("video_id"));
-  const description = document.getElementById("description");
+  
 
   // 채널 주인, 채널 이름  
   let currentChannelProfile = "";
@@ -48,7 +48,6 @@ document.addEventListener("DOMContentLoaded", function () {
     location.href = "../error/error.html";
     alert("사이드바 불러오기 중 오류 발생");
   }
-
   function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
@@ -79,9 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const date = document.getElementById("date");
       const channelLink = document.getElementById("channel-link");
       const description = document.getElementById("description");
-      const allVideos = await getVideoList();
-      // 현재 영상 태그 (목록들)
-      const currentVideoTags = videos.tags || [];
+      
 
       // 채널 프로필 및 채널명 저장 (댓글용)
       currentChannelProfile = channel.channel_profile;
@@ -202,83 +199,94 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         updateCountsDisplay(); // 화면 업데이트
       });
-      
-      // 현재 영상의 대표 태그 뽑기
-      async function findBestTag(tags) {
-        let bestTag = null;
-        let bestScore = -1;
-      
-        for (let i = 0; i < tags.length; i++) {
-          let total = 0;
-          for (let j = 0; j < tags.length; j++) {
-            // 자기 자신은 제외
-            if (i === j){
-              continue;                
-            } 
-            total += await getTagSimilarity(tags[i], tags[j]);
-          }
-          const avg = total / (tags.length - 1);
-          if (avg > bestScore) {
-            bestScore = avg;
-            bestTag = tags[i];
-          }
-        }    
-        return bestTag;
-      }
+
+
+      const allVideos = await getVideoList();
+
+      // 자기 영상 제외
+      const candidateVideos = allVideos.filter(v => v.id !== videos.id);
+      // 현재 영상 태그 (목록들)
+      const currentVideoTag = videos.tags || [];
+
+      // 대표 태그 계산      
+      const tagAverage = await Promise.all(
+        currentVideoTag.map(async tag => {
+          const sim =  await Promise.all(
+            currentVideoTag.filter(t => t !== tag).map(t =>getTagSimilarity(tag, t))
+            );
+            return {tag, avg : sim.reduce((a,b) => a + b, 0) / sim.length};            
+        })          
+      );
     
-      // 비디오 유사도 계산
-      async function calculateSimilarities(allVideos, currentVideoTags) {
-        const similarityResults = [];
-        const baseTag = await findBestTag(currentVideoTags); // 대표 태그 1개만 사용
-      
-        for (let video of allVideos) {
-          let total = 0;      
-          for (let tag of video.tags) {        
-            total += await getTagSimilarity(baseTag, tag);
-          }    
-          const averageScore = total / video.tags.length;
-          similarityResults.push({ video, averageScore });
+      // 대표 영상 태그 점수 비교
+      const bestTagObj = tagAverage.reduce((best, cur) => cur.avg > best.avg ? cur : best, {tag: null, avg: -1});
+      // 대표 영상 태그
+      const baseTag = bestTagObj.tag;         
+
+      // 유사도 캐시 설정
+      const simCache = new Map();
+      async function getChacheSim(a, b) {
+        const key = `${a}_${b}`;
+        if(simCache.has(key)){
+          return simCache.get(key);
         }
-      
-        similarityResults.sort((a, b) => b.averageScore - a.averageScore);
-        return similarityResults;
+        const score = await getTagSimilarity(a, b);
+        simCache.set(key, score);
+        return score;        
       }
+
+      // 대표 태그랑 태그 유사도 계산
       
-      // 추천 실행
-      async function recommendVideos() {
-        const similarityResults = await calculateSimilarities(allVideos, currentVideoTags);
-      
-        const filteredResults = similarityResults.filter(
-          result => result.averageScore >= 0.3
+        const simResults = await Promise.all(
+          candidateVideos.map(async vid => {
+            const scores = await Promise.all(
+              vid.tags.map(async tag => getChacheSim(baseTag, tag))
+            )
+            const avgScore = scores.reduce((sum, v) => sum + v , 0) / scores.length;       
+          
+          return { video: vid , score : avgScore};          
+          })
         );      
-        renderRelatedVideos(filteredResults.map(result => result.video),".related-videos1");
-        renderRelatedVideos(filteredResults.map(result => result.video),".related-videos2");
-      }    
-      recommendVideos();
 
-      async function renderRelatedVideos(sortedVideos,selector) {      
-        const relatedVideosContainer = document.querySelector(selector);
-        relatedVideosContainer.innerHTML = '';  // 기존 관련 비디오 초기화
-        for(const video of sortedVideos){     
-            const channelInfo =  await getChannelInfo(video.channel_id) ;
-            const channelName = channelInfo.channel_name;
+      const recommend =  simResults
+        .filter(r => r.score >= 0.3)
+        .sort((a,b) => b.score - a.score)
+        .map(r => r.video);   
+        
+      // 채널 정보 캐싱
+      const uniqueChannelIds = [...new Set(allVideos.map(video => video.channel_id))];
+      const  recChannelCache = {};
+      await Promise.all(
+        uniqueChannelIds.map(async id => {          
+          recChannelCache[id] = await getChannelInfo(id);
+        })
+      )     
 
-            const relatedVideoElement = document.createElement("div");
-            relatedVideoElement.classList.add("related-video");
-            relatedVideoElement.innerHTML = `
+      // 화면찍기
+      async function renderRelatedVideos(selector) {      
+        const container = document.querySelector(selector);
+        container.innerHTML = '';  // 기존 관련 비디오 초기화
+        recommend.forEach(video =>{     
+            const ch = recChannelCache[video.channel_id] ;            
+
+            const el = document.createElement("div");
+            el.classList.add("related-video");
+            el.innerHTML = `
                 <a href="../videos/videos.html?channel_id=${video.channel_id}&video_id=${video.id}" class="card-link">
                     <img src="${video.thumbnail}" loading="lazy" />
                 </a>
                 <div class="video-text">
                     <h4>${video.title}</h4>
-                    <p>${channelName}</p>
+                    <p>${ch.channel_name}</p>
                     <p>${video.views ? getViews(video.views) : "조회수가 없습니다."}</p>
                     <p>${video.created_dt ? getTimeAgo(video.created_dt) : "잘못된 영상입니다."}</p>
                 </div>
             `;
-            relatedVideosContainer.appendChild(relatedVideoElement);
-        };
+            container.appendChild(el);
+        });
       }
+      renderRelatedVideos(".related-videos1");
+      renderRelatedVideos(".related-videos2");
     }  
     video();
   }
@@ -369,33 +377,5 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /* 구독 버튼 */
-  try{    
-    const subscribeBtn = document.getElementById('subscribe-btn');
-    const subscribeText = document.getElementById('subscribe-text');
-    const bellIcon = document.getElementById('bell-icon');
-    let subscribed = false;
-
-    subscribeBtn.addEventListener('click', () => {
-      subscribed = !subscribed;
-      if (subscribed) {
-        subscribeText.textContent = '구독중';
-        subscribeBtn.style.backgroundColor = '#515353'; // 구독중 배경
-        bellIcon.style.display = 'inline';
-        bellIcon.classList.add('bell-shake');
-    
-        bellIcon.addEventListener('animationend', () => {
-          bellIcon.classList.remove('bell-shake');
-        }, { once: true });
-    
-      } else {
-        subscribeText.textContent = '구독';
-        subscribeBtn.style.backgroundColor = 'white'; // 구독전 배경
-        bellIcon.style.display = 'none';
-      }  
-    });   
-  }
-  catch(error){
-    alert("구독 버튼 오류 발생");
-    location.reload();
-  }
+  subscribe();  
 });
