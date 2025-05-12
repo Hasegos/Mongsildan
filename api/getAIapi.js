@@ -39,7 +39,7 @@ async function compareTagsWithApi(firstWord, secondWord) {
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 const similarityCache = new Map();
 
-async function getTagSimilarity(tag1, tag2, retryCount = 5) {
+async function getTagSimilarity(tag1, tag2, retryCount = 15) {
     const [w1, w2] = [tag1, tag2].sort();
     // 중복 요청을 막기위해서 (ex '배' vs '과일' , '과일' vs '배')
     const key = `${w1}_${w2}`;
@@ -73,8 +73,8 @@ async function getTagSimilarity(tag1, tag2, retryCount = 5) {
     // 총 3번 retry (fallback, 백오프 방식으로 재시도)
     catch (err) {
         if (retryCount > 0) {
-            console.warn(`[재시도] ${tag1} vs ${tag2} (${5 - retryCount + 1}회차)`);
-            await delay(600); // 실패 시에만 지연
+            console.warn(`[재시도] ${tag1} vs ${tag2} (${15 - retryCount + 1}회차)`);
+            await delay(500); // 실패 시에만 지연
             return await getTagSimilarity(tag1, tag2, retryCount - 1);
         }
         else {
