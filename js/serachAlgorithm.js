@@ -7,7 +7,8 @@ async function limitedMap(array, limit, asyncFn) {
     const results = [];
     const executing = [];
     for (const item of array) {
-        const p = asyncFn(item).then(result => {
+        const p = Promise.resolve().then(() => asyncFn(item))
+        .then(result => {
             executing.splice(executing.indexOf(p), 1); 
             return result; 
         })
@@ -34,19 +35,28 @@ async function searchVideos(query) {
         }
 
         // 채널 정보 캐싱
+        const uniqueChannelIds = [...new Set(videos.map(video => video.channel_id))];
         const channelInfo = {};
         await Promise.all(
-            videos.map(async (video) => {
-                if (!channelInfo[video.channel_id]) {
-                    const info = await getChannelInfo(video.channel_id);
-                    channelInfo[video.channel_id] = {
-                        channel_name: info.channel_name,
-                        channel_profile: info.channel_profile
-                    };
-                }
+            uniqueChannelIds.map(async id => {                
+                    const info = await getChannelInfo(id);
+                    channelInfo[id] = info;
+                
             })
         );
-        const results = await limitedMap(videos, 5, async (video) => {   
+        // 태그 유사도 캐싱
+        const SimilarityCache = new Map();
+        async function getCachedSimilarity(text) {
+            const key = `${query}_${text}`;
+            if(SimilarityCache.has(key)){
+                return SimilarityCache.get(key);
+            }
+            const score = await getTagSimilarity(query, text);
+            SimilarityCache.set(key, score);
+            return score;
+        }
+
+        const results = await limitedMap(videos, 10, async (video) => {   
         
             const { channel_name, channel_profile } = channelInfo[video.channel_id];
 
@@ -59,14 +69,14 @@ async function searchVideos(query) {
             }
 
             const [titleScore, channelScore] = await Promise.all([
-                getTagSimilarity(query, video.title),
-                getTagSimilarity(query, channel_name)
+                getCachedSimilarity(video.title),
+                getCachedSimilarity(channel_name)
             ]);
 
             // 태그 일부만 추출
             const tagSubset = video.tags.slice(0, 2);
             const tagScores = await Promise.all(
-                tagSubset.map(tag => getTagSimilarity(query, tag))
+                tagSubset.map(tag => getCachedSimilarity(tag))
             );
             const bestTagScore = tagScores.length ? Math.max(...tagScores) : 0;
 
@@ -140,6 +150,5 @@ async function displayResults(videos) {
             setTimeout(renderChunk, 1);
         }
     }
-
     renderChunk();
 }
