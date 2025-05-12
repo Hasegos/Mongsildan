@@ -40,8 +40,10 @@ document.addEventListener("DOMContentLoaded", function () {
       document.head.appendChild(styleLink);    
 
       // 초기에 안보이게 설정
-      aside.style.display = "none";     
-      menuButton(cuurrentPage, check);
+      renderSavedSubscriptions(aside);
+      menuButton(cuurrentPage, check);     
+      
+      aside.style.display = "none";      
     });  
   }
   catch (error) {
@@ -287,6 +289,9 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       renderRelatedVideos(".related-videos1");
       renderRelatedVideos(".related-videos2");
+
+       /* 구독 버튼 */  
+      initSubscribeButton(channelId, currentChannelName, currentChannelProfile);
     }  
     video();
   }
@@ -376,6 +381,5 @@ document.addEventListener("DOMContentLoaded", function () {
     location.reload();
   }
 
-  /* 구독 버튼 */
-  subscribe();  
+ 
 });
