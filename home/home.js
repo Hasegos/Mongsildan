@@ -133,6 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const videos = await getVideoList();  
 
 
+
       // 필터 업로드날짜 기준
       let currentFilter = null;    
       const allowed = new Set(['today', 'this-week', 'this-month', 'this-year']);
@@ -163,20 +164,21 @@ document.addEventListener("DOMContentLoaded", () => {
           startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate()); 
         }
         else if(currentFilter === "this-week"){
+          // 일주일 전
           startDate = new Date(now);
           startDate.setDate(now.getDate() - 6);
           startDate.setHours(0, 0, 0, 0);
         }
         else if(currentFilter === "this-month"){
-          // 이번달 1월 1일 기준
+          // 한달전
           startDate = new Date(now);
           startDate.setDate(now.getDate() - 30);
           startDate.setHours(0, 0, 0, 0);
         }
         else if(currentFilter === "this-year"){
-          // 올해 1월 1일 기준
+          // 1년전
           startDate = new Date(now);
-          startDate.setDate(now.getFullYear() - 1);
+          startDate.setDate(now.getDate() - 365);
           startDate.setHours(0, 0, 0, 0);          
         } 
         
@@ -185,22 +187,34 @@ document.addEventListener("DOMContentLoaded", () => {
         if(startDate){
           listToRender = videos.filter((video) => {            
             const videoDate = new Date(video.created_dt);
-
-            console.log(videoDate, video.title);
-
             return videoDate >= startDate && videoDate <= now;
           });
         }      
 
+        if(startDate && listToRender.length === 0){
+          Div.innerHTML = '<p>해당 기간에 업로드된 영상이 없습니다.</p>';
+          return;
+        }
+
         const fragment = document.createDocumentFragment();
-        const chunk = listToRender.slice(currentIndex, currentIndex + chunkSize);
+        const chunk = listToRender.slice(currentIndex, currentIndex + chunkSize);               
+        
 
-        const channelInfos = await Promise.all(
-          chunk.map((video) => getChannelInfo(video.channel_id))
-        );
-
-        chunk.forEach((video, index) => {
-          const { channel_name, channel_profile } = channelInfos[index];       
+        // 채널 아이디만 미리 뽑기
+        const uniqueChannelIds = [...new Set(
+          listToRender.map(video => video.channel_id)
+        )];
+        
+        // 채널 정보 가져오기
+        const channelInfo = {};
+        await Promise.all(
+          uniqueChannelIds.map(async id => {        
+            channelInfo[id] = await getChannelInfo(id);
+          })
+        )     
+        
+        chunk.forEach((video) => {
+          const { channel_name, channel_profile } = channelInfo[video.channel_id];       
           // 조회수
           const viewsText = (video.views!= null) ? getViews(video.views) : "죄회수가 없습니다.";
           // 업로드 날짜
