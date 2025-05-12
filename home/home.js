@@ -180,8 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
           startDate = new Date(now);
           startDate.setDate(now.getDate() - 365);
           startDate.setHours(0, 0, 0, 0);          
-        } 
-        
+        }        
 
         let listToRender = videos;
         if(startDate){
@@ -197,8 +196,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         const fragment = document.createDocumentFragment();
-        const chunk = listToRender.slice(currentIndex, currentIndex + chunkSize);               
-        
+        const chunk = listToRender.slice(currentIndex, currentIndex + chunkSize);          
 
         // 채널 아이디만 미리 뽑기
         const uniqueChannelIds = [...new Set(
