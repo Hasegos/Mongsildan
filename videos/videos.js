@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // 초기에 안보이게 설정
       aside.style.display = "none";     
       menuButton(cuurrentPage, check);
+      renderSavedSubscriptions();
     });  
   }
   catch (error) {
@@ -90,7 +91,6 @@ document.addEventListener("DOMContentLoaded", function () {
       // 채널 프로필
       channelProfile.src = channel.channel_profile;
       // 채널 프로필 링크
-      channelLink.href = `../Channel/channel.html?id=${channelId}`;
       channelLink.href = `../Channel/channel.html?id=${channelId}`;
       // 비디오 영상
       video.src = `https://storage.googleapis.com/youtube-clone-video/${videoId}.mp4`
@@ -376,8 +376,44 @@ document.addEventListener("DOMContentLoaded", function () {
     let subscribed = false;
 
     subscribeBtn.addEventListener('click', () => {
+
+      function toggleSubscription(channelId, channelName, channelProfile) {
+        const subscriptionList = document.querySelector('.subscription');
+        const existingItem = subscriptionList.querySelector(`li[data-channel-id="${channelId}"]`);
+
+        let savedSubs = JSON.parse(localStorage.getItem('subscriptions') || '[]');
+
+        if (existingItem) {
+          // 이미 구독 중인 항목이면 제거
+          existingItem.remove();
+          savedSubs = savedSubs.filter(sub => sub.channelId !== channelId);
+        } else {
+          // 구독 목록에 추가
+          const li = document.createElement('li');
+          li.setAttribute('data-channel-id', channelId);
+
+          const a = document.createElement('a');
+          a.href = `../Channel/channel.html?id=${channelId}`;
+          const img = document.createElement('img');
+          img.src = channelProfile;
+          a.appendChild(img);
+          a.append(channelName);
+          li.appendChild(a);
+
+          const firstItem = subscriptionList.querySelector('li.title')?.nextElementSibling;
+          if (firstItem) {
+            subscriptionList.insertBefore(li, firstItem);
+          } else {
+            subscriptionList.appendChild(li);
+          }
+          savedSubs.push({ channelId, channelName, channelProfile });
+        }
+        localStorage.setItem('subscriptions', JSON.stringify(savedSubs));
+      }
+
       subscribed = !subscribed;
       if (subscribed) {
+        toggleSubscription(channelId, currentChannelName, currentChannelProfile);
         subscribeText.textContent = '구독중';
         subscribeBtn.style.backgroundColor = '#515353'; // 구독중 배경
         bellIcon.style.display = 'inline';
@@ -388,6 +424,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }, { once: true });
     
       } else {
+        toggleSubscription(channelId, currentChannelName, currentChannelProfile);
         subscribeText.textContent = '구독';
         subscribeBtn.style.backgroundColor = 'white'; // 구독전 배경
         bellIcon.style.display = 'none';
@@ -398,4 +435,36 @@ document.addEventListener("DOMContentLoaded", function () {
     alert("구독 버튼 오류 발생");
     location.reload();
   }
+
+  // 구독항목 불러오기
+  function renderSavedSubscriptions() {
+    const subscriptionList = document.querySelector('.subscription');
+    if (!subscriptionList) return;
+
+    const savedSubs = JSON.parse(localStorage.getItem('subscriptions') || '[]');
+
+    for (const { channelId, channelName, channelProfile } of savedSubs) {
+      const exists = subscriptionList.querySelector(`li[data-channel-id="${channelId}"]`);
+      if (exists) continue;
+
+      const li = document.createElement('li');
+      li.setAttribute('data-channel-id', channelId);
+
+      const a = document.createElement('a');
+      a.href = `../Channel/channel.html?id=${channelId}`;
+      const img = document.createElement('img');
+      img.src = channelProfile;
+      a.appendChild(img);
+      a.append(channelName);
+      li.appendChild(a);
+
+      const firstItem = subscriptionList.querySelector('li.title')?.nextElementSibling;
+      if (firstItem) {
+        subscriptionList.insertBefore(li, firstItem);
+      } else {
+        subscriptionList.appendChild(li);
+      }
+    }
+  }
+
 });

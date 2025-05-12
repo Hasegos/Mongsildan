@@ -119,6 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     
       menuButton(cuurrentPage,check);
+      renderSavedSubscriptions();
       window.addEventListener("resize", () => {
         if (window.innerWidth > 625) {
           aside.classList.remove("mobile-open");
@@ -214,4 +215,39 @@ document.addEventListener("DOMContentLoaded", () => {
     location.reload();
     alert("1315px 미만 반응형 중 오류 발생");
   }
+
+  // 구독항목 불러오기
+  function renderSavedSubscriptions() {
+    console.log("구독목록 불러오기");
+    const subscriptionList = document.querySelector('.subscription');
+    if (!subscriptionList) {
+      return;
+    }
+
+    const savedSubs = JSON.parse(localStorage.getItem('subscriptions') || '[]');
+
+    for (const { channelId, channelName, channelProfile } of savedSubs) {
+      const exists = subscriptionList.querySelector(`li[data-channel-id="${channelId}"]`);
+      if (exists) continue;
+
+      const li = document.createElement('li');
+      li.setAttribute('data-channel-id', channelId);
+
+      const a = document.createElement('a');
+      a.href = `../Channel/channel.html?id=${channelId}`;
+      const img = document.createElement('img');
+      img.src = channelProfile;
+      a.appendChild(img);
+      a.append(channelName);
+      li.appendChild(a);
+
+      const firstItem = subscriptionList.querySelector('li.title')?.nextElementSibling;
+      if (firstItem) {
+        subscriptionList.insertBefore(li, firstItem);
+      } else {
+        subscriptionList.appendChild(li);
+      }
+    }
+  }
+
 });

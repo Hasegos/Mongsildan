@@ -3,6 +3,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
   const channelId = parseInt(params.get("id"));   
 
+  // 채널 주인, 채널 이름  
+  let currentChannelProfile = "";
+  let currentChannelName = "";
+
   // 최상단바 불러오기
   try{ 
     loadHtml("header", "../top/html/header-top.html", () => {  
@@ -32,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     
       menuButton(cuurrentPage,check);
+      renderSavedSubscriptions();
       window.addEventListener("resize", () => {
         if (window.innerWidth > 625) {
           aside.classList.remove("mobile-open");
@@ -52,12 +57,49 @@ document.addEventListener("DOMContentLoaded", () => {
     let subscribed = false;
 
     subscribeBtn.addEventListener('click', () => {
+
+      function toggleSubscription(channelId, channelName, channelProfile) {
+        const subscriptionList = document.querySelector('.subscription');
+        const existingItem = subscriptionList.querySelector(`li[data-channel-id="${channelId}"]`);
+
+        let savedSubs = JSON.parse(localStorage.getItem('subscriptions') || '[]');
+
+        if (existingItem) {
+          // 이미 구독 중인 항목이면 제거
+          existingItem.remove();
+          savedSubs = savedSubs.filter(sub => sub.channelId !== channelId);
+        } else {
+          // 구독 목록에 추가
+          const li = document.createElement('li');
+          li.setAttribute('data-channel-id', channelId);
+
+          const a = document.createElement('a');
+          a.href = `../Channel/channel.html?id=${channelId}`;
+          const img = document.createElement('img');
+          img.src = channelProfile;
+          a.appendChild(img);
+          a.append(channelName);
+          
+          li.appendChild(a);
+          const firstItem = subscriptionList.querySelector('li.title')?.nextElementSibling;
+
+          if (firstItem) {
+            subscriptionList.insertBefore(li, firstItem);
+          } else {
+            subscriptionList.appendChild(li);
+          }
+          savedSubs.push({ channelId, channelName, channelProfile });
+        }
+        localStorage.setItem('subscriptions', JSON.stringify(savedSubs));
+      }
+
       subscribed = !subscribed;
       if (subscribed) {
         subscribeText.textContent = '구독중';
         subscribeBtn.style.backgroundColor = '#515353'; // 구독중 배경
         bellIcon.style.display = 'inline';
         bellIcon.classList.add('bell-shake');
+        toggleSubscription(channelId, currentChannelName, currentChannelProfile);
     
         bellIcon.addEventListener('animationend', () => {
           bellIcon.classList.remove('bell-shake');
@@ -67,12 +109,13 @@ document.addEventListener("DOMContentLoaded", () => {
         subscribeText.textContent = '구독';
         subscribeBtn.style.backgroundColor = 'white'; // 구독전 배경
         bellIcon.style.display = 'none';
+        toggleSubscription(channelId, currentChannelName, currentChannelProfile);
       }  
-    });  
+    });   
   }
   catch(error){
-    location.reload();
     alert("구독 버튼 오류 발생");
+    location.reload();
   }
 
  /* title */
@@ -91,6 +134,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const subscribers = document.getElementById("subscribers");
       subscribers.textContent = getSubscriber(videos.subscribers);
+
+      // 채널 프로필 및 채널명 저장 (댓글용)
+      currentChannelProfile = profileImg.src;
+      currentChannelName = channelName.textContent;
+
     }   
 
   /* smallVideo */  
