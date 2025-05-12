@@ -26,11 +26,13 @@ document.addEventListener("DOMContentLoaded", () => {
   let cuurrentPage = 1 , check = 3;
   try{
     loadHtml("aside", "../sidebar/html/aside.html",() => {      
-      const aside = document.querySelector("aside");      
+      const aside = document.querySelector("aside");    
+      
+      renderSavedSubscriptions(aside);
       if(window.innerWidth > 625){
         aside.classList.remove("mobile-open");
       }
-    
+      
       menuButton(cuurrentPage,check);
       window.addEventListener("resize", () => {
         if (window.innerWidth > 625) {
@@ -47,6 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
  /* title */
   try{
     async function title() {       
+      const aside = document.querySelector("aside");
       const videos = await getChannelInfo(channelId);        
 
       const bannerImg = document.getElementById("banner-img");
@@ -54,12 +57,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const profileImg = document.getElementById("profile-img");
       profileImg.src = videos.channel_profile;
+      currentChannelProfile = videos.channel_profile;
 
       const channelName = document.getElementById("channel-name");
-      channelName.textContent = videos.channel_name;   
+      channelName.textContent = videos.channel_name; 
+      currentChannelName = videos.channel_name;   
 
       const subscribers = document.getElementById("subscribers");
       subscribers.textContent = getSubscriber(videos.subscribers);
+
+      // 구독 버튼
+      initSubscribeButton(channelId, currentChannelName, currentChannelProfile,aside);
     }   
 
   /* smallVideo */  
@@ -156,7 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* 구독 버튼 */
-  subscribe();  
+  
 
     /* 1315px 미만 반응형 */
   try{  
