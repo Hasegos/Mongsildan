@@ -3,8 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchQuery = params.get('search');
 
   window.isSearching = false;
-
-
    // 총 영상 정보 찍어주기
   try{    
     async function loadVideos() {    
@@ -123,8 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
       renderChunk();
-    }
-    
+    }    
     window.loadVideos = loadVideos;
   }
   catch(error){    
@@ -236,13 +233,14 @@ document.addEventListener("DOMContentLoaded", () => {
     let cuurrentPage = 1 , check = 1;
     loadHtml("aside", "../sidebar/html/aside.html",() => {
       const aside = document.querySelector("aside");
+      
       renderSavedSubscriptions(aside);
       
       if(window.innerWidth > 625){
         aside.classList.remove("mobile-open");
       }
     
-      menuButton(cuurrentPage,check);
+      menuButton(cuurrentPage,check,aside);
       window.addEventListener("resize", () => {
         if (window.innerWidth > 625) {
           aside.classList.remove("mobile-open");
@@ -253,9 +251,7 @@ document.addEventListener("DOMContentLoaded", () => {
   catch(error){
     location.href = "../error/error.html";
     alert("사이드바 불러오기 중 오류 발생");
-  }
-
- 
+  } 
 
   /* 1315px 미만 반응형 */
   try{    
@@ -279,4 +275,3 @@ document.addEventListener("DOMContentLoaded", () => {
     alert("1315px 미만 반응형 중 오류 발생");
   }
 });
-

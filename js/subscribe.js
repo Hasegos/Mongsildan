@@ -73,7 +73,7 @@ function reflectSubscribeUI(yes, text, btn, bell) {
 
 // 저장된 구독 목록을 사이드바에 렌더링
 function renderSavedSubscriptions(aside) {
-    console.log("실행됨")
+    
     const ul = aside.querySelector('ul.subscription');
     
     if (!ul) return;    

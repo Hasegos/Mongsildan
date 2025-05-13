@@ -1,7 +1,6 @@
-function menuButton(cuurrentPage,check) {
+function menuButton(cuurrentPage,check,aside) {
     const menuButton = document.getElementById("menuButton");    
-    // width 넓이 수정을위해서
-    const aside = document.querySelector("aside");    
+    // width 넓이 수정을위해서   
 
     menuButton.addEventListener("click", () => {    
         aside.classList.remove("mobile-open");       
