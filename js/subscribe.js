@@ -19,7 +19,6 @@ function initSubscribeButton(channelId, channelName, channelProfile) {
     });
 }
 
-
 // 로컬스토리지 토글 함수
 function toggleSubscription(channelId, channelName, channelProfile) {    
     const saved = JSON.parse(localStorage.getItem('subscriptions') || '[]');
@@ -93,9 +92,8 @@ function renderSavedSubscriptions(aside) {
             <span>${channelName}</span>
             </a>
         `;
-            if (ref){
+        if (ref){
             ul.insertBefore(li, ref);
-            console.log(ul);
         } 
         else  {
             ul.appendChild(li);
@@ -104,5 +102,5 @@ function renderSavedSubscriptions(aside) {
 }
 
 // 전역 노출
-window.initSubscribeButton       = initSubscribeButton;
+window.initSubscribeButton = initSubscribeButton;
 window.renderSavedSubscriptions = renderSavedSubscriptions;
