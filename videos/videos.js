@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // 초기에 안보이게 설정
       renderSavedSubscriptions(aside);
-      menuButton(cuurrentPage, check);     
+      menuButton(cuurrentPage, check,aside);     
       
       aside.style.display = "none";      
     });  

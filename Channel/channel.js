@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
         aside.classList.remove("mobile-open");
       }
       
-      menuButton(cuurrentPage,check);
+      menuButton(cuurrentPage,check,aside);
       window.addEventListener("resize", () => {
         if (window.innerWidth > 625) {
           aside.classList.remove("mobile-open");
