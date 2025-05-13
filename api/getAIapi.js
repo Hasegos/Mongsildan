@@ -1,6 +1,7 @@
 async function compareTagsWithApi(firstWord, secondWord) {
     const openApiURL = 'https://www.techfree-oreumi-api.ai.kr/WiseWWN/WordRel';
-    const access_key = 'b5824ea9-9807-4035-a747-d81d32b6df46';
+    require('dotenv').config();
+    const access_key = process.env.ACCESS_KEY;
 
     const requestJson = {
         'argument': {
