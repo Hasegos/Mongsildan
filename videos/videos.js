@@ -21,7 +21,31 @@ document.addEventListener("DOMContentLoaded", function () {
       /* 상단 600px 일때 */   
       topLoad600px(); 
       /* 초기 검색시 */
-      searching();       
+      searching(); 
+      
+      
+      // 사이드바 불러오기
+      let cuurrentPage = 3 , check = 2;
+
+      try { 
+        loadHtml("aside", "../sidebar/html/aside.html",() => {    
+          const aside = document.querySelector("aside");    
+          let styleLink = document.createElement("link");
+          styleLink.rel = "stylesheet";
+          styleLink.href = "../sidebar/style/aside.css";
+          document.head.appendChild(styleLink);    
+
+          // 초기에 안보이게 설정
+          renderSavedSubscriptions(aside);
+          menuButton(cuurrentPage, check,aside,menuButtonId);     
+          
+          aside.style.display = "none";      
+        });  
+      }
+      catch (error) {
+        location.href = "../error/error.html";
+        alert("사이드바 불러오기 중 오류 발생");
+      }
     });  
   }
   catch (error) {
@@ -29,28 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
     alert("상단바 불러오기 중 오류 발생");
   }
   
-  // 사이드바 불러오기
-  let cuurrentPage = 3 , check = 2;
-
-  try { 
-    loadHtml("aside", "../sidebar/html/aside.html",() => {    
-      const aside = document.querySelector("aside");    
-      let styleLink = document.createElement("link");
-      styleLink.rel = "stylesheet";
-      styleLink.href = "../sidebar/style/aside.css";
-      document.head.appendChild(styleLink);    
-
-      // 초기에 안보이게 설정
-      renderSavedSubscriptions(aside);
-      menuButton(cuurrentPage, check,aside,menuButtonId);     
-      
-      aside.style.display = "none";      
-    });  
-  }
-  catch (error) {
-    location.href = "../error/error.html";
-    alert("사이드바 불러오기 중 오류 발생");
-  }
+ 
   function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }

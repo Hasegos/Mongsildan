@@ -149,6 +149,31 @@ document.addEventListener("DOMContentLoaded", () => {
         searchVideos(searchQuery);         
         history.replaceState(null, "", window.location.pathname);
       }
+
+      // 사이드바 불러오기
+      try{    
+        let cuurrentPage = 1 , check = 1;
+        loadHtml("aside", "../sidebar/html/aside.html",() => {
+          const aside = document.querySelector("aside");
+          
+          renderSavedSubscriptions(aside);
+          
+          if(window.innerWidth > 625){
+            aside.classList.remove("mobile-open");
+          }
+        
+          menuButton(cuurrentPage,check,aside,menuButtonId);
+          window.addEventListener("resize", () => {
+            if (window.innerWidth > 625) {
+              aside.classList.remove("mobile-open");
+            }
+          });    
+        });   
+      }
+      catch(error){
+        location.href = "../error/error.html";
+        alert("사이드바 불러오기 중 오류 발생");
+      } 
     });
   }
   catch(error){
@@ -229,30 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
     location.href = "../error/error.html";
     alert("헤더 서브바 불러오기 중 오류 발생");   
   }
-  // 사이드바 불러오기
-  try{    
-    let cuurrentPage = 1 , check = 1;
-    loadHtml("aside", "../sidebar/html/aside.html",() => {
-      const aside = document.querySelector("aside");
-      
-      renderSavedSubscriptions(aside);
-      
-      if(window.innerWidth > 625){
-        aside.classList.remove("mobile-open");
-      }
-    
-      menuButton(cuurrentPage,check,aside,menuButtonId);
-      window.addEventListener("resize", () => {
-        if (window.innerWidth > 625) {
-          aside.classList.remove("mobile-open");
-        }
-      });    
-    });   
-  }
-  catch(error){
-    location.href = "../error/error.html";
-    alert("사이드바 불러오기 중 오류 발생");
-  } 
+  
 
   /* 1315px 미만 반응형 */
   try{    
