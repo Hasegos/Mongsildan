@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }   
 
   /* smallVideo */  
-    async function smallvideo(like,videoMainDescription,views,date, linkvideoId, linkChannelId){
+    async function smallvideo(videoMainDescription,views,date, linkvideoId, linkChannelId,smallmainImg){
         /* 가장 추천수가 많은 페이지 띄우기 */
         const smallVideoLink = document.getElementById("video-link");
         const mainImg = document.getElementById("main-img");
@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         smallVideoLink.href = `../videos/videos.html?channel_id=${linkChannelId}&video_id=${linkvideoId}`;
         viewText.textContent = views +  " · ";
-        mainImg.src = like;      
+        mainImg.src = smallmainImg;      
         beforeDay.textContent = date
         videoDescription.textContent = videoMainDescription;  
 
@@ -106,6 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let date = "" /* 업로드 날짜 */
       let linkvideoId = 0  /* 영상 id */
       let linkChannelId = 0; /* 채널 id */
+      let smallmainImg = "";
       
       const videos = await getChannelVideoList(channelId);     
       const Div = document.querySelector(".playlist-grid");
@@ -124,7 +125,8 @@ document.addEventListener("DOMContentLoaded", () => {
         chunk.forEach((video) => {
 
           if(like < video.likes){
-            like = video.thumbnail; 
+            smallmainImg = video.thumbnail;
+            like = video.likes; 
             videoMainDescription = video.title;       
             view =  video.views;
             date = video.created_dt;
@@ -155,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
           setTimeout(renderChunk, 1);        
         }
         // smallvideo
-        smallvideo(like,videoMainDescription,getViews(view),getTimeAgo(date), linkvideoId, linkChannelId);
+        smallvideo(videoMainDescription,getViews(view),getTimeAgo(date), linkvideoId, linkChannelId,smallmainImg);
       }
       renderChunk();
     }
