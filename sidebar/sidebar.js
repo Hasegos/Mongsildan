@@ -1,6 +1,6 @@
-function menuButton(cuurrentPage,check,aside,menuButton) {  
+function menuButton(cuurrentPage,check,aside,menuButtonId) {  
 
-    menuButton.addEventListener("click", () => {    
+    menuButtonId.addEventListener("click", () => {    
         aside.classList.remove("mobile-open");       
         let styleLink = document.createElement("link");     
         styleLink.rel = "stylesheet";                
