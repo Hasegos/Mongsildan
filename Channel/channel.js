@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const params = new URLSearchParams(window.location.search);
   const channelId = parseInt(params.get("id"));   
+  let menuButtonId = "";
 
   // 최상단바 불러오기
   try{ 
@@ -10,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
       headerstyle.rel = "stylesheet";
       headerstyle.href = "../top/style/header-top.css";
       document.head.appendChild(headerstyle); 
+      menuButtonId = document.getElementById("menuButton");
 
       /* 상단 600px 일때 */   
       topLoad600px(); 
@@ -33,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
         aside.classList.remove("mobile-open");
       }
       
-      menuButton(cuurrentPage,check,aside);
+      menuButton(cuurrentPage,check,aside,menuButtonId);
       window.addEventListener("resize", () => {
         if (window.innerWidth > 625) {
           aside.classList.remove("mobile-open");

@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
   const searchQuery = params.get('search');
-
+  let menuButtonId = "";
   window.isSearching = false;
    // 총 영상 정보 찍어주기
   try{    
@@ -137,6 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
       styleLink.rel = "stylesheet";
       styleLink.href = "../top/style/header-top.css";
       document.head.appendChild(styleLink); 
+      menuButtonId = document.getElementById("menuButton");
 
       /* 상단 600px 일때 */   
       topLoad600px(); 
@@ -240,7 +241,7 @@ document.addEventListener("DOMContentLoaded", () => {
         aside.classList.remove("mobile-open");
       }
     
-      menuButton(cuurrentPage,check,aside);
+      menuButton(cuurrentPage,check,aside,menuButtonId);
       window.addEventListener("resize", () => {
         if (window.innerWidth > 625) {
           aside.classList.remove("mobile-open");

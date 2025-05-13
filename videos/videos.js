@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const params = new URLSearchParams(window.location.search);
   const channelId = parseInt(params.get("channel_id")); 
   const videoId = parseInt(params.get("video_id"));
+  let menuButtonId = "";
   
 
   // 채널 주인, 채널 이름  
@@ -16,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
       styleLink.rel = "stylesheet";
       styleLink.href = "../top/style/header-top.css";
       document.head.appendChild(styleLink);   
-      
+      menuButtonId = document.getElementById("menuButton");
       /* 상단 600px 일때 */   
       topLoad600px(); 
       /* 초기 검색시 */
@@ -41,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // 초기에 안보이게 설정
       renderSavedSubscriptions(aside);
-      menuButton(cuurrentPage, check,aside);     
+      menuButton(cuurrentPage, check,aside,menuButtonId);     
       
       aside.style.display = "none";      
     });  
