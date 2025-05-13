@@ -4,131 +4,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.isSearching = false;
 
-  // 최상단바 불러오기
+
+   // 총 영상 정보 찍어주기
   try{    
-      loadHtml("header", "../top/html/header-top.html", () => {
-
-      let styleLink = document.createElement("link");
-      styleLink.rel = "stylesheet";
-      styleLink.href = "../top/style/header-top.css";
-      document.head.appendChild(styleLink); 
-
-      /* 상단 600px 일때 */   
-      topLoad600px(); 
-      /* 초기 검색시 */
-      searching();   
-      
-      if(searchQuery) {  
-        window.isSearching = true;
-        searchVideos(searchQuery);         
-        history.replaceState(null, "", window.location.pathname);
-      }
-    });
-  }
-  catch(error){
-    location.href = "../error/error.html";
-    alert("최상단바 불러오기 중 오류 발생");   
-  }
-
-  // 헤더 서브바 불러오기
-  try{    
-    loadHtml(".nav", "../top/html/header-sub.html", () => { 
-
-      // 헤더 서브 css 불러오기
-      let styleLink = document.createElement("link");
-      styleLink.rel = "stylesheet";
-      styleLink.href = "../top/style/header-sub.css";
-      document.head.appendChild(styleLink);
-
-      const scrollContainer = document.getElementById("scrollContainer");
-      const scrollRightBtn = document.getElementById("scrollRightBtn");
-      const scrollLeftBtn = document.getElementById("scrollLeftBtn");
-      const filterBtn = document.getElementById("filterButton");
-      const filterModal = document.getElementById("filterModal");
-      const closeBtn = document.getElementById("closeFilter");
-      const tabs = document.querySelectorAll(".tab-item");
-
-
-      // 토글 버튼
-      function toggleScrollButtons() {
-        const scrollLeft = scrollContainer.scrollLeft;
-        const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
-
-        let isScrolled = scrollLeft > 0
-        scrollLeftBtn.style.display = isScrolled ? "flex" : "none";      
-
-        scrollRightBtn.style.display = scrollLeft < maxScroll - 1 ? "flex" : "none";      
-      }
-
-      scrollContainer.addEventListener("scroll", toggleScrollButtons);
-      window.addEventListener("resize", toggleScrollButtons);
-      toggleScrollButtons();
-
-      scrollRightBtn.addEventListener("click", () => {
-        scrollContainer.scrollBy({ left: 200, behavior: "smooth" });
-      });
-
-      scrollLeftBtn.addEventListener("click", () => {
-        scrollContainer.scrollBy({ left: -200, behavior: "smooth" });
-      });
-
-      tabs.forEach((tab) => {
-        tab.addEventListener("click", () => {
-          const category = tab.getAttribute("data-category");
-          tabs.forEach((t) => t.classList.remove("active"));
-          tab.classList.add("active");
-          window.location.href = `/filtered.html?tag=${category}`;
-        });
-      });
-
-      filterBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        filterModal.classList.toggle("show");
-      });
-
-      closeBtn.addEventListener("click", () => {
-        filterModal.classList.remove("show");
-      });
-
-      document.addEventListener("click", (e) => {
-        if (!filterModal.contains(e.target) && !filterBtn.contains(e.target)) {
-          filterModal.classList.remove("show");
-        }
-      });     
-    });
-
-  }
-  catch(error){
-    location.href = "../error/error.html";
-    alert("헤더 서브바 불러오기 중 오류 발생");   
-  }
-  // 사이드바 불러오기
-  try{    
-    let cuurrentPage = 1 , check = 1;
-    loadHtml("aside", "../sidebar/html/aside.html",() => {
-      const aside = document.querySelector("aside");
-      renderSavedSubscriptions(aside);
-      
-      if(window.innerWidth > 625){
-        aside.classList.remove("mobile-open");
-      }
-    
-      menuButton(cuurrentPage,check);
-      window.addEventListener("resize", () => {
-        if (window.innerWidth > 625) {
-          aside.classList.remove("mobile-open");
-        }
-      });    
-    });   
-  }
-  catch(error){
-    location.href = "../error/error.html";
-    alert("사이드바 불러오기 중 오류 발생");
-  }
-
-  // 총 영상 정보 찍어주기
-  try{    
-    async function URL() {    
+    async function loadVideos() {    
       const videos = await getVideoList();  
 
       // 필터 업로드날짜 기준
@@ -245,12 +124,138 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       renderChunk();
     }
-    URL()
+    
+    window.loadVideos = loadVideos;
   }
   catch(error){    
     location.href = "../error/error.html";
     alert("총 영상 정보 찍어주기 중 오류 발생");
   }
+
+  // 최상단바 불러오기
+  try{    
+      loadHtml("header", "../top/html/header-top.html", () => {
+
+      let styleLink = document.createElement("link");
+      styleLink.rel = "stylesheet";
+      styleLink.href = "../top/style/header-top.css";
+      document.head.appendChild(styleLink); 
+
+      /* 상단 600px 일때 */   
+      topLoad600px(); 
+      /* 초기 검색시 */
+      searching();   
+      
+      if(searchQuery) {  
+        window.isSearching = true;
+        searchVideos(searchQuery);         
+        history.replaceState(null, "", window.location.pathname);
+      }
+    });
+  }
+  catch(error){
+    location.href = "../error/error.html";
+    alert("최상단바 불러오기 중 오류 발생");   
+  }
+
+  // 헤더 서브바 불러오기
+  try{    
+    loadHtml(".nav", "../top/html/header-sub.html", () => { 
+
+      // 헤더 서브 css 불러오기
+      let styleLink = document.createElement("link");
+      styleLink.rel = "stylesheet";
+      styleLink.href = "../top/style/header-sub.css";
+      document.head.appendChild(styleLink);
+
+      const scrollContainer = document.getElementById("scrollContainer");
+      const scrollRightBtn = document.getElementById("scrollRightBtn");
+      const scrollLeftBtn = document.getElementById("scrollLeftBtn");
+      const filterBtn = document.getElementById("filterButton");
+      const filterModal = document.getElementById("filterModal");
+      const closeBtn = document.getElementById("closeFilter");
+      const tabs = document.querySelectorAll(".tab-item");
+
+
+      // 토글 버튼
+      function toggleScrollButtons() {
+        const scrollLeft = scrollContainer.scrollLeft;
+        const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+
+        let isScrolled = scrollLeft > 0
+        scrollLeftBtn.style.display = isScrolled ? "flex" : "none";      
+
+        scrollRightBtn.style.display = scrollLeft < maxScroll - 1 ? "flex" : "none";      
+      }
+
+      scrollContainer.addEventListener("scroll", toggleScrollButtons);
+      window.addEventListener("resize", toggleScrollButtons);
+      toggleScrollButtons();
+
+      scrollRightBtn.addEventListener("click", () => {
+        scrollContainer.scrollBy({ left: 200, behavior: "smooth" });
+      });
+
+      scrollLeftBtn.addEventListener("click", () => {
+        scrollContainer.scrollBy({ left: -200, behavior: "smooth" });
+      });
+
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const category = tab.getAttribute("data-category");
+          tabs.forEach((t) => t.classList.remove("active"));
+          tab.classList.add("active");
+          window.location.href = `/filtered.html?tag=${category}`;
+        });
+      });
+
+      filterBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        filterModal.classList.toggle("show");
+      });
+
+      closeBtn.addEventListener("click", () => {
+        filterModal.classList.remove("show");
+      });
+
+      document.addEventListener("click", (e) => {
+        if (!filterModal.contains(e.target) && !filterBtn.contains(e.target)) {
+          filterModal.classList.remove("show");
+        }
+      });     
+      loadVideos()
+    });
+    
+  }
+  catch(error){
+    location.href = "../error/error.html";
+    alert("헤더 서브바 불러오기 중 오류 발생");   
+  }
+  // 사이드바 불러오기
+  try{    
+    let cuurrentPage = 1 , check = 1;
+    loadHtml("aside", "../sidebar/html/aside.html",() => {
+      const aside = document.querySelector("aside");
+      renderSavedSubscriptions(aside);
+      
+      if(window.innerWidth > 625){
+        aside.classList.remove("mobile-open");
+      }
+    
+      menuButton(cuurrentPage,check);
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 625) {
+          aside.classList.remove("mobile-open");
+        }
+      });    
+    });   
+  }
+  catch(error){
+    location.href = "../error/error.html";
+    alert("사이드바 불러오기 중 오류 발생");
+  }
+
+ 
 
   /* 1315px 미만 반응형 */
   try{    
@@ -274,3 +279,4 @@ document.addEventListener("DOMContentLoaded", () => {
     alert("1315px 미만 반응형 중 오류 발생");
   }
 });
+
