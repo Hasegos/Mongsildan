@@ -1,0 +1,140 @@
+/* ============ header-global ============ */
+
+.header-global {
+  height: 56px;
+  width: 100%;  
+  background-color: #212121;
+  display: flex;  
+  justify-content: space-between;
+  padding: 0 16px;  
+  position: fixed;  
+  z-index: 1000;
+}
+
+/* 공통 아이콘 스타일 */
+.header-global__icon {
+  width: 40px;  
+  object-fit: contain;
+}
+
+/* ============ Left ============ */
+
+.header-global__left {
+  display: flex;  
+  gap: 10px;
+  margin-left: 40px;
+}
+
+/* 햄버그 */
+.header-global__menu-button {
+  background-color: #212121;
+  border: none;
+}
+
+.header-global__menu-button :hover{
+  background-color: #333;  
+}
+
+/* Youtube */
+.header-global__logo-button {
+  display: flex;
+  align-items: center;
+  padding: 18px 14px 18px 16px;
+  height: 56px;
+  text-decoration: none;
+  flex-direction: row;
+  cursor: pointer;
+}
+
+/* ============ Center ============ */
+
+.header-global__center {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 뒤로가기 이미지*/
+.header-global__back-Button{
+  border: none;
+  margin-right: 10px;  
+}
+
+/* 검색창 */
+.header-global__search-form {
+  display: flex;
+  width: 426px;
+  height: 40px;
+  border: 1px solid #333;
+  border-radius: 2px;  
+}
+
+/* 검색 입력창 */
+.header-global__search-input {
+  flex: 1;
+  background-color: #121212;
+  color: white;
+  border: none;
+  padding: 0 12px;
+  font-size: 14px;
+}
+
+.header-global__search-input:focus {
+  outline: none;
+}
+
+/* 검색 버튼 */
+.header-global__search-button {
+  width: 64px;
+  background-color: #333;
+  border: none;  
+  cursor: pointer;
+}
+
+/* 마이크 버튼 */
+.header-global__mic-button {  
+  background-color: #212121;
+  border: none;  
+  cursor: pointer;
+}
+
+/* ============ Right ============ */
+.header-global__right {
+  display: flex;  
+  gap: 16px;
+}
+
+/* 600px 미만일때 */
+@media (max-width: 600px) {
+
+  /* 기본 숨김 */
+  .header-global__search-input,
+  .header-global__mic-button {
+    display: none;
+  }
+
+  .header-global__left {
+    margin-left: 0px;
+  }
+
+  .header-global__search-form {
+    width: auto;
+  }
+  /* 돋보기 버튼 클릭시 */
+  .header-global.searching .header-global__search-input {
+    display: block;
+  }
+  .header-global.searching .header-global__left,
+  .header-global.searching .header-global__right {
+    display: none; /* 왼쪽/오른쪽 숨기기 */
+  }
+
+  .header-global.searching .header-global__center {
+    flex: 1; /* center를 화면 꽉 채우게 */
+    justify-content: center;
+  }
+  
+  .header-global.searching .header-global__mic-button {
+    display: block;
+  }
+}
