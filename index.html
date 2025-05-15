@@ -3,62 +3,54 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>유튜브 클론 페이지</title>    
+    <title>Youtube</title>
+    <link rel="icon" href="../img/youtubeFavicon.ico" type="image/x-icon" >    
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
       rel="stylesheet"
     />    
     <link rel="stylesheet" href="./css/common.css"/>    
-    <link rel="stylesheet" href="./home/home.css" />    
+    <link rel="stylesheet" href="./css/index.css" />    
   </head>
-  <body>
-    <div class="wrapper">
-      <!-- 상단바 -->
-      <header></header>
-      <!-- 상세페이지 + 메인 -->
-      <div class="container">
-        <!-- 상세페이지 -->
-        <aside></aside>        
-        <div class="right-content">
-          <div class="nav"></div>          
-          <!--메인-->
-          <main>
-            <section class="card-container" id="card-container"></section>
-          </main>
-        </div>
+  <body>    
+    <!-- 상단바 -->
+    <header></header>
+    <!-- 상세페이지 + 메인 -->
+    <div class="page-container">
+      <!-- 상세페이지 -->
+      <aside></aside>        
+      <div class="index__right-content">
+        <div class="nav"></div>          
+        <!--메인-->
+        <main>
+          <section class="index__card-container" id="card-container"></section>
+        </main>
       </div>
-    </div>     
+    </div>
+    
     <!-- 에러 핸들러 --> 
     <script src="./js/errorHandlers.js"></script>
 
-    <!-- 채널 정보 -->
-    <script src="./api/getChannelInfo.js"></script>      
-    <!-- 비디오 정보 -->
-    <script src="./api/getVideoInfo.js"></script>
-    <!-- 총 영상 정보 -->
-    <script src="./api/getVideoList.js"></script>
+    <!-- 오르미 API -->
+    <script src="./js/getOreumiAllApi.js"></script>    
     <!-- AI api -->
-    <script src="./api/getAIapi.js"></script> 
+    <script src="./js/getAIapi.js"></script> 
     
     <!--로드-->
     <script src="./js/loadHTML.js"></script>       
     <!-- 600px 미만일때 최상단 반응형 -->
     <script src="./js/topLoad600px.js"></script>
-    <!--1315 미만일때-->
-    <script src="./js/page1315px.js"></script> 
-    <!-- 사이드 바 -->
-    <script src="./sidebar/sidebar.js"></script>   
+    
     <!-- 사이드바 -->
     <script src="./js/subscribe.js"></script>
     <!-- 계산기 -->
-    <script src="./js/getChannelEverything.js"></script>
-
+    <script src="./js/pageCalculator.js"></script>
     
     <!-- 검색시 메인페이지 이동 -->
     <script src="./js/searching.js"></script>      
     <!-- 검색 엔진 -->
-    <script src="./js/serachAlgorithm.js"></script>              
+    <script src="./js/serachAlgorithm.js"></script>                  
     <!-- 페이지 엔트리 포인트 -->
-    <script src="./home/home.js"></script>   
+    <script src="./js/index.js"></script>   
   </body>
 </html>
