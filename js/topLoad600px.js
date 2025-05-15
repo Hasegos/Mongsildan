@@ -1,7 +1,8 @@
+/* ============ 625px 미만 최상단 반응형 ============ */
 function topLoad600px(){
     const searchButton = document.getElementById("searchButton");
     const backButton = document.getElementById("backButton");
-    const headerTop = document.querySelector(".header-top");
+    const headerTop = document.querySelector(".header-global");
 
     searchButton.addEventListener("click",  () => {                       
         if (window.innerWidth <= 600) {            
@@ -15,13 +16,13 @@ function topLoad600px(){
     });
 
     backButton.addEventListener("click",  () => {      
-        const headerTop = document.querySelector(".header-top");
+        const headerTop = document.querySelector(".header-global");
         headerTop.classList.remove("searching");
         backButton.style.display = "none";       
     });
 
     window.addEventListener("resize",  () => {
-        const headerTop = document.querySelector(".header-top");
+        const headerTop = document.querySelector(".header-global");
         const backButton = document.getElementById("backButton");
 
         if (window.innerWidth > 600) {        
