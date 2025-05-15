@@ -1,0 +1,75 @@
+/* ============ aside ============ */
+
+aside{  
+  width: 190px;      
+}
+
+/* ============ sidebar-expanded ============ */
+
+.sidebar-expanded {  
+  width: 190px;
+  position: fixed;           
+  height: 100%;    
+  overflow-y: auto;
+  scrollbar-width: none;   
+  z-index: 10;
+  background-color: var(--color-aside);
+}
+
+/*목차 별 제목 */
+.sidebar-expanded__title {  
+  font-weight: bold;
+  color: #aaa;  
+  padding: 12px 0 0 1em;
+}
+
+/* 사이드바 내용 */
+.sidebar-expanded__content{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  text-align: left;
+  font-weight: bold;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/* 사이드 바 아이콘 */
+.sidebar-expanded__icon {
+  width: 36px;
+  height: 24px;  
+  padding: 0 0 0 1em;  
+}
+
+/* 사이드바 구독자 아래 화살표 */
+.sidebar-expanded__summary {  
+  width: 36px;
+  height: 24px;  
+  padding: 0 0 0 1em;  
+  list-style: none; 
+}
+
+/* 사이드바 구독자 */
+.sidebar-expanded__subscription img {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  margin: 0 0 0 1em;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+
+/* 각 목차별 밑줄 */
+.sidebar-expanded li:last-child {
+  border-bottom: 1px solid #303030;
+}
+
+.sidebar-expanded__details {
+  border-bottom: 1px solid #303030;
+}
+
+.sidebar-expanded__content:hover {
+  background-color: #3c3c3c;
+}
