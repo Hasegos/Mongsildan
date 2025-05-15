@@ -1,0 +1,307 @@
+/* ============ layout ============ */
+.layout__right-content {
+    flex: 1;
+    min-width: 0;
+}
+
+/* ============  channel title ============ */
+
+.channel-title__header {
+    background-color: #181818;  
+    padding-bottom: 10px;  
+}
+
+/* 채널 Title 이미지*/
+.channel-title__banner-img {
+    width: 100%;  
+    object-fit: cover;
+    display: block;
+}
+/* 채널 주인 정보 */
+.channel-title__channel-info {
+    display: flex;  
+    padding: 20px 65px;
+    gap: 20px;
+}
+/* 채널 주인 프로필 */
+.channel-title__profile-img {
+    width: 100px;  
+    border-radius: 50%;  
+}
+
+/* 채널 주인 정보 layout*/
+.channel-title__text-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* 채널 이름 */
+.channel-title__name {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* 구독자 수*/
+.channel-title__subscribers {  
+    color: gray;
+}
+
+/* 구독자 버튼 */
+.channel-title__subscribe-btn {
+    color: black;    
+    border: none;
+    width: 116px;
+    height: 36px;
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 30px; 
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease; /* 구독시 효과*/
+    align-self: center;
+    position: relative;    
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px; /* 벨과 글자 간격 */
+}
+
+/* 구독 버튼 누를시 활성화 */
+.channel-title__subscribe-btn:active {
+    transform: scale(0.96);
+}
+
+/* 벨 아이콘 스타일 */
+.channel-title__bell-icon {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+/* 채널 정보 목차 */
+.channel-title__nav-item {
+    display: flex;
+    flex-direction: row; 
+    width: 100%;
+    align-items: center;
+    padding: 0 65px;  
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;  
+}
+
+/* 채널 정보 목차 버튼 */
+.channel-title__nav-btn {
+    background: none;
+    border: none;  
+    padding: 16px;
+    cursor: pointer;  
+}
+
+.channel-title__nav-btn:hover {
+    color: #aaa;
+}
+
+/* 돋보기 버튼 */
+.channel-title__search-btn {  
+    border: none;  
+    cursor: pointer;
+    display: flex;  
+}
+
+/* 돋보기 이미지 */
+.channel-title__search-icon {
+    width: 46px;
+    height: 40px; 
+}
+
+/* ============= channel smallVideo ============= */
+
+.channel-small-video__section {
+    display: flex;  
+    align-items: flex-start;
+    justify-content: center;  
+    margin: 40px auto;
+    padding: 24px;  
+}
+
+/* 채널 Main Preview 이미지*/
+.channel-small-video__main-preview {
+    position: relative;
+    height: 238px;
+    width: 424px;
+    min-width: 424px;     
+}
+
+/* 채널 Main Preview 화살표 layout */
+.channel-small-video__thumb {    
+    width: 90%;
+    height: 90%;
+    margin-left: 20px;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+}
+
+/* ▶ 아이콘 버튼 */
+.channel-small-video__custom-play-btn {
+    color: white;
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    font-size: 64px;  
+    opacity: 0.85;
+    cursor: pointer;  
+    transition: transform 0.2s ease;
+}
+
+
+.channel-small-video__custom-play-btn:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* 채널 Main Description layout */
+.channel-small-video__video-description {
+    width: 400px; 
+    display: flex;
+    flex-direction: column;  
+}
+
+/* 채널 Main 제목 */
+.channel-small-video__video-description h2 {
+    font-size: 20px;  
+    margin-bottom: 12px; 
+}
+
+/* 채널 View 정보*/
+.channel-small-video__video-description p {
+    font-size: 16px;  
+    color: #aaa;
+}
+
+/* ============= channel playList ============= */
+
+.channel-playlist__section {  
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+    border-top: 5px solid #212121;
+}  
+
+/* 채널 플레이 리스트 header layout */
+.channel-playlist__playlist-header {
+    display: flex;
+    align-items: center;  
+    width: 100%;
+    max-width: 1280px;  
+    padding: 8px 65px;  
+}
+
+/* 채널 플레이 리스트 header title */
+.channel-playlist__playlist-header h3 {
+    display: flex;
+    align-items: center;  
+    height: 36px;  
+    font-size: 16px;  
+    margin: 10px;
+}
+
+/* 채널 플레이 리스트 header button */
+.channel-playlist__play-all-btn {  
+    padding: 6px 24px;
+    background-color: transparent;
+    border: 1px solid #fff;  
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 4px;  
+}
+
+/* 카드 배치: 카드 크기는 고정, 개수는 자동 반응형 layout */
+.channel-playlist__playlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* 고정 크기 카드 반복 */
+    gap: 15px;
+    justify-content: center;
+    width: 100%;
+    max-width: 1280px;
+    padding: 0 16px; 
+}
+
+/* 카드 크기 고정 */
+.channel-playlist__playlist-card {  
+    cursor: pointer;  
+    text-decoration: none;  
+    width: 100%; 
+}
+
+.channel-playlist__playlist-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+}
+
+/* 썸네일 이미지 layout */
+.channel-playlist__video-preview {  
+    height: 120px;
+    position: relative;  
+}
+
+/* 썸네일 이미지 */
+.channel-playlist__thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  
+}
+
+/* ▶ 오버레이 */
+.channel-playlist__play-icon-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;  
+    font-size: 36px;
+    color: white;  
+    animation: pulse 1.5s infinite;
+}
+/* ▶ 오버레이 애니 */
+@keyframes pulse {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+    50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+}
+
+/* 썸네일 텍스트 */
+.channel-playlist__playlist-text {  
+    padding: 10px;
+    color: #ccc; 
+}
+
+/* ============= 반응형 ============= */
+
+/* 875px 이하일때 */
+@media (max-width: 875px) {
+    .channel-title__nav ul{    
+        flex-direction: column;    
+    }  
+}
+
+/* 뷰포트 작아지면 세로로 정렬 */
+@media (max-width: 768px) {
+    .channel-small-video__section {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .channel-small-video__video-description {
+        text-align: center;
+        align-items: center;
+    }
+}
+
+/* 485px 이하에서는 2개 고정 */
+@media (max-width: 700px) {
+    .channel-playlist__playlist-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+}
