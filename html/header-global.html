@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>최상단 바</title>
+</head>
+<body>
+    <!-- 상단바 1 -->
+    <div class="header-global">
+      <div class="header-global__left">   
+        <!-- 햄버그 버튼 추가 -->
+        <button class="header-global__menu-button" id="menuButton">
+          <img src="../../img/burger.svg" class="header-global__icon"  alt="메뉴" />
+        </button>
+        
+        <a href="../../index.html" class="header-global__logo-button">
+          <img src="../../img/youtube.svg" alt="로고아이콘" />     
+        </a>
+      </div>
+      <div class="header-global__center">
+        <form class="header-global__search-form" onsubmit="return false;">
+          <!-- 600px 미만 뒤로가기 버튼 -->
+          <button class="header-global__back-Button" style="display: none;" id="backButton">
+            <img src="../../img/back.svg" class="header-global__icon" alt="뒤로가기" />
+          </button>
+          <input type="text" class="header-global__search-input" placeholder="Search" id="searchInput"/>
+          <button type="submit" class="header-global__search-button" id="searchButton">
+            <img src="../../img/search.svg" class="header-global__icon" alt="검색"/>
+          </button>
+        </form>
+        <button class="header-global__mic-button">
+          <img src="../../img/voice.svg" class="header-global__icon" alt="음성검색" />
+        </button>
+      </div>
+      <div class="header-global__right">
+        <img src="../../img/create.svg"  class="header-global__icon"  alt="업로드"/>
+        <img src="../../img/apps.svg"    class="header-global__icon"  alt="앱"/>
+        <img src="../../img/notice.svg"  class="header-global__icon"  alt="알림"/>
+        <img src="../../img/profile.svg" class="header-global__icon"  alt="프로필"/>
+      </div>
+    </div>    
+  </body>
+</html>
