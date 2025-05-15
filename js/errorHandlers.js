@@ -1,5 +1,4 @@
-/* 비디오, 이미지 로드 실패시 */
-// 모든 <img>와 <video>에 원본 URL 저장 
+/* ============= 비디오, 이미지 로드 실패시  ============= */
 function cacheOriginalMediaSrc() {
     document.querySelectorAll('img').forEach(img => {
         img.dataset.originalSrc = img.src;
@@ -11,7 +10,6 @@ function cacheOriginalMediaSrc() {
     });
 }
 
-//  미디어 에러 핸들러 설정 
 function initMediaWithRetry({ retries = 3, delay = 1000 } = {}) {
     document.addEventListener('error', event => {
         const el = event.target;
@@ -21,13 +19,12 @@ function initMediaWithRetry({ retries = 3, delay = 1000 } = {}) {
     }, true);
 } 
 
-// 에러 발생 시 처리: Fallback + 재시도 로직 
+/* ============= 에러 발생 시 처리 (fallback) ============= */
 function handleMediaError(el, retriesLeft, delay) {
-    // 이미 처리 중인 요소면 무시
+
     if (el._isRetrying) return;
-    el._isRetrying = true;
-    
-    // 기존 a태그 효과 무시
+    el._isRetrying = true;    
+
     const link = el.closest('a');   
     
     if(link){        
@@ -38,31 +35,29 @@ function handleMediaError(el, retriesLeft, delay) {
             pointerEvnets : 'none'
         })               
     }
-
-    // Fallback UI 생성
+    
     const placeholder = document.createElement('div');
     
     placeholder.className = 'media-fallback';
     placeholder.textContent = '미디어 로드 실패: 자동 재시도 중…';
-    // 이미지 무시
-    el.style.display = 'none';
-    // 이미지 요소 앞에 넣기
+    
+    el.style.display = 'none';    
     el.parentNode.insertBefore(placeholder, el);
 
     // 재시도
     (function retry(count, wait) {
         if (count <= 0) {            
             placeholder.textContent = '미디어 로드 실패 : ';
-            // 버튼 (새로고침 기능 + text 추가)
+            
             const btn = document.createElement('button');
-            btn.className = 'retry-btn';           
-            btn.textContent = '페이지 새로고침';
-            btn.onclick = () => window.location.reload();
-            placeholder.appendChild(btn);
+                btn.className = 'error__retry-btn';           
+                btn.textContent = '페이지 새로고침';
+                btn.onclick = () => window.location.reload();
+                placeholder.appendChild(btn);
             return;
         }
         setTimeout(() => {
-            // 원본 URL로 재설정
+            
             if (el instanceof HTMLImageElement) {
                 el.src = el.dataset.originalSrc;
             } else {
@@ -70,24 +65,20 @@ function handleMediaError(el, retriesLeft, delay) {
                     src.src = src.dataset.originalSrc;
                 });
                 el.load();
-            }
-            // 재시도 중 에러 시
+            }            
             const onError = () => {
                 el.removeEventListener('error', onError, true);
                 retry(count - 1, wait * 2);
             };
-            el.addEventListener('error', onError, true);
-            // 성공 시 placeholder 제거 
+            el.addEventListener('error', onError, true);            
             const onLoad = () => {
                 placeholder.remove();
                 el.style.display = '';
                 el.removeEventListener(el instanceof HTMLImageElement ? 'load' : 'loadeddata', onLoad);
-            };
-            // 이미지 요소가 정상적으로 로드되었을때
+            };            
             if (el instanceof HTMLImageElement) {
                 el.addEventListener('load', onLoad, { once: true });
-            }
-            // 비디오 요소가 정상적으로 로드되었을때
+            }            
             else {
                 el.addEventListener('loadeddata', onLoad, { once: true });
             }
@@ -95,40 +86,35 @@ function handleMediaError(el, retriesLeft, delay) {
     })(retriesLeft, delay);
 }
 
-// 네트워크 지연 에러
+/* ============= 네트워크 지연 에러 ============= */
 function monitorPageLoad(maxRtries, timeout){
     let isPageLoaded = false;
     let retriesLeft = (Number(localStorage.getItem("retriesLeft")) || maxRtries);       
     
     const timer = setTimeout(() => {
-        if(isPageLoaded){
-            console.log("정상적인 페이지 로드됨")
+        if(isPageLoaded){            
             localStorage.removeItem("retriesLeft");
             return;
         }
 
-        if(localStorage.getItem("retriesLeft") == 0){
-            console.error("페이지 로딩 실패");
+        if(localStorage.getItem("retriesLeft") == 0){            
             localStorage.removeItem("retriesLeft");                
-            location.href ="../error/error.html";
+            location.href ="../html/error.html";
             return;
-        }            
-        console.warn(`[${retriesLeft}번째 재시도]`);     
+        }                      
         retriesLeft--;           
         localStorage.setItem("retriesLeft", retriesLeft);                
-        location.reload();        
-        console.log(retriesLeft);
+        location.reload();                
         
     },timeout);   
 
     window.markPageAsLoaded = function () {
         isPageLoaded = true;
-        localStorage.removeItem("retriesLeft");
-        console.log("페이지 로딩 성공");
+        localStorage.removeItem("retriesLeft");        
     }   
 }    
 
-//  DOM 준비 후 초기화 실행 
+/* =============  DOM 준비 후 초기화 실행  ============= */
 window.addEventListener('DOMContentLoaded', () => {
     monitorPageLoad(3,5000);
     cacheOriginalMediaSrc();
