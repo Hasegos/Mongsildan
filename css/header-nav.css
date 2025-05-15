@@ -1,0 +1,181 @@
+/* ============ header-nav ============ */
+
+.header-nav {
+  position: fixed;
+  width: 100%;  
+  background-color: #212121;
+  display: flex;        
+  padding-left: 12px;
+  padding-right: 96px;
+}
+
+/* scroll left, right icon*/
+.header-nav__icon {
+  height: 40px;
+}
+
+/* 버튼 (화살표, 필터) */
+.header-nav__scroll-arrow {
+  position: absolute;  
+  background: linear-gradient(to right, transparent, #212121);
+  border: none;
+  cursor: pointer;
+  z-index: 100;      
+}
+
+/* 왼쪽 화살표 */
+.header-nav__scroll-arrow.left {
+  left: 0;  
+}
+
+/* scroll Container */
+.header-nav__scroll-container {
+  display: flex;
+  overflow-x: auto;  
+  gap: 12px;  
+  align-items: center;  
+}
+
+/* 스크롤 안보이는 기능 설정 */
+.header-nav__scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* All */
+.header-nav__scroll-tab-item.active {
+  background-color: white;
+  color: black;
+  font-weight: bold;  
+}
+
+/* scroll tap Button */
+.header-nav__scroll-tab-item {
+  background-color: #383838;  
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 8px;  
+  cursor: pointer;  
+}
+
+/* 탭 버튼 효과 */
+.header-nav__scroll-tab-item:hover {
+    background-color: #555; 
+}
+
+/* 오른쪽 화살표 */
+.header-nav__scroll-arrow.right {
+  right: 88px;
+}
+
+/* filter 검색 버튼 */
+.header-nav__filter-btn {    
+  border: none;
+  display: flex;  
+  cursor: pointer;  
+}
+
+/* filter 검색 버튼 이미지 */
+.header-nav__filter-btn-img {  
+  height: 40px;  
+}
+
+/* ============ filter modal ============  */
+
+.header-nav__filter-modal-popup {  
+  display: none;
+  opacity: 0;
+  position: fixed;
+  top: 10vh;
+  left: 50%;
+  transform: translateX(-50%);    
+  overflow-y: auto;
+  background: #181818e6;  
+  border-radius: 12px;
+  padding: 24px 32px;
+  margin: 5vh 5vw;  
+  transition: opacity 0.3s ease;     
+}
+
+/* 필터 보일때 */
+.header-nav__filter-modal-popup.show {  
+  opacity: 1;
+  visibility: visible;  
+  display: block;
+}
+
+/* X Button */
+.header-nav__filter-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #aaa;
+  cursor: pointer;
+  float: right;
+}
+
+.header-nav__filter-close:hover {
+  color: white;
+}
+
+/* ============ 필터 항목 ============ */
+
+.header-nav__filter-columns {
+  flex-wrap: nowrap;  
+  margin-top: 8px;
+  justify-content: space-between;  
+  align-items: center;  
+  display: flex;
+  overflow-x: auto;  
+  gap: 12px;    
+}
+
+/* 스크롤 안보이는 기능 설정 */
+.header-nav__filter-columns::-webkit-scrollbar {
+  display: none;
+}
+
+/* 필터 목록 */
+.header-nav__filter-column {    
+  min-width: 120px;  
+}
+
+/* 필터 목차 title */
+.header-nav__filter-column-title {
+  font-size: 14px;  
+  padding-bottom: 8px;
+  border-bottom: 1px solid #333;  
+  color: #ccc;
+}
+
+/* 목차 내용 버튼 */
+.header-nav__filter-option {
+  padding: 6px 0;
+  background: none;
+  border: none;
+  color: #eee;
+  font-size: 13px;
+  text-align: left;  
+  cursor: pointer;
+}
+.header-nav__filter-option:hover {
+  text-decoration: underline;
+  color: white;
+}
+
+/* ============ 반응형 ============ */
+@media (max-width: 768px) {
+  .header-nav__filter-modal-popup {
+    padding: 16px;
+  }
+  .header-nav__filter-column-title { font-size: 13px; }
+  .header-nav__filter-option { font-size: 12px; }
+}
+@media (max-width: 480px) {
+  .header-nav__filter-modal-popup {
+    padding: 16px;
+    border-radius: 8px;
+  }
+  .header-nav__filter-column-title { font-size: 12px; }
+  .header-nav__filter-option { font-size: 11px; }
+  .header-nav__filter-close { font-size: 18px; }
+}
