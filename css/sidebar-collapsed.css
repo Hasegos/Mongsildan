@@ -1,0 +1,42 @@
+/* ============ aside ============ */
+
+aside{   
+    width: 70px;   
+}
+
+/* ============ sidebar-collapsed ============ */
+
+.sidebar-collapsed {
+    position: fixed;           
+    height: 100%;    
+    overflow-y: auto;
+    scrollbar-width: none;
+    background-color: var(--color-aside);            
+}
+
+/* 목록 */
+.sidebar-collapsed__list {       
+    display: flex;
+    gap: 10px;
+    flex-direction: column;        
+}
+
+/* 목록 내용*/
+.sidebar-collapsed__content {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;      
+}
+
+.sidebar-collapsed__content:hover {
+    background-color: #3c3c3c;
+}
+
+/* 목록 아이콘 */
+.sidebar-collapsed__icon {
+    width: 30px;
+    height: 24px;    
+}
